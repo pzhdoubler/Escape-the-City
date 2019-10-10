@@ -13,6 +13,9 @@ private:
 
 public:
     //constructor
+    //the constructor will most likely initiate fonts for text we want to display as well as
+    //maybe do the initial entire updating of the screen to load the level in so then we don't need to worry
+    //about updating everything during the main loop, just things that need to be updated as described below
     ScreenView();
 
     //the controller will be reading in input? Or does screenView need a keyboardInput function like in pong?
