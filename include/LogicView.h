@@ -1,15 +1,21 @@
 #ifndef _LOGICVIEW_H_
 #define _LOGICVIEW_H_
 
+#include <SFML/Graphics.hpp>
+#include <memory>
+#include <string>
+#include <vector>
+
+#include <PlayerChar.h>
+#include <GameElement.h>
+#include <Interactable.h>
+
 
 class LogicView
 {
 	public:
 		//Default constructor
 		LogicView() {};
-
-		//Destructor that clears all internal fields
-		~LogicView();
 
 		//Initiallizes the gamestate based on the given LevelState description
 		bool init(LevelState level);
@@ -18,7 +24,7 @@ class LogicView
 		bool update(float deltaMs);
 
 		//Returns a collection of all drawable objects in the game state to be updated
-		GameElement[] getDrawables();
+		std::vector<*GameElement> getDrawables();
 
 		//Recives button input and updates gamestate based on given time and button
 		//filler type Key. Uses txt file?
@@ -28,23 +34,28 @@ class LogicView
 	private:
 
 		//updates player's physics based on current postion and buttons press
-		bool updatePlayerPosition(PlayerChar player, Key button, float deltaMs);
+		void updatePlayerPosition(PlayerChar player, String button, float deltaMs);
 
 		//determines if the player is going to take damage or die based on current position
-		bool updatePlayerState(PlayerChar player, float deltaMs);
+		void updatePlayerState(PlayerChar player, float deltaMs);
 
 		//updates any moving, non-player objects in the game
-		bool updateObjects(float deltaMs);
+		void updateObjects(float deltaMs);
 
 		LevelState level;
 
-		PlayerChar fast, jump;
+		std::shared_ptr<PlayerChar> fast, high;
 
-		//Interactables[] hazards;
+		std::vector<Interactable> hazards;
 
-		//Interactables[] enemies;
+		std::vector<Interactable> enemies;
 
-		//Interactables[] items;
+		std::vector<Interactable> items;
+
+		float GRAVITY;
+		float FRICTION;
+		float FAST_RUN, FAST_JUMP, FAST_MAX_X, FAST_MAX_Y;
+		float HIGH_RUN, HIGH_JUMP, HIGH_MAX_X, HIGH_MAX_Y;
 
 };
 
