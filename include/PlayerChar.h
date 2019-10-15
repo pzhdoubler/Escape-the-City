@@ -6,27 +6,29 @@
 class PlayerChar{
 public:
   //Character contructor
-  Char(player);
-  //sf::Vector2f pos;
-  //sf::Sprite ;
+  Char(bool player);
 
+  sf::RectangleShape tall; //to be replaced with sprites
+  sf::RectangleShape fast;
+  //sf::Sprite ;
 
   void useItem();
 
-  void getPos();
+  void draw(sf::RenderWindow&);
 
-  float setPos(x, y);
+  sf::Vector2f getPos();
 
-  float setVelocity(i, j);
+  void setPos(pos);
 
-  void getVelocity()
+  void setVelocity(vel);
 
-  //defines which character
-  bool player;
+  sf::Vector2f getVelocity();
 
 private:
-   float x, y, i, j;
-
+   sf::Vector2f pos;
+   sf::Vector2f vel;
+   //defines which character
+   bool player;
 
 };
 
