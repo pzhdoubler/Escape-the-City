@@ -44,7 +44,7 @@ class GameLogic
 
 		LevelState level;
 
-		PlayerChar fast, high;
+		PlayerChar fast_man, high_man;
 
 		std::vector<Interactable> hazards;
 
@@ -54,8 +54,8 @@ class GameLogic
 
 		float GRAVITY;
 		float FRICTION;
-		float FAST_RUN, FAST_JUMP, FAST_MAX_X, FAST_MAX_Y;
-		float HIGH_RUN, HIGH_JUMP, HIGH_MAX_X, HIGH_MAX_Y;
+		float FAST_RUN, FAST_VERT, FAST_MAX_X, FAST_MAX_Y;
+		float JUMP_RUN, JUMP_VERT, JUMP_MAX_X, JUMP_MAX_Y;
 
 };
 

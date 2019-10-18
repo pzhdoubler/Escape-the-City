@@ -9,8 +9,8 @@ bool GameLogic::init(LevelState level)
 	//Read any important values from level
 	//eg hazards, enemies, etc
 
-	fast = PlayerChar(true);
-	high = PlayerChar(false);
+	fast_man = PlayerChar(true);
+	jump_man = PlayerChar(false);
 	//set starting positions and speeds
 	//stored in level state
 
@@ -25,8 +25,8 @@ bool GameLogic::update(float deltaMs)
 {
 	//update player state
 
-	updatePlayerPosition(fast, "", deltaMs);
-	updatePlayerPosition(high, "", deltaMs);
+	updatePlayerPosition(fast_man, "", deltaMs);
+	updatePlayerPosition(high_man, "", deltaMs);
 
 	//update other level objects
 	return true;
@@ -64,8 +64,8 @@ void GameLogic::updatePlayerPosition(PlayerChar player, String button, float del
 			new_vy = FAST_MAX_Y;
 		}
 		else {
-			if (abs(new_vy) > HIGH_MAX_Y) {
-				new_vy = HIGH_MAX_Y;
+			if (abs(new_vy) > JUMP_MAX_Y) {
+				new_vy = JUMP_MAX_Y;
 			}
 		}
 	}

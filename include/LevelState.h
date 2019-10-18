@@ -16,8 +16,9 @@ class LevelState{
 		//updates background tiles and static objects
 		LevelState updateLevelState(const sf::Time&);
 
-		//saves tags for anything that is a barrier for collision tags
-		sf::VertexArray vertices;
+		sf::Vector2f getFastSpawnPt();
+
+		sf::Vector2f getJumpSpawnPt();
 
 		void draw();
 
@@ -26,6 +27,11 @@ class LevelState{
 		sf::Sprite mapTile; //full tile sheet
 		sf::Sprite background; //sprite for the static background
 		sf::View *viewPointer; //pointer to the GameLogic
+
+		sf::Vector2f fastSpawnPt;
+		sf::Vector2f jumpSpawnpt;
+
+		sf::Vector2f exitPt;
 
 
 }
