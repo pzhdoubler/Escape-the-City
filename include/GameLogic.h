@@ -1,5 +1,5 @@
-#ifndef _LOGICVIEW_H_
-#define _LOGICVIEW_H_
+#ifndef _GAMELOGIC_H_
+#define _GAMELOGIC_H_
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -11,11 +11,11 @@
 #include <Interactable.h>
 
 
-class LogicView
+class GameLogic
 {
 	public:
 		//Default constructor
-		LogicView() {};
+		GameLogic() {};
 
 		//Initiallizes the gamestate based on the given LevelState description
 		bool init(LevelState level);
@@ -59,4 +59,4 @@ class LogicView
 
 };
 
-#endif // !_LOGICVIEW_H_
+#endif // !_GAMELOGIC_H_

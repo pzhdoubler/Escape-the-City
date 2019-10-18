@@ -1,4 +1,4 @@
-#include <LogicView.h>
+#include <GameLogic.h>
 
 #include <cmath>
 
