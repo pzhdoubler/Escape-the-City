@@ -3,14 +3,14 @@
 #include <cmath>
 
 
-bool LogicView::init(LevelState level)
+bool GameLogic::init(LevelState level)
 {
 	this->level = level;
 	//Read any important values from level
 	//eg hazards, enemies, etc
 
-	fast = std::make_shared<PlayerChar>(true);
-	high = std::make_shared<PlayerChar>(false);
+	fast = PlayerChar(true);
+	high = PlayerChar(false);
 	//set starting positions and speeds
 	//stored in level state
 
@@ -21,24 +21,22 @@ bool LogicView::init(LevelState level)
 }
 
 
-bool LogicView::update(float deltaMs)
+bool GameLogic::update(float deltaMs)
 {
 	//update player state
 
-	updatePlayerPosition(*fast, "", deltaMs);
-	updatePlayerPosition(*high, "", deltaMs);
+	updatePlayerPosition(fast, "", deltaMs);
+	updatePlayerPosition(high, "", deltaMs);
 
 	//update other level objects
 	return true;
 }
 
 
-std::vector<GameElements*> LogicView::getDrawables();
+std::vector<PlayerChar> GameLogic::getDrawables(); //IMPLEMENT WITH GAMEELEMENTS NEXT
 {
-	GameElements* p1 = fast;
-	GameElements* p2 = high;
 
-	std::vector<GameElements*> drawables{ fast, high };
+	std::vector<PlayerChar> drawables{ fast, high };
 
 	//add all interactables
 
@@ -46,7 +44,7 @@ std::vector<GameElements*> LogicView::getDrawables();
 }
 
 
-void LogicView::updatePlayerPosition(PlayerChar player, String button, float deltaMs)
+void GameLogic::updatePlayerPosition(PlayerChar player, String button, float deltaMs)
 {
 	float seconds = deltaMs / 1000.0;
 
@@ -62,7 +60,7 @@ void LogicView::updatePlayerPosition(PlayerChar player, String button, float del
 
 	//limit to max vert speed
 	if (abs(new_vy) > FAST_MAX_Y) {
-		if (player.getType()) { //WHICH PLAYER IS WHICH???
+		if (player.getType()) { //if fast char
 			new_vy = FAST_MAX_Y;
 		}
 		else {
