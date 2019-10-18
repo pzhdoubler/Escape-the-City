@@ -25,7 +25,7 @@ class LevelState{
 	private:
 		sf::Sprite mapTile; //full tile sheet
 		sf::Sprite background; //sprite for the static background
-		sf::View *viewPointer; //pointer to the LogicView
+		sf::View *viewPointer; //pointer to the GameLogic
 
 
 }
