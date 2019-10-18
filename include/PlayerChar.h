@@ -8,8 +8,8 @@ public:
   //Character contructor
   Char(bool player);
 
-  sf::RectangleShape jumpman; //to be replaced with sprites
-  sf::RectangleShape fastman;
+  sf::RectangleShape jump_man; //to be replaced with sprites
+  sf::RectangleShape fast_man;
   //sf::Sprite ;
 
   void useItem();

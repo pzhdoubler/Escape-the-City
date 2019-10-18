@@ -4,24 +4,23 @@
 
 PlayerChar::PlayerChar(bool player){
   if (player){
-    jumpman.setSize(20, 20);
-    jumpman.setFillColor(sf::Color::Red);
-    jumpman.setOrigin(10, 20);
-    jumpman.setPos(10, 20);
+    fast_man.setSize(20, 20);
+    fast_man.setFillColor(sf::Color::Blue);
+    fast_man.setPos(50, 20);
+
 
   }
   else{
-    fastman.setSize(20, 20);
-    fastman.setFillColor(sf::Color::Blue);
-    fastman.setOrigin(50, 20);
-    fastman.setPos(50, 20);
+    jump_man.setSize(20, 20);
+    jump_man.setFillColor(sf::Color::Red);
+    jump_man.setPos(10, 20);
   }
 }
 
 void PlayerChar::draw(sf::RenderWindow &window){
-    jumpman.setPos(pos);
+    jump_man.setPos(pos);
     window.draw(tall);
-    fastman.setPos(pos);
+    fast_man.setPos(pos);
     window.draw(fast);
 
 }
