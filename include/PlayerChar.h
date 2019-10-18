@@ -18,9 +18,9 @@ public:
 
   sf::Vector2f getPos();
 
-  void setPos(pos);
+  void setPos(sf::Vector2f pos);
 
-  void setVelocity(vel);
+  void setVelocity(sf::Vector2f vel);
 
   sf::Vector2f getVelocity();
 

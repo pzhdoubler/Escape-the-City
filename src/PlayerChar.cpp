@@ -28,25 +28,21 @@ float PlayerChar::getPos(x, y){
   return pos;
 }
 
-void PlayerChar::setPos(pos){
+void PlayerChar::setPos(sf::Vector2f pos){
   if (player){
-    pos.x=x;
-    pos.y=y;
+    this->pos=pos;
   }
   else{
-    pos.x=x;
-    pos.y=y;
+    this->pos=pos;
   }
 }
 
-void PlayerChar::setVelocity(vel){
+void PlayerChar::setVelocity(sf::Vector2f vel){
   if (player){
-    vel.x=x;
-    vel.y=y;
+    this->vel=vel;
   }
   else{
-    vel.x=x;
-    vel.y=y;
+    this->vel=vel;
   }
 }
 
