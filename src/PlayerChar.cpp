@@ -19,13 +19,13 @@ PlayerChar::PlayerChar(bool player){
 
 void PlayerChar::draw(sf::RenderWindow &window){
     jump_man.setPos(pos);
-    window.draw(tall);
+    window.draw(jump_man);
     fast_man.setPos(pos);
-    window.draw(fast);
+    window.draw(fast_man);
 
 }
 
-void PlayerChar::getPos(){
+sf::Vector2f PlayerChar::getPos(){
   return pos;
 }
 

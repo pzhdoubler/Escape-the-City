@@ -6,7 +6,7 @@
 class PlayerChar{
 public:
   //Character contructor
-  Char(bool player);
+  PlayerChar(bool player);
 
   sf::RectangleShape jump_man; //to be replaced with sprites
   sf::RectangleShape fast_man;
