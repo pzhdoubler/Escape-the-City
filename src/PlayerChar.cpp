@@ -19,12 +19,13 @@ PlayerChar::PlayerChar(bool player){
 }
 
 void PlayerChar::draw(sf::RenderWindow &window){
+    setPos(pos);
     window.draw(tall);
     window.draw(fast);
 
 }
 
-float PlayerChar::getPos(x, y){
+void PlayerChar::getPos(){
   return pos;
 }
 
