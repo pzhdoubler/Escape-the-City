@@ -12,8 +12,11 @@ bool LogicView::init(LevelState level)
 	fast = std::make_shared<PlayerChar>(true);
 	high = std::make_shared<PlayerChar>(false);
 	//set starting positions and speeds
+	//stored in level state
 
 	//read in physics constants
+	GRAVITY = 5;
+
 	return true;
 }
 
@@ -32,8 +35,8 @@ bool LogicView::update(float deltaMs)
 
 std::vector<GameElements*> LogicView::getDrawables();
 {
-	GameElement* p1 = fast;
-	GameElement* p2 = high;
+	GameElements* p1 = fast;
+	GameElements* p2 = high;
 
 	std::vector<GameElements*> drawables{ fast, high };
 
@@ -43,11 +46,11 @@ std::vector<GameElements*> LogicView::getDrawables();
 }
 
 
-void LogicView::updatePlayerPosition(PlayerChar player, float deltaMs)
+void LogicView::updatePlayerPosition(PlayerChar player, String button, float deltaMs)
 {
 	float seconds = deltaMs / 1000.0;
 
-	sf::Vector2f pos = player.getPosition();
+	sf::Vector2f pos = player.getPos();
 	sf::Vector2f vel = player.getVelocity();
 
 	float new_vx = vel.x;
@@ -72,7 +75,10 @@ void LogicView::updatePlayerPosition(PlayerChar player, float deltaMs)
 	float new_x = pos.x + (vel.x * seconds);
 	float new_y = pos.y + (vel.y * seconds);
 
-	player.setPositon(new_x, new_y);
-	player.setVelocity(new_vx, new_vy);
+	sf::Vector2f new_pos = sf::Vector2f::Vector2(new_x, new_y);
+	sf::Vector2f new_vel = sf::Vector2f::Vector2(new_vx, new_vy);
+
+	player.setPos(new_pos);
+	player.setVelocity(new_vel);
 
 }
