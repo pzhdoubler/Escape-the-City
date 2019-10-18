@@ -7,6 +7,9 @@
 
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "GameLogic.h"
+
+
 
 class ScreenView {
 
@@ -29,10 +32,9 @@ public:
     //from the logic which will hold character instances.
     //this update should get those coordinates and then draw the main window based on the new coordinates
     //will also need to draw enemies, barriers, items, other classes using the GameElements interface
-    void update(sf::RenderWindow& mainWindow, LogicView& logicView);
+    void update(sf::RenderWindow& mainWindow, GameLogic& gameLogic);
 
 
-    //is y'all's  namespace sf also not working?
 
 
 };
