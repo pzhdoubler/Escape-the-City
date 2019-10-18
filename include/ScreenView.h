@@ -6,6 +6,7 @@
 #define CSCI437_SCREENVIEW_H
 
 
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class ScreenView {
 
@@ -18,7 +19,10 @@ public:
     //about updating everything during the main loop, just things that need to be updated as described below
     ScreenView();
 
-    //the controller will be reading in input? Or does screenView need a keyboardInput function like in pong?
+    //will get a levelState object from levelEditor
+    //uses that info to draws where barriers are, saves the canvas as a private field, draws it once then doesn't need to update it anymore
+    //probably in the constructor or maybe it's own init function called when this is created
+
 
 
     //ScreenView doesn't need direct references to the character's coordinates, we can just ask for those
