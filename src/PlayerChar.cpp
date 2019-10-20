@@ -3,15 +3,17 @@
 
 
 PlayerChar::PlayerChar(bool player){
+  this->height = 18;
+  this->width = 15;
   if (player){
-    fast_man.setSize(20, 20);
+    fast_man.setSize(width, height);
     fast_man.setFillColor(sf::Color::Blue);
     fast_man.setPos(50, 20);
 
 
   }
   else{
-    jump_man.setSize(20, 20);
+    jump_man.setSize(width, height);
     jump_man.setFillColor(sf::Color::Red);
     jump_man.setPos(10, 20);
   }
@@ -49,6 +51,14 @@ void PlayerChar::setVelocity(sf::Vector2f vel){
 
 sf::Vector2f PlayerChar::getVelocity(){
   return vel;
+}
+
+sf::RectangleShape PlayerChar::getHeight(){
+  return height;
+}
+
+int PlayerChar::getWidth(){
+  return width;
 }
 
 void PlayerChar::UseItem(){

@@ -24,11 +24,16 @@ public:
 
   sf::Vector2f getVelocity();
 
+  int getHeight();
+  int getWidth();
+
 private:
    sf::Vector2f pos;
    sf::Vector2f vel;
    //defines which character
    bool player;
+   int height;
+   int width;
 
 };
 
