@@ -9,20 +9,28 @@ class LevelReader{
 		LevelReader();
 
 		//reads a text file with the argument given of a path to map file
-		void loadMap(const std::string&);
+		void loadMap(std::string& level);
 
 		LevelState createLevelState();
 
-		sf::VertexArray vertices;
+		//makes array to give to LevelState of IDs that are collision points from the tile map
 
-		void setFastSpawnPt();
-		void setJumpSpawnPt();
+
+		void setFastSpawnPt(sf::Vector2f pt);
+		void setJumpSpawnPt(sf::Vector2f pt);
+
+		void setExitPt(sf::Vector2f pt);
 
 	private:
 		LevelState currentLevelState;
 
 		sf::Vector2f fastSpawnPt;
 		sf::Vector2f jumpSpawnpt;
+
+		sf::Vector2f exitPt;
+
+		int map[30][40]; //stores values for each tile and their id, pass to LevelState
+
 }
 
 #endif //_LEVELREADER_H_

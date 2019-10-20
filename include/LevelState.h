@@ -13,12 +13,16 @@ class LevelState{
 		//Default constructor
 		LevelState();
 
+		LevelState(int map[30][40], sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnpt);
+
 		//updates background tiles and static objects
 		LevelState updateLevelState(const sf::Time&);
 
 		sf::Vector2f getFastSpawnPt();
 
 		sf::Vector2f getJumpSpawnPt();
+
+		//get method for array of values for collision detection
 
 		void draw();
 
@@ -33,7 +37,11 @@ class LevelState{
 
 		sf::Vector2f exitPt;
 
+		int tileSize;
 
+		int map[30][40]; //stores values for each tile and their id
+
+		int collision[30][40]; //stores values for whether the tile is a collision (0 = default, 1 = collision)
 }
 
 #endif //_LEVELSTATE_H_
