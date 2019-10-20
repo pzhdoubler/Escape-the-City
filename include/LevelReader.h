@@ -1,6 +1,8 @@
 #ifndef _LEVELREADER_H_
 #define _LEVELREADER_H_
 
+#include <SFML/Graphics.hpp>
+
 //LevelReader takes input from a text file and interprets it into arguments to pass
 //to the LevelState constructor
 

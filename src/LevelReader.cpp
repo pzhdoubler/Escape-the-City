@@ -18,7 +18,7 @@ LevelReader(){
 
 void LevelReader::loadMap(std::string& level){
 	std::ifstream file;
-	file.open(level);
+	file.open("..\\levels\\" + level);
 	if(!file.is_open()){
 		std::cout << "Failed to load file";
 		return;
@@ -31,6 +31,12 @@ void LevelReader::loadMap(std::string& level){
 	//fill the map array with tileIDs that are specified in the text file
 	while(file >> xTile >> yTile >> tileID){
 		this->map[xTile][yTile] = tileID;
+		if(tileID == 2){
+			this->fastSpawnPt = sf::Vector2f(xTile, yTile);
+		}
+		if(tileID == 3){
+			this->jumpSpawnPt = sf::Vector2f(xTile, yTile);
+		}
 	}
 	file.close();
 }

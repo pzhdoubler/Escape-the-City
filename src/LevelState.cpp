@@ -20,5 +20,5 @@ int LevelState:getTileSize(){
 }
 
 int[][] LevelState::getTileMap() {
-	return map
+	return map;
 }
