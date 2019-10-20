@@ -39,5 +39,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
+	currentLevelState = LevelState(map[30][40], fastSpawnPt, jumpSpawnpt);
 	return currentLevelState;
 }

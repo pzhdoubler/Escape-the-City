@@ -14,7 +14,7 @@ class LevelReader{
 		LevelState createLevelState();
 
 		//makes array to give to LevelState of IDs that are collision points from the tile map
-
+		
 
 		void setFastSpawnPt(sf::Vector2f pt);
 		void setJumpSpawnPt(sf::Vector2f pt);
