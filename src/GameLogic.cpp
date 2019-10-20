@@ -33,15 +33,15 @@ bool GameLogic::update(float deltaMs)
 {
 	//update player state
 
-	updatePlayerPosition(*fast_man, "", deltaMs);
-	updatePlayerPosition(*high_man, "", deltaMs);
+	updatePlayerPosition(*fast_man, deltaMs);
+	updatePlayerPosition(*high_man, deltaMs);
 
 	//update other level objects
 	return true;
 }
 
 
-std::vector<PlayerChar> GameLogic::getDrawables(); //IMPLEMENT WITH GAMEELEMENTS NEXT
+std::vector<PlayerChar> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMENTS NEXT
 {
 
 	std::vector<PlayerChar> drawables{ *fast, *high };
@@ -52,7 +52,7 @@ std::vector<PlayerChar> GameLogic::getDrawables(); //IMPLEMENT WITH GAMEELEMENTS
 }
 
 
-void GameLogic::updatePlayerPosition(PlayerChar player, String button, float deltaMs)
+void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 {
 	float seconds = deltaMs / 1000.0;
 

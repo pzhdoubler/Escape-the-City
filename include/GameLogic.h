@@ -2,7 +2,6 @@
 #define _GAMELOGIC_H_
 
 #include <SFML/Graphics.hpp>
-#include <string>
 #include <vector>
 
 #include <PlayerChar.h>
@@ -33,7 +32,7 @@ class GameLogic
 	private:
 
 		//updates player's physics based on current postion and buttons press
-		void updatePlayerPosition(PlayerChar player, String button, float deltaMs);
+		void updatePlayerPosition(PlayerChar player, float deltaMs);
 
 		//determines if the player is going to take damage or die based on current position
 		void updatePlayerState(PlayerChar player, float deltaMs);
@@ -43,7 +42,7 @@ class GameLogic
 
 		//determines where a point should be after a collision. also communicates information about which axis was effected
 		//last index is 0 for x-axis and 1 for y-axis
-		std::vector<int> GameLogic::collisionCalculation(int x, int y);
+		std::vector<int> collisionCalculation(float x, float y);
 
 		LevelState* level;
 
