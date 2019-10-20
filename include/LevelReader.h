@@ -29,7 +29,7 @@ class LevelReader{
 
 		sf::Vector2f exitPt;
 
-		int map[30][40]; //stores values for each tile and their id, pass to LevelState
+		int map[40][30]; //stores values for each tile and their id, pass to LevelState
 
 }
 

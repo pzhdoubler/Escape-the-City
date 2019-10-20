@@ -13,7 +13,7 @@ class GameLogic
 {
 	public:
 		//Default constructor
-		GameLogic() {};
+		GameLogic();
 
 		//Initiallizes the gamestate based on the given LevelState description
 		bool init(LevelState level);

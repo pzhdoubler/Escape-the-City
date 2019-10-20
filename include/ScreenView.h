@@ -8,23 +8,26 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLogic.h"
+#include "LevelState.h"
 
 
 
 class ScreenView {
 
 private:
+    sf::Sprite levelOutline;
+
 
 public:
     //constructor
     //the constructor will most likely initiate fonts for text we want to display as well as
     //maybe do the initial entire updating of the screen to load the level in so then we don't need to worry
     //about updating everything during the main loop, just things that need to be updated as described below
-    ScreenView();
+    ScreenView(LevelState level);
 
-    //will get a levelState object from levelEditor
-    //uses that info to draws where barriers are, saves the canvas as a private field, draws it once then doesn't need to update it anymore
-    //probably in the constructor or maybe it's own init function called when this is created
+    //this guy will be called by constructor, and do the iteration of an array. Save it as a sprite object that can be
+    //called by the update first before any other drawing takes place
+    sf::Sprite init(LevelState level);
 
 
 
@@ -32,7 +35,7 @@ public:
     //from the logic which will hold character instances.
     //this update should get those coordinates and then draw the main window based on the new coordinates
     //will also need to draw enemies, barriers, items, other classes using the GameElements interface
-    void update(sf::RenderWindow& mainWindow, GameLogic& gameLogic);
+    void update(sf::RenderWindow& mainWindow, GameLogic& gameLogic, );
 
 
 

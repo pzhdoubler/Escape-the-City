@@ -3,14 +3,18 @@
 #include <cmath>
 
 
+GameLogic::GameLogic()
+{
+	fast_man = new PlayerChar(true);
+	jump_man = new PlayerChar(false);
+}
+
+
 bool GameLogic::init(LevelState level)
 {
 	this->level = level;
 	//Read any important values from level
 	//eg hazards, enemies, etc
-
-	fast_man = new PlayerChar(true);
-	jump_man = new PlayerChar(false);
 
 	fast_man->setPos(level.getFastSpawnPt());
 	jump_man->setPos(level.getJumpSpawnPt());
