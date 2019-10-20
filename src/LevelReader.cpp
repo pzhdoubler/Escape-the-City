@@ -1,4 +1,6 @@
 #include <LevelReader.h>
+#include <fstream>
+#include <iostream>
 
 LevelState currentLevelState;
 
@@ -6,7 +8,12 @@ sf::Vector2f fastSpawnPt;
 sf::Vector2f jumpSpawnPt;
 
 LevelReader(){
-
+	//fill the map array with zeros to represent 'empty' tiles
+	for(int r = 0; r < 40; r++){
+		for(int c = 0; c < 30; c++){
+			this->map[r][c] = 0;
+		}
+	}
 }
 
 void LevelReader::loadMap(std::string& level){
@@ -17,13 +24,15 @@ void LevelReader::loadMap(std::string& level){
 		return;
 	}
 	std::string line;
-	while(std::getline(file, line)){
-		//complete
+	int xTile;
+	int yTile;
+	int tileID;
+
+	//fill the map array with tileIDs that are specified in the text file
+	while(file >> xTile >> yTile >> tileID){
+		this->map[xTile][yTile] = tileID;
 	}
-}
-
-LevelState LevelReader:createLevelState(){
-
+	file.close();
 }
 
 void LevelReader::setFastSpawnPt(sf::Vector2f pt){
@@ -39,6 +48,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map[30][40], fastSpawnPt, jumpSpawnpt);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt);
 	return currentLevelState;
 }

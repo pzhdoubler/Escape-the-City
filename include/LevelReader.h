@@ -22,8 +22,6 @@ class LevelReader{
 		void setExitPt(sf::Vector2f pt);
 
 	private:
-		LevelState currentLevelState;
-
 		sf::Vector2f fastSpawnPt;
 		sf::Vector2f jumpSpawnpt;
 
