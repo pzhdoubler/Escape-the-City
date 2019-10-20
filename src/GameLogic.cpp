@@ -82,10 +82,10 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 		}
 	}
 
-	int tile_size = level.getTileSize();
+	int tile_size = level->getTileSize();
 	int player_height = player.getHeight();
 	int player_width = player.getWidth();
-	int level_layout[40][30] = level.getMatrix();
+	int level_layout[][] = level->getTileMap();
 
 	float new_x = pos.x + (vel.x * seconds);
 	float new_y = pos.y + (vel.y * seconds);
@@ -142,7 +142,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 
 std::vector<float> GameLogic::collisionCalculation(float x, float y)
 {
-	int tile_size = level.getTileSize();
+	int tile_size = level->getTileSize();
 
 	int x_diff, y_diff;
 
