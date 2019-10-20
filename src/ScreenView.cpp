@@ -25,7 +25,7 @@ sf::Sprite ScreenView::init(LevelState level) {
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            if (level.map[i][j] == 1) {
+            if (level.getTileMap()[i][j] == 1) {
                 border.setSize(sf::Vector2f(20,20));
                 border.setFillColor(sf::Color::Black);
                 border.setPosition(i*20, j*20);
@@ -33,7 +33,7 @@ sf::Sprite ScreenView::init(LevelState level) {
             }
         }
     }
-    
+
     const sf::Texture texture = textureCanvas.getTexture();
     sf::Sprite spriteCanvas(texture);
     return spriteCanvas;
