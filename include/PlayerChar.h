@@ -6,10 +6,10 @@
 class PlayerChar{
 public:
   //Character contructor
-  Char(bool player);
+  PlayerChar(bool player);
 
-  sf::RectangleShape jumpman; //to be replaced with sprites
-  sf::RectangleShape fastman;
+  sf::RectangleShape jump_man; //to be replaced with sprites
+  sf::RectangleShape fast_man;
   //sf::Sprite ;
 
   void useItem();
@@ -24,11 +24,16 @@ public:
 
   sf::Vector2f getVelocity();
 
+  int getHeight();
+  int getWidth();
+
 private:
    sf::Vector2f pos;
    sf::Vector2f vel;
    //defines which character
    bool player;
+   int height;
+   int width;
 
 };
 
