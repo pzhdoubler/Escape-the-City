@@ -2,11 +2,6 @@
 #include <fstream>
 #include <iostream>
 
-LevelState currentLevelState;
-
-sf::Vector2f fastSpawnPt;
-sf::Vector2f jumpSpawnPt;
-
 LevelReader::LevelReader(){
 	//fill the map array with zeros to represent 'empty' tiles
 	/*for(int r = 0; r < 40; r++){
@@ -28,7 +23,6 @@ void LevelReader::loadMap(const std::string& level){
 	file.open("..\\levels\\" + level);
 	if(!file.is_open()){
 		std::cout << "Failed to load file";
-		return;
 	}
 	std::string line;
 	int xTile;

@@ -12,7 +12,7 @@ public:
 	//Constructor
 	//LevelReader interprets text files to pass into the LevelState constructor
 	//Default constructor
-	LevelState();
+	LevelState(){};
 
 	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt);
 
