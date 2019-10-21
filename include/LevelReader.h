@@ -13,7 +13,7 @@ public:
 	LevelReader();
 
 	//reads a text file with the argument given of a path to map file
-	void loadMap(std::string& level);
+	void loadMap(const std::string& level);
 
 	LevelState createLevelState();
 

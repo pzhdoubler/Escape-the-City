@@ -1,10 +1,9 @@
 #include <SFML/Graphics.hpp>
 
-#include <LogicView.h>
+#include <GameLogic.h>
 #include <ScreenView.h>
 #include <LevelState.h>
 #include <LevelReader.h>
-#include <AppLayer.h>
 
 int main(int argc, char** argv) 
 {

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Zack H'Doubler/source/repos/Escape-the-City
+# Install script for directory: C:/W&M/Fall 2019/CSCI437/Escape-the-City
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/W&M/Fall 2019/CSCI437/Escape-the-City/Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,28 +1,29 @@
 #include <SFML/Graphics.hpp>
-
+#include <PlayerChar.h>
 
 
 PlayerChar::PlayerChar(bool player){
+  this->player = player;
   this->height = 18;
   this->width = 15;
   if (player){
-    fast_man.setSize(width, height);
+    fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Blue);
-    fast_man.setPos(50, 20);
+    fast_man.setPosition(sf::Vector2f(0, 0));
 
 
   }
   else{
-    jump_man.setSize(width, height);
+    jump_man.setSize(sf::Vector2f(width, height));
     jump_man.setFillColor(sf::Color::Red);
-    jump_man.setPos(10, 20);
+    jump_man.setPosition(sf::Vector2f(10, 0));
   }
 }
 
 void PlayerChar::draw(sf::RenderWindow &window){
-    jump_man.setPos(pos);
+    jump_man.setPosition(pos);
     window.draw(jump_man);
-    fast_man.setPos(pos);
+    fast_man.setPosition(pos);
     window.draw(fast_man);
 
 }
@@ -53,7 +54,7 @@ sf::Vector2f PlayerChar::getVelocity(){
   return vel;
 }
 
-sf::RectangleShape PlayerChar::getHeight(){
+int PlayerChar::getHeight(){
   return height;
 }
 
@@ -61,10 +62,11 @@ int PlayerChar::getWidth(){
   return width;
 }
 
-bool getType(){
+bool PlayerChar::getType(){
   return player;
 }
 
-void PlayerChar::UseItem(){
+/*void PlayerChar::UseItem(){
 
 }
+*/

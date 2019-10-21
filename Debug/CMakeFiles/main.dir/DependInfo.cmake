@@ -4,20 +4,20 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/bin/main.cpp" "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/main.dir/bin/main.cpp.obj"
-  "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/src/ScreenView.cpp" "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/main.dir/src/ScreenView.cpp.obj"
+  "C:/W&M/Fall 2019/CSCI437/Escape-the-City/bin/main.cpp" "C:/W&M/Fall 2019/CSCI437/Escape-the-City/Debug/CMakeFiles/main.dir/bin/main.cpp.obj"
+  "C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/ScreenView.cpp" "C:/W&M/Fall 2019/CSCI437/Escape-the-City/Debug/CMakeFiles/main.dir/src/ScreenView.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
-  "C:/SFML-2.5.1/include"
+  "C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/Escape-the-City_core.dir/DependInfo.cmake"
+  "C:/W&M/Fall 2019/CSCI437/Escape-the-City/Debug/CMakeFiles/Escape-the-City_core.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -23,7 +23,7 @@ LevelReader::LevelReader(){
 	}
 }
 
-void LevelReader::loadMap(std::string& level){
+void LevelReader::loadMap(const std::string& level){
 	std::ifstream file;
 	file.open("..\\levels\\" + level);
 	if(!file.is_open()){

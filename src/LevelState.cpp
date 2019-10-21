@@ -4,7 +4,7 @@ LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawn
 	this->tileSize = 20;
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
-	this->jumpSpawnpt = jumpSpawnpt;
+	this->jumpSpawnPt = jumpSpawnPt;
 }
 
 sf::Vector2f LevelState::getFastSpawnPt(){

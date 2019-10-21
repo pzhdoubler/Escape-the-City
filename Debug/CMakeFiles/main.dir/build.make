@@ -42,10 +42,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\Zack H'Doubler\source\repos\Escape-the-City"
+CMAKE_SOURCE_DIR = "C:\W&M\Fall 2019\CSCI437\Escape-the-City"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug"
+CMAKE_BINARY_DIR = "C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -59,30 +59,30 @@ include CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/bin/main.cpp.obj: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/bin/main.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
 CMakeFiles/main.dir/bin/main.cpp.obj: ../bin/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/bin/main.cpp.obj"
-	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\bin\main.cpp.obj -c "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\bin\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/bin/main.cpp.obj"
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\bin\main.cpp.obj -c "C:\W&M\Fall 2019\CSCI437\Escape-the-City\bin\main.cpp"
 
 CMakeFiles/main.dir/bin/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/bin/main.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\bin\main.cpp" > CMakeFiles\main.dir\bin\main.cpp.i
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\W&M\Fall 2019\CSCI437\Escape-the-City\bin\main.cpp" > CMakeFiles\main.dir\bin\main.cpp.i
 
 CMakeFiles/main.dir/bin/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/bin/main.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\bin\main.cpp" -o CMakeFiles\main.dir\bin\main.cpp.s
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\W&M\Fall 2019\CSCI437\Escape-the-City\bin\main.cpp" -o CMakeFiles\main.dir\bin\main.cpp.s
 
 CMakeFiles/main.dir/src/ScreenView.cpp.obj: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/ScreenView.cpp.obj: CMakeFiles/main.dir/includes_CXX.rsp
 CMakeFiles/main.dir/src/ScreenView.cpp.obj: ../src/ScreenView.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/ScreenView.cpp.obj"
-	C:\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\src\ScreenView.cpp.obj -c "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\src\ScreenView.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/ScreenView.cpp.obj"
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\main.dir\src\ScreenView.cpp.obj -c "C:\W&M\Fall 2019\CSCI437\Escape-the-City\src\ScreenView.cpp"
 
 CMakeFiles/main.dir/src/ScreenView.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/ScreenView.cpp.i"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\src\ScreenView.cpp" > CMakeFiles\main.dir\src\ScreenView.cpp.i
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\W&M\Fall 2019\CSCI437\Escape-the-City\src\ScreenView.cpp" > CMakeFiles\main.dir\src\ScreenView.cpp.i
 
 CMakeFiles/main.dir/src/ScreenView.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/ScreenView.cpp.s"
-	C:\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\src\ScreenView.cpp" -o CMakeFiles\main.dir\src\ScreenView.cpp.s
+	C:\Users\katel\Downloads\x86_64-6.1.0-release-posix-seh-rt_v5-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\W&M\Fall 2019\CSCI437\Escape-the-City\src\ScreenView.cpp" -o CMakeFiles\main.dir\src\ScreenView.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
@@ -95,21 +95,21 @@ main_EXTERNAL_OBJECTS =
 main.exe: CMakeFiles/main.dir/bin/main.cpp.obj
 main.exe: CMakeFiles/main.dir/src/ScreenView.cpp.obj
 main.exe: CMakeFiles/main.dir/build.make
-main.exe: C:/SFML-2.5.1/lib/libsfml-graphics-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-window-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-system-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-audio-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-network-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-graphics-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-window-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-system-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-audio-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-network-d.a
 main.exe: libEscape-the-City_core.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-graphics-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-window-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-system-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-audio-d.a
-main.exe: C:/SFML-2.5.1/lib/libsfml-network-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-graphics-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-window-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-system-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-audio-d.a
+main.exe: C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/lib/libsfml-network-d.a
 main.exe: CMakeFiles/main.dir/linklibs.rsp
 main.exe: CMakeFiles/main.dir/objects1.rsp
 main.exe: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\main.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\Zack H'Doubler\source\repos\Escape-the-City" "C:\Users\Zack H'Doubler\source\repos\Escape-the-City" "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug" "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug" "C:\Users\Zack H'Doubler\source\repos\Escape-the-City\Debug\CMakeFiles\main.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\W&M\Fall 2019\CSCI437\Escape-the-City" "C:\W&M\Fall 2019\CSCI437\Escape-the-City" "C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug" "C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug" "C:\W&M\Fall 2019\CSCI437\Escape-the-City\Debug\CMakeFiles\main.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/main.dir/depend
 
