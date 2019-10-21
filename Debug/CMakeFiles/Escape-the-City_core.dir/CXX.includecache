@@ -6,32 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/GameElements.h
-
-../include/GameLogic.h
-SFML/Graphics.hpp
--
-vector
--
-PlayerChar.h
--
-GameElements.h
--
-Interactables.h
--
-LevelState.h
--
-
-../include/Interactables.h
-
-../include/LevelReader.h
-SFML/Graphics.hpp
--
-string
--
-LevelState.h
--
-
 ../include/LevelState.h
 SFML/Graphics.hpp
 -
@@ -39,18 +13,6 @@ map
 -
 vector
 -
-
-../include/PlayerChar.h
-SFML/Graphics.hpp
--
-
-../include/ScreenView.h
-SFML/Graphics/RenderWindow.hpp
--
-GameLogic.h
-../include/GameLogic.h
-LevelState.h
-../include/LevelState.h
 
 C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/include/SFML/Config.hpp
 TargetConditionals.h
@@ -686,25 +648,7 @@ SFML/Config.hpp
 
 C:/Users/katel/Downloads/SFML-2.4.2-windows-gcc-6.1.0-mingw-64-bit/SFML-2.4.2/include/SFML/Window/WindowStyle.hpp
 
-C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/GameLogic.cpp
-GameLogic.h
--
-cmath
--
-
-C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/LevelReader.cpp
-LevelReader.h
--
-fstream
--
-iostream
--
-
 C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/LevelState.cpp
 LevelState.h
 -
-
-C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/ScreenView.cpp
-ScreenView.h
-C:/W&M/Fall 2019/CSCI437/Escape-the-City/src/ScreenView.h
 
