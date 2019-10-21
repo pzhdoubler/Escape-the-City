@@ -23,8 +23,8 @@ void ScreenView::init(LevelState &level) {
     int height = 30;
     textureCanvas.clear(sf::Color::White);
 
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
             if (level.getTileMap()[i][j] == 1) {
 				sf::RectangleShape border;
                 border.setSize(sf::Vector2f(20,20));
