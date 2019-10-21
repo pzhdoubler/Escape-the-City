@@ -34,14 +34,6 @@ map
 SFML/Graphics.hpp
 -
 
-../include/ScreenView.h
-SFML/Graphics/RenderWindow.hpp
--
-GameLogic.h
-../include/GameLogic.h
-LevelState.h
-../include/LevelState.h
-
 C:/SFML-2.5.1/include/SFML/Config.hpp
 TargetConditionals.h
 C:/SFML-2.5.1/include/SFML/TargetConditionals.h
@@ -717,8 +709,4 @@ GameLogic.h
 -
 cmath
 -
-
-C:/Users/Zack H'Doubler/source/repos/Escape-the-City/src/ScreenView.cpp
-ScreenView.h
-C:/Users/Zack H'Doubler/source/repos/Escape-the-City/src/ScreenView.h
 

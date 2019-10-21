@@ -43,7 +43,7 @@ class GameLogic
 
 		//determines where a point should be after a collision. also communicates information about which axis was effected
 		//last index is 0 for x-axis and 1 for y-axis
-		std::vector<int> collisionCalculation(float x, float y);
+		std::vector<float> collisionCalculation(float x, float y);
 
 		LevelState* level;
 
