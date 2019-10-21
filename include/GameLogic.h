@@ -33,10 +33,10 @@ class GameLogic
 	private:
 
 		//updates player's physics based on current postion and buttons press
-		void updatePlayerPosition(PlayerChar player, float deltaMs);
+		void updatePlayerPosition(PlayerChar& player, float deltaMs);
 
 		//determines if the player is going to take damage or die based on current position
-		void updatePlayerState(PlayerChar player, float deltaMs);
+		void updatePlayerState(PlayerChar& player, float deltaMs);
 
 		//updates any moving, non-player objects in the game
 		void updateObjects(float deltaMs);

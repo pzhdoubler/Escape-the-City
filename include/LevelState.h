@@ -16,9 +16,9 @@ public:
 
 	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt);
 
-	sf::Vector2f getFastSpawnPt();
+	sf::Vector2f& getFastSpawnPt();
 
-	sf::Vector2f getJumpSpawnPt();
+	sf::Vector2f& getJumpSpawnPt();
 
 	int getTileSize();
 

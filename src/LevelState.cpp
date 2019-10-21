@@ -8,11 +8,11 @@ LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawn
 	this->jumpSpawnPt = jumpSpawnPt;
 }
 
-sf::Vector2f LevelState::getFastSpawnPt(){
+sf::Vector2f& LevelState::getFastSpawnPt(){
 	return fastSpawnPt;
 }
 
-sf::Vector2f LevelState::getJumpSpawnPt(){
+sf::Vector2f& LevelState::getJumpSpawnPt(){
 	return jumpSpawnPt;
 }
 

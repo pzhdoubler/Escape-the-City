@@ -21,9 +21,9 @@ public:
 
   sf::Vector2f getPos();
 
-  void setPos(sf::Vector2f pos);
+  void setPos(sf::Vector2f& pos);
 
-  void setVelocity(sf::Vector2f vel);
+  void setVelocity(sf::Vector2f& vel);
 
   sf::Vector2f getVelocity();
 
@@ -31,6 +31,8 @@ public:
 
   int getHeight();
   int getWidth();
+
+  void printPlayerChar();
 
 private:
    sf::Vector2f pos;

@@ -9,14 +9,12 @@ PlayerChar::PlayerChar(bool player){
   if (player){
     fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Red);
-    fast_man.setPosition(sf::Vector2f(0, 0));
 
 
   }
   else{
     jump_man.setSize(sf::Vector2f(width, height));
     jump_man.setFillColor(sf::Color::Blue);
-    jump_man.setPosition(sf::Vector2f(10, 0));
   }
 }
 
@@ -32,18 +30,14 @@ sf::Vector2f PlayerChar::getPos(){
   return pos;
 }
 
-void PlayerChar::setPos(sf::Vector2f pos){
-	//printf("prev pos: %f, %f\n", this->pos.x, this->pos.y);
-	//printf("passed pos: %f, %f\n", pos.x, pos.y);
-	this->pos = pos;
-	//printf("final pos: %f, %f\n\n", this->pos.x, this->pos.y);
+void PlayerChar::setPos(sf::Vector2f& pos){
+  this->pos.x = pos.x;
+  this->pos.y = pos.y;
 }
 
-void PlayerChar::setVelocity(sf::Vector2f vel){
-	//printf("prev vel: %f, %f\n", this->vel.x, this->vel.y);
-	//printf("passed vel: %f, %f\n", vel.x, vel.y);
-	this->vel = vel;
-	//printf("final vel: %f, %f\n\n", this->vel.x, this->vel.y);
+void PlayerChar::setVelocity(sf::Vector2f& vel){
+  this->vel.x = vel.x;
+  this->vel.y = vel.y;
 }
 
 sf::Vector2f PlayerChar::getVelocity(){
@@ -61,6 +55,21 @@ int PlayerChar::getWidth(){
 bool PlayerChar::getType(){
   return player;
 }
+
+void PlayerChar::printPlayerChar() {
+	if (player)
+		printf("Type: Fast\n");
+	else
+		printf("Type: Jump\n");
+
+	printf("Position: { %f, %f }\n", pos.x, pos.y);
+	printf("Velocity: { %f, %f }\n", vel.x, vel.y);
+	printf("Height: %d\n", height);
+	printf("Width: %d\n", width);
+
+	printf("\n");
+}
+
 
 /*void PlayerChar::UseItem(){
 
