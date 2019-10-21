@@ -12,7 +12,7 @@ GameLogic::GameLogic()
 
 bool GameLogic::init(LevelState level)
 {
-	this->level = level;
+	this->level = &level;
 	//Read any important values from level
 	//eg hazards, enemies, etc
 
@@ -38,7 +38,7 @@ bool GameLogic::update(float deltaMs)
 	//update player state
 
 	updatePlayerPosition(*fast_man, deltaMs);
-	updatePlayerPosition(*high_man, deltaMs);
+	updatePlayerPosition(*jump_man, deltaMs);
 
 	//update other level objects
 	return true;
@@ -48,7 +48,9 @@ bool GameLogic::update(float deltaMs)
 std::vector<PlayerChar> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMENTS NEXT
 {
 
-	std::vector<PlayerChar> drawables{ *fast, *high };
+	std::vector<PlayerChar> drawables;
+	drawables.push_back(*fast_man);
+	drawables.push_back(*jump_man);
 
 	//add all interactables
 
