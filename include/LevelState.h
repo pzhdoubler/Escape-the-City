@@ -22,7 +22,9 @@ public:
 
 	int getTileSize();
 
-	std::vector<std::vector<int>> getTileMap();
+	const std::vector<std::vector<int>>& getTileMap() const;
+
+	void printLevelState();
 
 	//get method for array of values for collision detection
 

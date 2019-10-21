@@ -17,7 +17,7 @@ class GameLogic
 		GameLogic();
 
 		//Initiallizes the gamestate based on the given LevelState description
-		bool init(LevelState level);
+		bool init(LevelState &level);
 
 		//Updates internal game state for the given time
 		bool update(float deltaMs);

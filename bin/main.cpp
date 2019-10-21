@@ -36,12 +36,22 @@ int main(int argc, char** argv)
 			float deltaMs = clock.getElapsedTime().asSeconds();
 			clock.restart();
 
+			sf::Event event;
+			while (App.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed) {
+					paused = true;
+					App.close();
+				}
+			}
+
 			logic.update(deltaMs);
 
 			screen.update(App, logic);
 
 			//update controller
 
+			App.display();
 		}
 	}
 

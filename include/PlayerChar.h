@@ -15,9 +15,9 @@ public:
   sf::RectangleShape fast_man;
   //sf::Sprite ;
 
-  void useItem();
+  //void useItem();
 
-  void draw(sf::RenderWindow&);
+  void draw(sf::RenderWindow& window);
 
   sf::Vector2f getPos();
 

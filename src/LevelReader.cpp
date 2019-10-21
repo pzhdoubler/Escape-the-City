@@ -36,10 +36,10 @@ void LevelReader::loadMap(const std::string& level){
 	while(file >> xTile >> yTile >> tileID){
 		this->map[xTile][yTile] = tileID;
 		if(tileID == 2){
-			this->fastSpawnPt = sf::Vector2f(xTile, yTile);
+			this->fastSpawnPt = sf::Vector2f(xTile*20, yTile*20);
 		}
 		if(tileID == 3){
-			this->jumpSpawnPt = sf::Vector2f(xTile, yTile);
+			this->jumpSpawnPt = sf::Vector2f(xTile*20, yTile*20);
 		}
 	}
 	file.close();

@@ -10,7 +10,7 @@ GameLogic::GameLogic()
 }
 
 
-bool GameLogic::init(LevelState level)
+bool GameLogic::init(LevelState &level)
 {
 	this->level = &level;
 	//Read any important values from level
@@ -19,15 +19,17 @@ bool GameLogic::init(LevelState level)
 	fast_man->setPos(level.getFastSpawnPt());
 	jump_man->setPos(level.getJumpSpawnPt());
 
+	//fast_man->setPos(sf::Vector2f(200, 200));
+
 	fast_man->setVelocity(sf::Vector2f(0, 0));
 	jump_man->setVelocity(sf::Vector2f(0, 0));
 	//set starting positions and speeds
 	//stored in level state
 
 	//read in physics constants
-	GRAVITY = 5;
-	FAST_MAX_Y = 10;
-	JUMP_MAX_Y = 7;
+	GRAVITY = 10;
+	FAST_MAX_Y = 25;
+	JUMP_MAX_Y = 20;
 
 	return true;
 }
@@ -35,6 +37,8 @@ bool GameLogic::init(LevelState level)
 
 bool GameLogic::update(float deltaMs)
 {
+	//level->printLevelState();
+
 	//update player state
 
 	updatePlayerPosition(*fast_man, deltaMs);
@@ -94,6 +98,13 @@ std::vector<float> GameLogic::collisionCalculation(float x, float y)
 
 void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 {
+	/*
+	if (player.getType())
+		printf("\nFast: \n");
+	else
+		printf("\nJump: \n");
+	*/
+
 	float seconds = deltaMs / 1000.0;
 
 	sf::Vector2f pos = player.getPos();
@@ -103,8 +114,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 	float new_vy = vel.y;
 
 	//apply gravity
-	if (std::abs(int(vel.y)) > 0) 
-		new_vy -= GRAVITY;
+	new_vy -= GRAVITY;
 
 	//limit to max vert speed
 	if (std::abs(int(new_vy)) > FAST_MAX_Y) {
@@ -128,6 +138,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 
 	//top left corner
 	if (level_layout[int(new_x)/tile_size][int(new_y)/tile_size] == 1) {
+		//printf("top left corner\n");
 		std::vector<float> shift = collisionCalculation(new_x, new_y);
 		new_x = shift[0];
 		new_y = shift[1];
@@ -138,6 +149,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 	}
 	//top right corner
 	if (level_layout[(int(new_x) + player_width) / tile_size][int(new_y) / tile_size] == 1) {
+		//printf("top right corner\n");
 		std::vector<float> shift = collisionCalculation(new_x + player_width, new_y);
 		new_x = shift[0] - player_width;
 		new_y = shift[1];
@@ -148,6 +160,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 	}
 	//bottom left corner
 	if (level_layout[int(new_x) / tile_size][(int(new_y) - player_height) / tile_size] == 1) {
+		//printf("bottom left corner\n");
 		std::vector<float> shift = collisionCalculation(new_x, new_y - player_height);
 		new_x = shift[0];
 		new_y = shift[1] + player_height;
@@ -158,6 +171,7 @@ void GameLogic::updatePlayerPosition(PlayerChar player, float deltaMs)
 	}
 	//bottom right corner
 	if (level_layout[(int(new_x) + player_width) / tile_size][(int(new_y) - player_height) / tile_size] == 1) {
+		//printf("bottom right corner\n");
 		std::vector<float> shift = collisionCalculation(new_x + player_width, new_y - player_height);
 		new_x = shift[0] - player_width;
 		new_y = shift[1] + player_height;
