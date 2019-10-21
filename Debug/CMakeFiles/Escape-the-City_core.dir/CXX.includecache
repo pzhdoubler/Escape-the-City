@@ -6,32 +6,10 @@
 
 #IncludeRegexTransform: 
 
-../include/GameElements.h
-
-../include/GameLogic.h
-SFML/Graphics.hpp
--
-vector
--
-PlayerChar.h
--
-GameElements.h
--
-Interactables.h
--
-LevelState.h
--
-
-../include/Interactables.h
-
 ../include/LevelState.h
 SFML/Graphics.hpp
 -
 map
--
-
-../include/PlayerChar.h
-SFML/Graphics.hpp
 -
 
 C:/SFML-2.5.1/include/SFML/Config.hpp
@@ -704,9 +682,7 @@ SFML/Config.hpp
 
 C:/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp
 
-C:/Users/Zack H'Doubler/source/repos/Escape-the-City/src/GameLogic.cpp
-GameLogic.h
--
-cmath
+C:/Users/Zack H'Doubler/source/repos/Escape-the-City/src/LevelState.cpp
+LevelState.h
 -
 

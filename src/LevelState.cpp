@@ -1,6 +1,6 @@
 #include <LevelState.h>
 
-LevelState(int map[40][30], sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnpt){
+LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnpt){
 	this->tileSize = 20;
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
@@ -19,6 +19,6 @@ int LevelState::getTileSize(){
 	return tileSize;
 }
 
-int** LevelState::getTileMap() {
+std::vector<std::vector<int>> LevelState::getTileMap() {
 	return map;
 }

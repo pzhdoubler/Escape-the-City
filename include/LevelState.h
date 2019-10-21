@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <vector>
 
 //LevelState takes input from LevelReader and builds the level itself
 
@@ -13,7 +14,7 @@ public:
 	//Default constructor
 	LevelState();
 
-	LevelState(int map[40][30], sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt);
+	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt);
 
 	sf::Vector2f getFastSpawnPt();
 
@@ -21,7 +22,7 @@ public:
 
 	int getTileSize();
 
-	int** getTileMap();
+	std::vector<std::vector<int>> getTileMap();
 
 	//get method for array of values for collision detection
 
@@ -38,7 +39,7 @@ private:
 
 	int tileSize;
 
-	int map[40][30]; //stores values for each tile and their id
+	std::vector<std::vector<int>> map; //stores values for each tile and their id
 
 	//int collision[40][30]; //stores values for whether the tile is a collision (0 = default, 1 = collision)
 };
