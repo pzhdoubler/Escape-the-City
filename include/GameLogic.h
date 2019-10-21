@@ -47,7 +47,8 @@ class GameLogic
 
 		LevelState* level;
 
-		PlayerChar* fast_man, jump_man;
+		PlayerChar* fast_man;
+		PlayerChar* jump_man;
 
 		std::vector<Interactables> hazards;
 
