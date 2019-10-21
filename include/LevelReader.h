@@ -27,7 +27,7 @@ public:
 
 private:
 	sf::Vector2f fastSpawnPt;
-	sf::Vector2f jumpSpawnpt;
+	sf::Vector2f jumpSpawnPt;
 
 	sf::Vector2f exitPt;
 

@@ -7,7 +7,7 @@ LevelState currentLevelState;
 sf::Vector2f fastSpawnPt;
 sf::Vector2f jumpSpawnPt;
 
-LevelReader(){
+LevelReader::LevelReader(){
 	//fill the map array with zeros to represent 'empty' tiles
 	for(int r = 0; r < 40; r++){
 		for(int c = 0; c < 30; c++){
