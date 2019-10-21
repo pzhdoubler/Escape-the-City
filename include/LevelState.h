@@ -19,6 +19,8 @@ public:
 
 	sf::Vector2f getJumpSpawnPt();
 
+	int getTileSize();
+
 	int** getTileMap();
 
 	//get method for array of values for collision detection

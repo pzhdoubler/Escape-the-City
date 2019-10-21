@@ -15,7 +15,7 @@ sf::Vector2f LevelState::getJumpSpawnPt(){
 	return jumpSpawnPt;
 }
 
-int LevelState:getTileSize(){
+int LevelState::getTileSize(){
 	return tileSize;
 }
 
