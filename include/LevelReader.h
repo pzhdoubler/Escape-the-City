@@ -32,7 +32,7 @@ private:
 	sf::Vector2f exitPt;
 
 	//int map[40][30]; //stores values for each tile and their id, pass to LevelState
-	std::vector<std::vector<int>> map(40, std::vector<int>(30));
+	std::vector<std::vector<int>> map;
 };
 
 #endif //_LEVELREADER_H_

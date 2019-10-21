@@ -14,6 +14,13 @@ LevelReader::LevelReader(){
 			this->map[r][c] = 0;
 		}
 	}*/
+	for(int r = 0; r < 40; r++){
+		std::vector<int> row;
+		for(int c = 0; c < 30; c++){
+			row.push_back(0);
+		}
+		this->map.push_back(row);
+	}
 }
 
 void LevelReader::loadMap(std::string& level){
