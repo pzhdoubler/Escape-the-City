@@ -5,6 +5,9 @@
 
 class PlayerChar{
 public:
+
+  //default constructor
+  PlayerChar(){};
   //Character contructor
   PlayerChar(bool player);
 
