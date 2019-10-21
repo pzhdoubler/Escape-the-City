@@ -61,6 +61,10 @@ int PlayerChar::getWidth(){
   return width;
 }
 
+bool getType(){
+  return player;
+}
+
 void PlayerChar::UseItem(){
 
 }

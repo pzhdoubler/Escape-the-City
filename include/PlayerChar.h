@@ -27,6 +27,8 @@ public:
 
   sf::Vector2f getVelocity();
 
+  bool getType();
+
   int getHeight();
   int getWidth();
 
