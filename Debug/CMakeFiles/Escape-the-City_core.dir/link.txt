@@ -1,0 +1,2 @@
+C:\mingw64\bin\ar.exe qc libEscape-the-City_core.a  CMakeFiles/Escape-the-City_core.dir/src/GameLogic.cpp.obj CMakeFiles/Escape-the-City_core.dir/src/Interactables.cpp.obj CMakeFiles/Escape-the-City_core.dir/src/LevelReader.cpp.obj CMakeFiles/Escape-the-City_core.dir/src/LevelState.cpp.obj CMakeFiles/Escape-the-City_core.dir/src/PlayerChar.cpp.obj CMakeFiles/Escape-the-City_core.dir/src/ScreenView.cpp.obj
+C:\mingw64\bin\ranlib.exe libEscape-the-City_core.a

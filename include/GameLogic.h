@@ -5,8 +5,9 @@
 #include <vector>
 
 #include <PlayerChar.h>
-#include <GameElement.h>
-#include <Interactable.h>
+#include <GameElements.h>
+#include <Interactables.h>
+#include <LevelState.h>
 
 
 class GameLogic
@@ -48,11 +49,11 @@ class GameLogic
 
 		PlayerChar* fast_man, jump_man;
 
-		std::vector<Interactable> hazards;
+		std::vector<Interactables> hazards;
 
-		std::vector<Interactable> enemies;
+		std::vector<Interactables> enemies;
 
-		std::vector<Interactable> items;
+		std::vector<Interactables> items;
 
 		int GRAVITY;
 		int FRICTION;

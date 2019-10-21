@@ -19,6 +19,6 @@ int LevelState:getTileSize(){
 	return tileSize;
 }
 
-int[][] LevelState::getTileMap() {
+int** LevelState::getTileMap() {
 	return map;
 }

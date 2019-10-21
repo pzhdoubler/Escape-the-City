@@ -1,0 +1,4 @@
+C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/Escape-the-City_core.dir
+C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/edit_cache.dir
+C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/main.dir
+C:/Users/Zack H'Doubler/source/repos/Escape-the-City/Debug/CMakeFiles/rebuild_cache.dir

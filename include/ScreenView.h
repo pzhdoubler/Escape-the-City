@@ -19,6 +19,8 @@ private:
 
 
 public:
+	//default constructor
+	ScreenView() {};
     //constructor
     //the constructor will most likely initiate fonts for text we want to display as well as
     //maybe do the initial entire updating of the screen to load the level in so then we don't need to worry

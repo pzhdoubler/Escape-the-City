@@ -1,7 +1,11 @@
+#ifndef GAMEELEMENTS_H_
+#define GAMEELEMENTS_H_
 
+class GameElement {
 
-class GameElement{
+	virtual draw();
 
-virtual draw();
+};
 
-}
+#endif // !GAMEELEMENTS_H_
+
