@@ -9,12 +9,15 @@ LevelReader::LevelReader(){
 			this->map[r][c] = 0;
 		}
 	}*/
-	for(int r = 0; r < 30; r++){
-		std::vector<int> row;
-		for(int c = 0; c < 40; c++){
-			row.push_back(0);
+	this->map.resize(40);
+	for(int r = 0; r < 40; r++){
+		this->map[r].resize(30);
+		//std::vector<int> row;
+		for(int c = 0; c < 30; c++){
+			//row.push_back(0);
+			this->map[r][c] = 0;
 		}
-		this->map.push_back(row);
+		//this->map.push_back(row);
 	}
 }
 
