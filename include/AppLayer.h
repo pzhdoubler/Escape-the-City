@@ -13,14 +13,20 @@
 class AppLayer {
 
 private:
+    LevelReader loader;
+    LevelState level;
+
 
 
 
 public:
-    LevelReader loader;
-    LevelState level;
 
+    GameLogic logic;
+    ScreenView screen;
+
+    bool isPaused = false;
     AppLayer();
+    bool screenTransitionTest(sf::RenderWindow& App);
 };
 
 #endif //CSCI437_APPLAYER_H

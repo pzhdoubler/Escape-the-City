@@ -4,27 +4,30 @@
 #include <ScreenView.h>
 #include <LevelState.h>
 #include <LevelReader.h>
+#include <AppLayer.h>
 
 int main(int argc, char** argv) 
 {
 	sf::RenderWindow App(sf::VideoMode(800, 600, 32), "Escape the City - SFML", sf::Style::Close);
 
 	//initialize app layer
+	AppLayer appLayer;
 
 	while (App.isOpen()) 
 	{
 
-		LevelReader loader; //to be done inside app layer once fully implemented
-		loader.loadMap("level_prototype.txt");
-
-		//recieve level and initialize Views
-		LevelState level = loader.createLevelState();
-
-		GameLogic logic;
-		logic.init(level);
-
-		ScreenView screen;
-		screen.init(level);
+	    //all this should now work within appLayer
+//		LevelReader loader; //to be done inside app layer once fully implemented
+//		loader.loadMap("level_prototype.txt");
+//
+//		//recieve level and initialize Views
+//		LevelState level = loader.createLevelState();
+//
+//		GameLogic logic;
+//		logic.init(level);
+//
+//		ScreenView screen;
+//		screen.init(level);
 
 		//initialize controller
 
@@ -46,9 +49,14 @@ int main(int argc, char** argv)
 				}
 			}
 
-			logic.update(deltaMs);
+			//this is to test if on a spaceBar press, the AppLayer will remove a blue filled screen
+			appLayer.screenTransitionTest(App);
+            //with this in place, we dont start updating logic or screenview until we press the spacebar but the only
+            //reason for that is is because we don't let anything else update due to the while loop we get stuck in
 
-			screen.update(App, logic);
+			appLayer.logic.update(deltaMs);
+
+			appLayer.screen.update(App, appLayer.logic);
 
 			//update controller
 
