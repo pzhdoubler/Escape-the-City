@@ -7,24 +7,24 @@ Hazards::Hazards(){
   
 }
 
-void draw(sf::RenderWindow& window){
+void Hazards::draw(sf::RenderWindow& window){
   window.draw(this);
 }
 
-void setPos(sf::Vector2f& pos){
+void Hazards::setPos(sf::Vector2f& pos){
   this->pos.x = pos.x;
   this->pos.y = pos.y;
 }
 
 
 //returns the position of the hazard
-sf::Vector2f getPos(){
+sf::Vector2f Hazards::getPos(){
   return pos;
 }
 
 
 
-void Toggle(){
+void Hazards::Toggle(){
   this->toggled= !toggled;
 
 }

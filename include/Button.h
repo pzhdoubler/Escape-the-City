@@ -7,7 +7,7 @@
 class Button : public Interactables{
 public:
   //defalt constructor
-  Button(){};
+  Button();
 
   sf::Sprite button;
   
@@ -31,7 +31,7 @@ private:
   bool pressed;
 
 
-}
+};
 
 
 #endif //!BUTTON_H_

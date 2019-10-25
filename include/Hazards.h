@@ -7,7 +7,7 @@
 class Hazards : public Interactables {
 public:
 
-  Hazards(){};
+  Hazards();
 
   void draw(sf::RenderWindow& window);
 

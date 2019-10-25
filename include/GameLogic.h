@@ -23,7 +23,7 @@ class GameLogic
 		bool update(float deltaMs);
 
 		//Returns a collection of all drawable objects in the game state to be updated
-		std::vector<PlayerChar> getDrawables();
+		std::vector<GameElements*> getDrawables();
 
 		//Recives button input and updates gamestate based on given time and button
 		//filler type Key. Uses txt file?

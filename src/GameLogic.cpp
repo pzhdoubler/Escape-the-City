@@ -51,12 +51,15 @@ bool GameLogic::update(float deltaMs)
 }
 
 
-std::vector<PlayerChar> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMENTS NEXT
+std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMENTS NEXT
 {
+	std::vector<GameElements*> drawables;
 
-	std::vector<PlayerChar> drawables;
-	drawables.push_back(*fast_man);
-	drawables.push_back(*jump_man);
+	GameElements* fast_ptr = fast_man;
+	GameElements* jump_ptr = jump_man;
+
+	drawables.push_back(fast_ptr);
+	drawables.push_back(jump_ptr);
 
 	//add all interactables
 

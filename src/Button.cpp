@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 Button::Button(){
-  this->pressed = 0;
+  this->pressed = false;
 }
 
 void Button::draw(sf::RenderWindow &window){
@@ -14,6 +14,6 @@ void Button::setPos(sf::Vector2f& pos){
   this->pos.y = pos.y;
 }
 
-void Toggle(){
+void Button::Toggle(){
   this->pressed = !pressed;
 }

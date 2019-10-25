@@ -48,8 +48,8 @@ void ScreenView::update(sf::RenderWindow &mainWindow, GameLogic &gameLogic) {
     //mainWindow reference
 	sf::Sprite level(levelOutline);
     mainWindow.draw(level);
-	std::vector<PlayerChar> drawables = gameLogic.getDrawables();
+	std::vector<GameElements*> drawables = gameLogic.getDrawables();
 
-	drawables.at(0).draw(mainWindow);
-    drawables.at(1).draw(mainWindow);
+	drawables.at(0)->draw(mainWindow);
+    drawables.at(1)->draw(mainWindow);
 }

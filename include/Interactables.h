@@ -2,6 +2,7 @@
 #define INTERACTABLES_H
 
 #include <SFML/Graphics.hpp>
+#include <GameElements.h>
 
 class Interactables : public GameElements {
 public:
