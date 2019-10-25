@@ -18,20 +18,28 @@ public:
 
   //void useItem();
 
+  //draws the characters fast_man and jump_man
   void draw(sf::RenderWindow& window);
 
+  //return the position of the character
   sf::Vector2f getPos();
 
+  //methods to set a position for the characters
   void setPos(sf::Vector2f& pos);
 
+  // method to set a velocity for the characters
   void setVelocity(sf::Vector2f& vel);
 
+  // method returns the velocity of the character as a vector
   sf::Vector2f getVelocity();
 
+  // returns the player character
   bool getType();
 
+  //returns the initial height and width of the characters
   int getHeight();
   int getWidth();
+
 
   void printPlayerChar();
 
