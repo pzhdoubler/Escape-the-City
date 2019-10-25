@@ -14,7 +14,7 @@ public:
 	//Default constructor
 	LevelState(){};
 
-	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt);
+	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize);
 
 	sf::Vector2f& getFastSpawnPt();
 

@@ -4,24 +4,17 @@
 
 LevelReader::LevelReader(){
 	//fill the map array with zeros to represent 'empty' tiles
-	/*for(int r = 0; r < 40; r++){
-		for(int c = 0; c < 30; c++){
-			this->map[r][c] = 0;
-		}
-	}*/
 	this->map.resize(40);
 	for(int r = 0; r < 40; r++){
 		this->map[r].resize(30);
-		//std::vector<int> row;
 		for(int c = 0; c < 30; c++){
-			//row.push_back(0);
 			this->map[r][c] = 0;
 		}
-		//this->map.push_back(row);
 	}
 }
 
 void LevelReader::loadMap(const std::string& level){
+	this->tileSize = 20;
 	std::ifstream file;
 	file.open("..\\levels\\" + level);
 	if(!file.is_open()){
@@ -36,10 +29,10 @@ void LevelReader::loadMap(const std::string& level){
 	while(file >> xTile >> yTile >> tileID){
 		this->map[xTile][yTile] = tileID;
 		if(tileID == 2){
-			this->fastSpawnPt = sf::Vector2f(xTile*20, yTile*20);
+			this->fastSpawnPt = sf::Vector2f(xTile*tileSize, yTile*tileSize);
 		}
 		if(tileID == 3){
-			this->jumpSpawnPt = sf::Vector2f(xTile*20, yTile*20);
+			this->jumpSpawnPt = sf::Vector2f(xTile*tileSize, yTile*tileSize);
 		}
 	}
 	file.close();
@@ -58,6 +51,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, tileSize);
 	return currentLevelState;
 }

@@ -17,9 +17,6 @@ public:
 
 	LevelState createLevelState();
 
-	//makes array to give to LevelState of IDs that are collision points from the tile map
-
-
 	void setFastSpawnPt(sf::Vector2f pt);
 	void setJumpSpawnPt(sf::Vector2f pt);
 
@@ -32,8 +29,9 @@ private:
 
 	sf::Vector2f exitPt;
 
-	//int map[40][30]; //stores values for each tile and their id, pass to LevelState
-	std::vector<std::vector<int>> map;
+	std::vector<std::vector<int>> map; //stores values for each tile and their id, pass to LevelState
+
+	int tileSize;
 };
 
 #endif //_LEVELREADER_H_

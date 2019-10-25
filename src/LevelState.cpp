@@ -1,8 +1,8 @@
 #include <LevelState.h>
 #include <cstdio>
 
-LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt){
-	this->tileSize = 20;
+LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize){
+	this->tileSize = tileSize;
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
 	this->jumpSpawnPt = jumpSpawnPt;
