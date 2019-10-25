@@ -14,6 +14,11 @@ void Button::setPos(sf::Vector2f& pos){
   this->pos.y = pos.y;
 }
 
+sf::Vector2f Button::getPos(){
+  return pos;
+}
+
+//tells if the button has been pressed
 void Button::Toggle(){
   this->pressed = !pressed;
 }

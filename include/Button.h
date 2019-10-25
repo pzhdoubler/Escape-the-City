@@ -10,7 +10,7 @@ public:
   Button();
 
   sf::Sprite button;
-  
+
 
   void draw(sf::RenderWindow& window);
 

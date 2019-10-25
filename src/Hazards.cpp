@@ -11,6 +11,7 @@ void Hazards::draw(sf::RenderWindow& window){
   window.draw(hazard);
 }
 
+//set hazard's position only used at creation of a hazard
 void Hazards::setPos(sf::Vector2f& pos){
   this->pos.x = pos.x;
   this->pos.y = pos.y;
@@ -23,7 +24,7 @@ sf::Vector2f Hazards::getPos(){
 }
 
 
-
+//
 void Hazards::Toggle(){
   this->toggled= !toggled;
 

@@ -4,10 +4,12 @@
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
 
-class Hazards : public Interactables {
+class Items : public Interactables {
 public:
 
-  Items(){};
+  Items();
+
+  sf::Sprite item;
 
   void draw(sf::RenderWindow& window);
 
