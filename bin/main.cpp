@@ -23,7 +23,8 @@ int main(int argc, char** argv)
 		GameLogic logic;
 		logic.init(level);
 
-		ScreenView screen(level);
+		ScreenView screen;
+		screen.init(level);
 
 		//initialize controller
 
