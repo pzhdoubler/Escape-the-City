@@ -1,11 +1,15 @@
 #ifndef GAMEELEMENTS_H_
 #define GAMEELEMENTS_H_
 
-class GameElement {
+#include <SFML/Graphics.hpp>
 
-	virtual draw();
+class GameElements {
+
+public:
+
+	virtual void draw(sf::RenderWindow& window);
+
 
 };
 
 #endif // !GAMEELEMENTS_H_
-

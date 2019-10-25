@@ -2,8 +2,9 @@
 #define PLAYER_CHAR_H
 
 #include <SFML/Graphics.hpp>
+#include <GameElements.h>
 
-class PlayerChar{
+class PlayerChar : public GameElements {
 public:
 
   //default constructor
