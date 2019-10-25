@@ -25,7 +25,7 @@ public:
     //the constructor will most likely initiate fonts for text we want to display as well as
     //maybe do the initial entire updating of the screen to load the level in so then we don't need to worry
     //about updating everything during the main loop, just things that need to be updated as described below
-    ScreenView(LevelState &level);
+    //ScreenView();
 
     //this guy will be called by constructor, and do the iteration of an array. Save it as a sprite object that can be
     //called by the update first before any other drawing takes place

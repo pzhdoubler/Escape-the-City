@@ -5,12 +5,12 @@
 #include "ScreenView.h"
 #include <vector>
 
-ScreenView::ScreenView(LevelState &level) {
-    //I know for the first level we will want an instruction box in the upper left hand corner
-    //we will want to initialize some sort of HUD like we did in Pong with fonts and texts to draw that show instructions
-    //but we need to know what level we are on because we don't need text drawn on every level
-    init(level);
-}
+//ScreenView::ScreenView() {
+//    //I know for the first level we will want an instruction box in the upper left hand corner
+//    //we will want to initialize some sort of HUD like we did in Pong with fonts and texts to draw that show instructions
+//    //but we need to know what level we are on because we don't need text drawn on every level
+//
+//}
 
 void ScreenView::init(LevelState &level) {
     //iterate through a 2d array that has either a 0 or 1. If 0, progress. If 1, draw a 20x20 box.
@@ -27,9 +27,9 @@ void ScreenView::init(LevelState &level) {
         for (int j = 0; j < height; j++) {
             if (level.getTileMap()[i][j] == 1) {
 				sf::RectangleShape border;
-                border.setSize(sf::Vector2f(20,20));
+                border.setSize(sf::Vector2f(level.getTileSize(), level.getTileSize()));
                 border.setFillColor(sf::Color::Black);
-                border.setPosition(i*20, j*20);
+                border.setPosition(i*level.getTileSize(), j*level.getTileSize());
                 textureCanvas.draw(border);
 				//printf("[ %d, %d ]\n", i, j);
             }
