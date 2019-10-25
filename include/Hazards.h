@@ -9,6 +9,8 @@ public:
 
   Hazards();
 
+  sf::Sprite hazard;
+
   void draw(sf::RenderWindow& window);
 
   void setPos(sf::Vector2f& pos);
