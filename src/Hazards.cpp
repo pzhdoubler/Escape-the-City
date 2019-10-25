@@ -4,11 +4,11 @@
 
 Hazards::Hazards(){
   this->toggled= 0;
-  
+
 }
 
 void Hazards::draw(sf::RenderWindow& window){
-  window.draw(this);
+  window.draw(hazard);
 }
 
 void Hazards::setPos(sf::Vector2f& pos){
