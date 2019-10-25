@@ -1,8 +1,18 @@
 #ifndef INTERACTABLES_H
 #define INTERACTABLES_H
 
-class Interactables {
+#include <SFML/Graphics.hpp>
+
+class Interactables : public GameElements {
 public:
+  //defalt constructor
+  Interactables(){};
+
+
+
+
+
+private:
 
 
 
