@@ -6,8 +6,8 @@
 class GameElements {
 
 public:
-
-	virtual void draw(sf::RenderWindow& window);
+ //virtual draws to allow ScreenView to acess drawn methods
+	virtual void draw(sf::RenderWindow& window) = 0;
 
 
 };
