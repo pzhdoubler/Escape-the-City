@@ -9,7 +9,7 @@ public:
   //defalt constructor
   Interactables(){};
 
-
+  void draw(sf::RenderWindow& window);
 
 
 
