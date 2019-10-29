@@ -5,8 +5,8 @@
 
 GameLogic::GameLogic()
 {
-	fast_man = new PlayerChar(true);
-	jump_man = new PlayerChar(false);
+	fast_man = std::make_shared<PlayerChar>(true);
+	jump_man = std::make_shared<PlayerChar>(false);
 }
 
 
@@ -55,8 +55,8 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 {
 	std::vector<GameElements*> drawables;
 
-	GameElements* fast_ptr = fast_man;
-	GameElements* jump_ptr = jump_man;
+	GameElements* fast_ptr = fast_man.get();
+	GameElements* jump_ptr = jump_man.get();
 
 	drawables.push_back(fast_ptr);
 	drawables.push_back(jump_ptr);

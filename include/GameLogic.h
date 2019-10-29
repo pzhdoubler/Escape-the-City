@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <memory>
 
 #include <PlayerChar.h>
 #include <GameElements.h>
@@ -47,8 +48,8 @@ class GameLogic
 
 		LevelState* level;
 
-		PlayerChar* fast_man;
-		PlayerChar* jump_man;
+		std::shared_ptr<PlayerChar> fast_man;
+		std::shared_ptr<PlayerChar> jump_man;
 
 		std::vector<Interactables> hazards;
 
