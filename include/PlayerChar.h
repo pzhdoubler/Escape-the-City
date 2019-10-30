@@ -40,6 +40,9 @@ public:
   int getHeight();
   int getWidth();
 
+  //determines if character is currently in the air
+  bool isInAir();
+  void setInAir(bool in_air);
 
   void printPlayerChar();
 
@@ -50,6 +53,7 @@ private:
    bool player;
    int height;
    int width;
+   bool in_air;
 
 };
 

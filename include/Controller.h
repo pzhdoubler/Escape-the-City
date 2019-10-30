@@ -1,6 +1,8 @@
 #ifndef _CONTROLLER_H_
+#define _CONTROLLER_H_
 
-#include <GameLogic.h>
+//Forward declaration of logic
+class GameLogic;
 
 
 class Controller 
@@ -33,7 +35,7 @@ class Controller
 
 	private:
 
-		GameLogic logic;
+		GameLogic* logic;
 
 		int bindings[CONTROLS_LEN];
 

@@ -9,7 +9,7 @@
 #include <GameElements.h>
 #include <Interactables.h>
 #include <LevelState.h>
-
+#include <Controller.h>
 
 class GameLogic
 {
@@ -27,8 +27,7 @@ class GameLogic
 		std::vector<GameElements*> getDrawables();
 
 		//Recives button input and updates gamestate based on given time and button
-		//filler type Key. Uses txt file?
-		//void buttonPress(Key button, float deltaMs);
+		void buttonPress(Controller::Controls button, float deltaMs);
 
 
 	private:
@@ -61,6 +60,8 @@ class GameLogic
 		int FRICTION;
 		int FAST_RUN, FAST_VERT, FAST_MAX_X, FAST_MAX_Y;
 		int JUMP_RUN, JUMP_VERT, JUMP_MAX_X, JUMP_MAX_Y;
+
+		bool f_in_air, j_in_air;
 
 };
 
