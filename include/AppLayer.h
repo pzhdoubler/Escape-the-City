@@ -17,6 +17,10 @@ private:
     LevelState level;
     sf::Text hud;
     sf::Font font;
+    bool optionMenu(sf::RenderWindow& App);
+    bool optionMenuOpen = false;
+    bool levelSelectMenu(sf::RenderWindow& App);
+    bool levelSelectOpen = false;
 
 
 
@@ -25,9 +29,11 @@ public:
     GameLogic logic;
     ScreenView screen;
 
-    bool isPaused = false;
+    bool isPlaying = false; //will change to isPlaying
+
     AppLayer();
-    bool screenTransitionTest(sf::RenderWindow& App);
+    bool mainMenu(sf::RenderWindow& App); //will change to mainMenu
+
 };
 
 #endif //CSCI437_APPLAYER_H

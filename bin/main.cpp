@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	{
         bool paused = false; //Controller will return true or false based on pausing pref
 
-        while(!appLayer.isPaused) {
+        while(!appLayer.isPlaying) {
             //essentially trying to do a while loop for appLayer.update
             sf::Event event;
             while (App.pollEvent(event))
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
                 }
             }
 
-            appLayer.screenTransitionTest(App);
+            appLayer.mainMenu(App);
 
         }
 
