@@ -6,6 +6,7 @@ PlayerChar::PlayerChar(bool player){
   this->player = player;
   this->height = 18;
   this->width = 15;
+  this->in_air = true;
   if (player){
     fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Red);
@@ -54,6 +55,14 @@ int PlayerChar::getWidth(){
 
 bool PlayerChar::getType(){
   return player;
+}
+
+bool PlayerChar::isInAir() {
+  return in_air;
+}
+
+void PlayerChar::setInAir(bool in_air) {
+  this->in_air = in_air;
 }
 
 void PlayerChar::printPlayerChar() {

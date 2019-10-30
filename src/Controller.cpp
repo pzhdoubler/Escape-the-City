@@ -1,12 +1,11 @@
-#include <SFML/Graphics.hpp>
-
 #include <Controller.h>
 
+#include <SFML/Graphics.hpp>
 
 bool Controller::init(GameLogic &logic)
 {
 
-	this->logic = logic;
+	this->logic = &logic;
 
 	bindings[PAUSE] = 15; //P key
 
@@ -29,6 +28,7 @@ bool Controller::init(GameLogic &logic)
 }
 
 
+//check for case of same keys
 bool Controller::editKey(Controls key, int new_binding)
 {
 
