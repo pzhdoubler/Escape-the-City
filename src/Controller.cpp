@@ -1,27 +1,28 @@
 #include <Controller.h>
 
 #include <SFML/Graphics.hpp>
+#include <GameLogic.h>
 
 bool Controller::init(GameLogic &logic)
 {
 
 	this->logic = &logic;
 
-	bindings[PAUSE] = 15; //P key
+	bindings[PAUSE] = sf::Keyboard::P; //P key
 
 	//read in values from file, currently correspond to default keys in design doc
 
-	bindings[FAST_LEFT] = 72;
-	bindings[FAST_RIGHT] = 73;
-	bindings[FAST_JUMP] = 74;
-	bindings[FAST_DOWN] = 75;
-	bindings[FAST_USE] = 42;
+	bindings[FAST_LEFT] = sf::Keyboard::Left;
+	bindings[FAST_RIGHT] = sf::Keyboard::Right;
+	bindings[FAST_JUMP] = sf::Keyboard::Up;
+	bindings[FAST_DOWN] = sf::Keyboard::Down;
+	bindings[FAST_USE] = sf::Keyboard::RShift;
 
-	bindings[JUMP_LEFT] = 0;
-	bindings[JUMP_RIGHT] = 3;
-	bindings[JUMP_JUMP] = 22;
-	bindings[JUMP_DOWN] = 18;
-	bindings[JUMP_USE] = 38;
+	bindings[JUMP_LEFT] = sf::Keyboard::A;
+	bindings[JUMP_RIGHT] = sf::Keyboard::D;
+	bindings[JUMP_JUMP] = sf::Keyboard::W;
+	bindings[JUMP_DOWN] = sf::Keyboard::S;
+	bindings[JUMP_USE] = sf::Keyboard::LShift;
 
 	return true;
 
@@ -76,13 +77,16 @@ bool Controller::editKey(Controls key, int new_binding)
 bool Controller::update(float deltaMs)
 {
 	//check to pause game
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[PAUSE])))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[PAUSE]))) {
 		return true;
+	}
+
 
 	for(int i = 1; i < CONTROLS_LEN; i++) 
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[i])))
-			break;//key update logic method
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[i]))) {
+			logic->buttonPress(Controls(i), deltaMs);
+		}
 	}
 
 	return false;

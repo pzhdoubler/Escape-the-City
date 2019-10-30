@@ -58,6 +58,8 @@ int main(int argc, char** argv)
 
 			appLayer.screen.update(App, appLayer.logic);
 
+			appLayer.controller.update(deltaMs);
+
 			//update controller
 
 			App.display();

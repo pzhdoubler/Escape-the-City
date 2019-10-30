@@ -17,6 +17,7 @@ AppLayer::AppLayer() {
     //init logic and screen
     logic.init(level);
     screen.init(level);
+	controller.init(logic);
 
 }
 

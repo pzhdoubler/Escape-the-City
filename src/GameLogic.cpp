@@ -35,12 +35,12 @@ bool GameLogic::init(LevelState &level)
 	FAST_MAX_X = 2500;
 	FAST_MAX_Y = 2500;
 	FAST_RUN = 1000;
-	FAST_VERT = 1500;
+	FAST_VERT = 500;
 
 	JUMP_MAX_X = 1000;
 	JUMP_MAX_Y = 2000;
 	JUMP_RUN = 500;
-	JUMP_VERT = 3000;
+	JUMP_VERT = 1000;
 
 	return true;
 }
@@ -78,24 +78,52 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 
 void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 {
+	float seconds = deltaMs;
+
+	sf::Vector2f fast_vel = fast_man->getVelocity();
+	sf::Vector2f jump_vel = jump_man->getVelocity();
 
 	switch (button)
 	{
 		case Controller::FAST_LEFT:
-		case Controller::FAST_RIGHT:
-		case Controller::FAST_JUMP:
-		case Controller::FAST_DOWN:
-		case Controller::FAST_USE:
-		case Controller::JUMP_LEFT:
-		case Controller::JUMP_RIGHT:
-		case Controller::JUMP_JUMP:
-		case Controller::JUMP_DOWN:
-		case Controller::JUMP_USE:
-
+			fast_vel.x -= FAST_RUN * seconds;
 			break;
+		case Controller::FAST_RIGHT:
+			fast_vel.x += FAST_RUN * seconds;
+			break;
+		case Controller::FAST_JUMP:
+			if (!fast_man->isInAir()) {
+				fast_vel.y = (-1)*FAST_VERT;
+				fast_man->setInAir(true);
+			}
+			break;
+		case Controller::FAST_DOWN:
+			break;
+		case Controller::FAST_USE:
+			break;
+		case Controller::JUMP_LEFT:
+			jump_vel.x -= JUMP_RUN * seconds;
+			break;
+		case Controller::JUMP_RIGHT:
+			jump_vel.x += JUMP_RUN * seconds;
+			break;
+		case Controller::JUMP_JUMP:
+			if (!jump_man->isInAir()) {
+				jump_vel.y = (-1)*JUMP_VERT;
+				jump_man->setInAir(true);
+			}
+			break;
+		case Controller::JUMP_DOWN:
+			break;
+		case Controller::JUMP_USE:
+			break;
+
 		default:
 			break;
 	}
+
+	fast_man->setVelocity(fast_vel);
+	jump_man->setVelocity(jump_vel);
 
 }
 

@@ -7,6 +7,7 @@
 
 #include "GameLogic.h"
 #include "ScreenView.h"
+#include "Controller.h"
 #include "LevelState.h"
 #include "LevelReader.h"
 
@@ -23,6 +24,7 @@ public:
 
     GameLogic logic;
     ScreenView screen;
+	Controller controller;
 
     bool isPaused = false;
     AppLayer();
