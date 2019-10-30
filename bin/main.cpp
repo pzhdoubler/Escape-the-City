@@ -5,6 +5,7 @@
 #include <LevelState.h>
 #include <LevelReader.h>
 #include <AppLayer.h>
+#include <Controller.h>
 
 int main(int argc, char** argv) 
 {
@@ -12,11 +13,24 @@ int main(int argc, char** argv)
 
 	//initialize app layer
 	AppLayer appLayer;
+	GameLogic logic;
+	ScreenView screen;
+	Controller controller;
 
 	while (App.isOpen()) 
 	{
+        bool paused = false; //Controller will return true or false based on pausing pref
+
         while(!appLayer.isPaused) {
             //essentially trying to do a while loop for appLayer.update
+            sf::Event event;
+            while (App.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed) {
+                    paused = true;
+                    App.close();
+                }
+            }
 
             appLayer.screenTransitionTest(App);
             //still freezes if clicked more than once, look up how to implement multiple screens
@@ -32,16 +46,16 @@ int main(int argc, char** argv)
         //decided to put appLayer above, before initalizing logic and screenview so it loads after the blue screen
         //is removed
 
-		GameLogic logic;
 		logic.init(level);
 
-		ScreenView screen;
 		screen.init(level);
+
+		controller.init(logic);
 
 		//initialize controller
 
 		sf::Clock clock;
-		bool paused = false; //Controller will return true or false based on pausing pref
+
 
 
 
@@ -64,6 +78,8 @@ int main(int argc, char** argv)
 			logic.update(deltaMs);
 
 			screen.update(App, logic);
+
+			controller.update(deltaMs);
 
 			//update controller
 
