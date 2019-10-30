@@ -29,7 +29,7 @@ void ScreenView::init(LevelState &level) {
 				sf::RectangleShape border;
                 border.setSize(sf::Vector2f(level.getTileSize(), level.getTileSize()));
                 border.setFillColor(sf::Color::Black);
-                border.setPosition(i*level.getTileSize(), j*level.getTileSize());
+                border.setPosition(i*level.getTileSize(), 580 - j*level.getTileSize());
                 textureCanvas.draw(border);
 				//printf("[ %d, %d ]\n", i, j);
             }
