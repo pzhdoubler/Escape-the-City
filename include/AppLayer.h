@@ -15,7 +15,8 @@ class AppLayer {
 private:
     LevelReader loader;
     LevelState level;
-
+    sf::Text hud;
+    sf::Font font;
 
 
 

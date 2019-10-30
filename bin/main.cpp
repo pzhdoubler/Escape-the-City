@@ -15,24 +15,35 @@ int main(int argc, char** argv)
 
 	while (App.isOpen()) 
 	{
+        while(!appLayer.isPaused) {
+            //essentially trying to do a while loop for appLayer.update
 
-	    //all this should now work within appLayer
-//		LevelReader loader; //to be done inside app layer once fully implemented
-//		loader.loadMap("level_prototype.txt");
-//
-//		//recieve level and initialize Views
-//		LevelState level = loader.createLevelState();
-//
-//		GameLogic logic;
-//		logic.init(level);
-//
-//		ScreenView screen;
-//		screen.init(level);
+            appLayer.screenTransitionTest(App);
+            //still freezes if clicked more than once, look up how to implement multiple screens
+            //but at least the blocks seem to load without error
+        }
+
+		LevelReader loader; //to be done inside app layer once fully implemented
+		loader.loadMap("level_prototype.txt");
+
+		//recieve level and initialize Views
+		LevelState level = loader.createLevelState();
+
+        //decided to put appLayer above, before initalizing logic and screenview so it loads after the blue screen
+        //is removed
+
+		GameLogic logic;
+		logic.init(level);
+
+		ScreenView screen;
+		screen.init(level);
 
 		//initialize controller
 
 		sf::Clock clock;
 		bool paused = false; //Controller will return true or false based on pausing pref
+
+
 
 		//main game loop
 		while (!paused) 
@@ -49,14 +60,10 @@ int main(int argc, char** argv)
 				}
 			}
 
-			//this is to test if on a spaceBar press, the AppLayer will remove a blue filled screen
-			appLayer.screenTransitionTest(App);
-            //with this in place, we dont start updating logic or screenview until we press the spacebar but the only
-            //reason for that is is because we don't let anything else update due to the while loop we get stuck in
 
-			appLayer.logic.update(deltaMs);
+			logic.update(deltaMs);
 
-			appLayer.screen.update(App, appLayer.logic);
+			screen.update(App, logic);
 
 			//update controller
 
