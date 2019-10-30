@@ -33,8 +33,7 @@ int main(int argc, char** argv)
             }
 
             appLayer.screenTransitionTest(App);
-            //still freezes if clicked more than once, look up how to implement multiple screens
-            //but at least the blocks seem to load without error
+
         }
 
 		LevelReader loader; //to be done inside app layer once fully implemented
