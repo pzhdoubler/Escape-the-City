@@ -38,6 +38,10 @@ const std::vector<std::vector<int>>& LevelState::getTileMap() const {
 	return map;
 }
 
+const std::vector<std::vector<int>>& LevelState::getCollisionMap() const{
+	return collisionMap;
+}
+
 void LevelState::printLevelState() {
 	printf("tileSize: %d\n", tileSize);
 	printf("fastSpawn: { %f, %f }\n", fastSpawnPt.x, fastSpawnPt.y);
