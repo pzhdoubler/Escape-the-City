@@ -46,6 +46,7 @@ bool GameLogic::init(LevelState &level)
 
 	sf::Vector2f grav_test_start(200, 200);
 	fast_man->setPos(grav_test_start);
+	jump_man->setPos(grav_test_start);
 
 	sf::Vector2f zeros(0, 0);
 	fast_man->setVelocity(zeros);
@@ -225,50 +226,26 @@ std::vector<int> GameLogic::getClosestCollisionPoint(int tile_x, int tile_y, flo
 	int tileXPos = tile_x * tileSize;
 	int tileYPos = tile_y * tileSize;
 
-	//top left corner
+	int nodesPerEdge = 6;
+	int nodeDist = tileSize / (nodesPerEdge-1);
+
+	//printf("\ntile: %d, %d\n", tileXPos, tileYPos);
+
 	std::vector<int> colPoint{ tileXPos, tileYPos };
 	float min_dist = std::abs(float(tileXPos) - pos_x) + std::abs(float(tileYPos) - pos_y);
-	//top edge
-	if (std::abs(float(tileXPos + halfTileSize) - pos_x) + std::abs(float(tileYPos) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos + halfTileSize;
-		colPoint[1] = tileYPos;
-		min_dist = std::abs(float(tileXPos + halfTileSize) - pos_x) + std::abs(float(tileYPos) - pos_y);
-	}
-	//top right corner
-	if (std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos + tileSize;
-		colPoint[1] = tileYPos;
-		min_dist = std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos) - pos_y);
-	}
-	//right edge
-	if (std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos + halfTileSize) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos + tileSize;
-		colPoint[1] = tileYPos + halfTileSize;
-		min_dist = std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos + halfTileSize) - pos_y);
-	}
-	//bot right corner
-	if (std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos + tileSize;
-		colPoint[1] = tileYPos + tileSize;
-		min_dist = std::abs(float(tileXPos + tileSize) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y);
-	}
-	//bot edge
-	if (std::abs(float(tileXPos + halfTileSize) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos + halfTileSize;
-		colPoint[1] = tileYPos + tileSize;
-		min_dist = std::abs(float(tileXPos + halfTileSize) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y);
-	}
-	//bot left corner
-	if (std::abs(float(tileXPos) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos;
-		colPoint[1] = tileYPos + tileSize;
-		min_dist = std::abs(float(tileXPos) - pos_x) + std::abs(float(tileYPos + tileSize) - pos_y);
-	}
-	//left edge
-	if (std::abs(float(tileXPos) - pos_x) + std::abs(float(tileYPos + halfTileSize) - pos_y) < min_dist) {
-		colPoint[0] = tileXPos;
-		colPoint[1] = tileYPos + halfTileSize;
-		min_dist = std::abs(float(tileXPos) - pos_x) + std::abs(float(tileYPos + halfTileSize) - pos_y);
+	for (int i = 0; i < nodesPerEdge; i++) {
+		for (int j = 0; j < nodesPerEdge; j++) {
+			//get point on edge
+			if (tileXPos + i * nodeDist % tileSize == 0 || tileYPos + j * nodeDist % tileSize == 0) {
+				int this_dist = std::abs(float(tileXPos) + i * nodeDist - pos_x) + std::abs(float(tileYPos) + j * nodeDist - pos_y);
+				//printf("point: %d, %d\n", tileXPos + i * nodeDist, tileYPos + j * nodeDist);
+				if (this_dist < min_dist) {
+					min_dist = this_dist;
+					colPoint[0] = tileXPos + i * nodeDist;
+					colPoint[1] = tileYPos + j * nodeDist;
+				}
+			}
+		}
 	}
 
 	return colPoint;
@@ -285,7 +262,8 @@ std::vector<GameLogic::UnitDirection> GameLogic::getCollisionVectors(int point_x
 	if (point_x % tileSize == 0 && point_y % tileSize == 0) {
 		int coord_x = point_x / tileSize;
 		int coord_y = point_y / tileSize;
-		int barrier_count = tileMap[coord_x][coord_y] + tileMap[coord_x - 1][coord_y] + tileMap[coord_x - 1][coord_y - 1] + tileMap[coord_x][coord_x - 1];
+		int barrier_count = tileMap[coord_x][coord_y] + tileMap[coord_x - 1][coord_y] + tileMap[coord_x - 1][coord_y - 1] + tileMap[coord_x][coord_y - 1];
+		//printf("barr count = %d\n", barrier_count);
 		switch (barrier_count) {
 		case 1:
 			if (tileMap[coord_x][coord_y] == 1) {
@@ -339,7 +317,8 @@ std::vector<GameLogic::UnitDirection> GameLogic::getCollisionVectors(int point_x
 	//vertical edge
 	else if (point_x % tileSize == 0) {
 		//barrier to right
-		if (tileMap[point_x / tileSize][(point_y - halfTileSize) / tileSize] == 1)
+		//printf("vert edge\n");
+		if (tileMap[point_x / tileSize][point_y / tileSize] == 1)
 			vectors.push_back(Left);
 		else
 			vectors.push_back(Right);
@@ -347,7 +326,8 @@ std::vector<GameLogic::UnitDirection> GameLogic::getCollisionVectors(int point_x
 	//horizontal edge
 	else if (point_y % tileSize == 0) {
 		//barrier on bottom
-		if (tileMap[(point_x - halfTileSize) / tileSize][point_y / tileSize] == 1)
+		//printf("horiz edge\n");
+		if (tileMap[point_x / tileSize][point_y / tileSize] == 1)
 			vectors.push_back(Up);
 		else
 			vectors.push_back(Down);
@@ -403,6 +383,12 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 	std::vector<float> bot_left{ new_x , new_y + player_height };
 	std::vector<float> bot_right{ new_x + player_width, new_y + player_height };
 
+	//printf("center = %f %f\n", center[0], center[1]);
+	//printf("topleft = %f %f\n", top_left[0], top_left[1]);
+	//printf("topright = %f %f\n", top_right[0], top_right[1]);
+	//printf("botleft = %f %f\n", top_left[0], top_left[1]);
+	//printf("botright = %f %f\n", top_left[0], top_left[1]);
+
 	std::vector<std::vector<int>> possibleCollisionPoints;
 	//check corners
 	if (level_layout[int(top_left[0]) / tile_size][int(top_left[1]) / tile_size] == 1) {
@@ -415,7 +401,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 		possibleCollisionPoints.push_back(getClosestCollisionPoint(int(bot_left[0]) / tile_size, int(bot_left[1]) / tile_size, center[0], center[1]));
 	}
 	if (level_layout[int(bot_right[0]) / tile_size][int(bot_right[1]) / tile_size] == 1) {
-		possibleCollisionPoints.push_back(getClosestCollisionPoint(int(bot_left[0]) / tile_size, int(bot_left[1]) / tile_size, center[0], center[1]));
+		possibleCollisionPoints.push_back(getClosestCollisionPoint(int(bot_right[0]) / tile_size, int(bot_right[1]) / tile_size, center[0], center[1]));
 	}
 
 	if (possibleCollisionPoints.size() > 0) {
@@ -431,17 +417,13 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 		}
 
 		std::vector<int> collisionPoint = possibleCollisionPoints[collisionPointIndex];
-		if (player.getType()) {
-			printf("col point: %d, %d\n", collisionPoint[0], collisionPoint[1]);
-		}
 		std::vector<UnitDirection> u_vectors = getCollisionVectors(collisionPoint[0], collisionPoint[1]);
-		if (player.getType()) {
-			printf("col vectors: ");
-			for (int i = 0; i < u_vectors.size(); i++) {
-				printf("%d ", u_vectors[i]);
-			}
-			printf("\n");
-		}
+		//printf("col point: %d, %d\n", collisionPoint[0], collisionPoint[1]);
+		//printf("col vectors: ");
+		//for (int i = 0; i < u_vectors.size(); i++) {
+		//	printf("%d ", u_vectors[i]);
+		//}
+		//printf("\n");
 
 		int d1_x, d1_y, d2_x, d2_y;
 		//check dot products with all edges and adjust appropriately
@@ -449,15 +431,15 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 			std::vector<int> u_v = getUnitVector(u_vectors[i]);
 			std::vector<float> shift;
 			//top edge
-			if (u_vectors[i] == Up || u_vectors[i] == Down) {
+			if (u_vectors[i] == Left || u_vectors[i] == Right) {
 				d1_x = top_left[0] - collisionPoint[0];
 				d1_y = top_left[1] - collisionPoint[1];
 				d2_x = top_right[0] - collisionPoint[0];
 				d2_y = top_right[1] - collisionPoint[1];
 				if (dotProduct(d1_x, d1_y, u_v[0], u_v[1])*dotProduct(d2_x, d2_y, u_v[0], u_v[1]) < 0) {
-					if (player.getType()) {
-						printf("top edge\n");
-					}
+					//printf("HORIZ COLLISION\n");
+					//printf("top edge\n");
+					//printf("dots : %d, %d\n", dotProduct(d1_x, d1_y, u_v[0], u_v[1]), dotProduct(d2_x, d2_y, u_v[0], u_v[1]));
 					shift = collisionCalculation(top_left[0], top_left[1], Down);
 					new_y = shift[1];
 					new_vy = 0;
@@ -468,9 +450,9 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 				d2_x = bot_right[0] - collisionPoint[0];
 				d2_y = bot_right[1] - collisionPoint[1];
 				if (dotProduct(d1_x, d1_y, u_v[0], u_v[1])*dotProduct(d2_x, d2_y, u_v[0], u_v[1]) < 0) {
-					if (player.getType()) {
-						printf("bottom edge\n");
-					}
+					//printf("HORIZ COLLISION\n");
+					//printf("bottom edge\n");
+					//printf("dots : %d, %d\n", dotProduct(d1_x, d1_y, u_v[0], u_v[1]), dotProduct(d2_x, d2_y, u_v[0], u_v[1]));
 					shift = collisionCalculation(bot_left[0], bot_left[1], Up);
 					new_y = shift[1] - player_height;
 					new_vy = 0;
@@ -484,9 +466,9 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 				d2_x = bot_left[0] - collisionPoint[0];
 				d2_y = bot_left[1] - collisionPoint[1];
 				if (dotProduct(d1_x, d1_y, u_v[0], u_v[1])*dotProduct(d2_x, d2_y, u_v[0], u_v[1]) < 0) {
-					if (player.getType()) {
-						printf("left edge\n");
-					}
+					//printf("VERT COLLISION\n");
+					//printf("left edge\n");
+					//printf("dots : %d, %d\n", dotProduct(d1_x, d1_y, u_v[0], u_v[1]), dotProduct(d2_x, d2_y, u_v[0], u_v[1]));
 					shift = collisionCalculation(top_left[0], top_left[1], Right);
 					new_x = shift[0];
 					new_vx = 0;
@@ -497,9 +479,9 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 				d2_x = top_right[0] - collisionPoint[0];
 				d2_y = top_right[1] - collisionPoint[1];
 				if (dotProduct(d1_x, d1_y, u_v[0], u_v[1])*dotProduct(d2_x, d2_y, u_v[0], u_v[1]) < 0) {
-					if (player.getType()) {
-						printf("right edge\n");
-					}
+					//printf("VERT COLLISION\n");
+					//printf("right edge\n");
+					//printf("dots : %d, %d\n", dotProduct(d1_x, d1_y, u_v[0], u_v[1]), dotProduct(d2_x, d2_y, u_v[0], u_v[1]));
 					shift = collisionCalculation(top_right[0], top_right[1], Left);
 					new_x = shift[0] - player_width;
 					new_vx = 0;
