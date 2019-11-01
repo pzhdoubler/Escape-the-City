@@ -2,7 +2,6 @@
 #define _BARRIER_H_
 
 #include <vector>
-#include <map>
 #include <LevelState.h>
 
 class Barrier 
@@ -41,7 +40,7 @@ class Barrier
 
 		std::vector<std::vector<int>> collisionPoints;
 
-		std::map<std::vector<int>, std::vector<UnitDirection>> collisionVectors;
+		std::vector<std::vector<UnitDirection>> collisionVectors;
 
 		static const std::vector<int> upVector;
 		static const std::vector<int> downVector;

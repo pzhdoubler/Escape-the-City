@@ -33,6 +33,18 @@ class GameLogic
 
 	private:
 
+		enum UnitDirection
+		{
+			Up,
+			Down,
+			Left,
+			Right
+		};
+
+		std::vector<int> getUnitVector(UnitDirection direction);
+
+		int dotProduct(int v1x, int v1y, int v2x, int v2y);
+
 		//updates player's physics based on current postion and buttons press
 		void updatePlayerPosition(PlayerChar& player, float deltaMs);
 
@@ -44,11 +56,13 @@ class GameLogic
 
 		//determines where a point should be after a collision. also communicates information about which axis was effected
 		//last index is 0 for x-axis and 1 for y-axis
-		std::vector<float> collisionCalculation(float x, float y);
+		std::vector<float> collisionCalculation(float x, float y, UnitDirection dir);
+
+		std::vector<int> getClosestCollisionPoint(int tile_x, int tile_y, float pos_x, float pos_y);
+
+		std::vector<UnitDirection> getCollisionVectors(int point_x, int point_y);
 
 		LevelState* level;
-
-		std::vector<Barrier> barrierMap;
 
 		std::shared_ptr<PlayerChar> fast_man;
 		std::shared_ptr<PlayerChar> jump_man;

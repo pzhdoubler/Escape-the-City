@@ -1,6 +1,5 @@
 #include <Barrier.h>
 
-#include <utility>
 #include <cmath>
 
 
@@ -37,12 +36,14 @@ bool Barrier::init(LevelState& level, int x_coord, int y_coord, int edgePoints)
 
 			std::vector<int> point{ current_X, current_Y };
 			std::vector<Barrier::UnitDirection> u_vector{ Down };
-			collisionVectors[point] = u_vector;
 			collisionPoints.push_back(point);
+			collisionVectors.push_back(u_vector);
 
 			current_X += edgeSectionLength;
 		}
 	}
+	printf("finished top\n");
+
 	//Bottom edge
 	if (y_coord < tileMap[0].size() && tileMap[x_coord][y_coord+1] != 1)
 	{
@@ -54,60 +55,54 @@ bool Barrier::init(LevelState& level, int x_coord, int y_coord, int edgePoints)
 
 			std::vector<int> point{ current_X, current_Y };
 			std::vector<Barrier::UnitDirection> u_vector{ Up };
-			collisionVectors[point] = u_vector;
 			collisionPoints.push_back(point);
+			collisionVectors.push_back(u_vector);
 
 			current_X += edgeSectionLength;
 		}
 	}
 
-	//Need to check for duplicate key values since corners may be initialized
-	std::map<std::vector<int>, std::vector<UnitDirection>>::iterator map_iter;
+	printf("finished bot\n");
+	//Corners initialized so just create edge points
 
 	//Left edge
 	if (x_coord > 0 && tileMap[x_coord-1][y_coord] != 1)
 	{
+		//corners
+		collisionVectors[0].push_back(Right);
+		collisionVectors[2+edgePoints].push_back(Right);
 		int current_X = position[0];
-		int current_Y = position[1];
-		for (int i = 1; i <= (edgePoints + 2); i++) {
-			if (i == edgePoints + 2)
-				current_Y = position[1] + tileSize;
+		int current_Y = position[1] + edgeSectionLength;
+		for (int i = 1; i <= edgePoints; i++) {
 			std::vector<int> point{ current_X, current_Y };
+			std::vector<Barrier::UnitDirection> u_vector{ Right };
+			collisionPoints.push_back(point);
+			collisionVectors.push_back(u_vector);
 
-			map_iter = collisionVectors.find(point);
-			if (map_iter == collisionVectors.end()) {
-				std::vector<Barrier::UnitDirection> u_vector{ Right };
-				collisionVectors[point] = u_vector;
-				collisionPoints.push_back(point);
-			}
-			else {
-				collisionVectors[point].push_back(Right);
-			}
 			current_Y += edgeSectionLength;
 		}
 	}
+	printf("finished left\n");
+
 	//Right edge
 	if (x_coord < tileMap.size() && tileMap[x_coord+1][y_coord] != 1)
 	{
+		//corners
+		collisionVectors[1 + edgePoints].push_back(Right);
+		collisionVectors[3 + 2*edgePoints].push_back(Right);
 		int current_X = position[0] + tileSize;
 		int current_Y = position[1];
-		for (int i = 1; i <= (edgePoints + 2); i++) {
-			if (i == edgePoints + 2)
-				current_Y = position[0] + tileSize;
+		for (int i = 1; i <= edgePoints; i++) {
 			std::vector<int> point{ current_X, current_Y };
+			std::vector<Barrier::UnitDirection> u_vector{ Left };
+			collisionPoints.push_back(point);
+			collisionVectors.push_back(u_vector);
 
-			map_iter = collisionVectors.find(point);
-			if (map_iter == collisionVectors.end()) {
-				std::vector<Barrier::UnitDirection> u_vector{ Left };
-				collisionVectors[point] = u_vector;
-				collisionPoints.push_back(point);
-			}
-			else {
-				collisionVectors[point].push_back(Left);
-			}
 			current_Y += edgeSectionLength;
 		}
 	}
+
+	printf("finished right\n");
 
 	return true;
 }
@@ -136,7 +131,10 @@ const std::vector<int>& Barrier::getClosestCollisionPoint(int x_pos, int y_pos) 
 
 const std::vector<Barrier::UnitDirection>& Barrier::getCollisionPointVectors(std::vector<int>& point)
 {
-	return collisionVectors[point];
+	for (int i = 0; i < collisionPoints.size(); i++) {
+		if (point == collisionPoints[i])
+			return collisionVectors[i];
+	}
 }
 
 
