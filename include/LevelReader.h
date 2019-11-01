@@ -32,6 +32,22 @@ private:
 	std::vector<std::vector<int>> map; //stores values for each tile and their id, pass to LevelState
 
 	int tileSize;
+
+	//vector of button positions
+	std::vector<sf::Vector2f> buttonPos;
+
+	//vector of hazard positions
+	std::vector<sf::Vector2f> pressurePlatePos;
+
+	//vector of toggle door positions
+	std::vector<sf::Vector2f> doorPos;
+
+	//vector of toggle spike positions
+	std::vector<sf::Vector2f> spikePos;
+
+	//vector of moving platform positions
+	std::vector<sf::Vector2f> movPlatformPos;
+
 };
 
 #endif //_LEVELREADER_H_

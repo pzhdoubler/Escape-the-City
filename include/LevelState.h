@@ -28,6 +28,8 @@ public:
 
 	void draw();
 
+	const std::vector<std::vector<int>>& getCollisionMap() const;
+
 
 private:
 	sf::View* viewPointer; //pointer to the GameLogic
@@ -40,6 +42,8 @@ private:
 	int tileSize;
 
 	std::vector<std::vector<int>> map; //stores values for each tile and their id
+
+	std::vector<std::vector<int>> collisionMap; //stores values for collision tiles
 };
 
 #endif //_LEVELSTATE_H_
