@@ -9,6 +9,7 @@
 #include <GameElements.h>
 #include <Interactables.h>
 #include <LevelState.h>
+#include <Barrier.h>
 #include <Controller.h>
 
 class GameLogic
@@ -46,6 +47,8 @@ class GameLogic
 		std::vector<float> collisionCalculation(float x, float y);
 
 		LevelState* level;
+
+		std::vector<Barrier> barrierMap;
 
 		std::shared_ptr<PlayerChar> fast_man;
 		std::shared_ptr<PlayerChar> jump_man;
