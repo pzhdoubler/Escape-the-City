@@ -137,14 +137,14 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 
 	//get to closest x tile border
 	if ((int(posx) % tile_size) < (tile_size / 2))
-		x_diff = -1 * (int(posx) % tile_size);
+		x_diff = -1 * (int(posx) % tile_size); //left side close
 	else
-		x_diff = tile_size - (int(posx) % tile_size);
+		x_diff = tile_size - (int(posx) % tile_size); //right side close
 	//get to closest y tile border
 	if ((int(posy) % tile_size) < (tile_size / 2))
-		y_diff = -1 * (int(posy) % tile_size);
+		y_diff = -1 * (int(posy) % tile_size); //top close
 	else
-		y_diff = tile_size - (int(posy) % tile_size);
+		y_diff = tile_size - (int(posy) % tile_size); //bot close
 
 	//check surrounding tiles
 	int up = 0;
@@ -174,17 +174,29 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 		to_return.push_back(posy);
 		to_return.push_back(0);
 	}
+	//top exposed corner
+	else if (up != 1 && (int(posy) % tile_size) < (tile_size / 4)) {
+		to_return.push_back(posx);
+		to_return.push_back(int(posy) + y_diff);
+		to_return.push_back(1);
+	}
+	//bot exposed corner
+	else if (down != 1 && tile_size - (int(posy) % tile_size) < (tile_size / 4)) {
+		to_return.push_back(int(posx) + x_diff);
+		to_return.push_back(posy);
+		to_return.push_back(0);
+	}
+	//default to shortest dist change
 	else {
-		if (prevTileX != tileXCoord) {
-			to_return.push_back(posx);
-			to_return.push_back(int(posy) + y_diff);
-			to_return.push_back(1);
-		}
-		//default to x when both different
-		else {
+		if (std::abs(x_diff) < std::abs(y_diff)) {
 			to_return.push_back(int(posx) + x_diff);
 			to_return.push_back(posy);
 			to_return.push_back(0);
+		}
+		else {
+			to_return.push_back(posx);
+			to_return.push_back(int(posy) + y_diff);
+			to_return.push_back(1);
 		}
 	}
 
@@ -204,6 +216,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 
 	//apply gravity
 	new_vy += GRAVITY * seconds;
+	player.setInAir(true);
 
 	//limit to max vert speed
 	if (std::abs(int(new_vy)) > FAST_MAX_Y) {

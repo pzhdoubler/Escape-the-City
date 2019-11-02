@@ -9,7 +9,6 @@
 #include <GameElements.h>
 #include <Interactables.h>
 #include <LevelState.h>
-#include <Barrier.h>
 #include <Controller.h>
 
 class GameLogic
