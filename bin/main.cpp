@@ -37,6 +37,9 @@ int main(int argc, char** argv)
         }
 
 		LevelReader loader; //to be done inside app layer once fully implemented
+		//current level options:
+		//level_prototype.txt
+		//level_0_tutorial.txt
 		loader.loadMap("level_0_tutorial.txt");
 
 		//recieve level and initialize Views

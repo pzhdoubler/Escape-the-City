@@ -128,9 +128,9 @@ void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 }
 
 
-std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoord, float posx, float posy)
+std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoord, int prevTileX, int prevTileY, float posx, float posy)
 {
-	std::vector<std::vector<int>> tileMap = level->getTileMap();
+	std::vector<std::vector<int>> tileMap = level->getCollisionMap();
 	int tile_size = level->getTileSize();
 
 	int x_diff, y_diff;
@@ -146,27 +146,41 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 	else
 		y_diff = tile_size - (int(posy) % tile_size);
 
+	//check surrounding tiles
+	int up = 0;
+	int down = 0;
+	int left = 0;
+	int right = 0;
+	if (tileYCoord > 0)
+		up = tileMap[tileXCoord][tileYCoord - 1];
+	if (tileYCoord < tileMap[0].size()-1)
+		down = tileMap[tileXCoord][tileYCoord + 1];
+	if (tileXCoord > 0)
+		left = tileMap[tileXCoord - 1][tileYCoord];
+	if (tileXCoord < tileMap.size() - 1)
+		right = tileMap[tileXCoord + 1][tileYCoord];
+
 	std::vector<float> to_return;
 
 	//flat ground
-	if (tileXCoord > 0 && tileXCoord < tileMap.size() && tileMap[tileXCoord - 1][tileYCoord] == 1 && tileMap[tileXCoord + 1][tileYCoord] == 1) {
+	if (left == 1 && right == 1) {
 		to_return.push_back(posx);
 		to_return.push_back(int(posy) + y_diff);
 		to_return.push_back(1);
 	}
 	//flat wall
-	else if (tileYCoord > 0 && tileXCoord < tileMap[0].size() && tileMap[tileXCoord][tileYCoord - 1] == 1 && tileMap[tileXCoord][tileYCoord + 1] == 1) {
+	else if (up == 1 && down == 1) {
 		to_return.push_back(int(posx) + x_diff);
 		to_return.push_back(posy);
 		to_return.push_back(0);
 	}
-	// chooses shortest distance to fix to, defaults to horiz when equal
 	else {
-		if (std::abs(y_diff) < std::abs(x_diff)) {
+		if (prevTileX != tileXCoord) {
 			to_return.push_back(posx);
 			to_return.push_back(int(posy) + y_diff);
 			to_return.push_back(1);
 		}
+		//default to x when both different
 		else {
 			to_return.push_back(int(posx) + x_diff);
 			to_return.push_back(posy);
@@ -208,7 +222,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 	int tile_size = level->getTileSize();
 	int player_height = player.getHeight();
 	int player_width = player.getWidth();
-	std::vector<std::vector<int>> level_layout = level->getTileMap();
+	std::vector<std::vector<int>> level_layout = level->getCollisionMap();
 
 	float deltaX = vel.x * seconds;
 	float deltaY = vel.y * seconds;
@@ -216,35 +230,12 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 	float new_x = pos.x + deltaX;
 	float new_y = pos.y + deltaY;
 
-	//top left corner
-	if (level_layout[int(new_x)/tile_size][int(new_y)/tile_size] == 1) {
-		std::vector<float> shift = collisionCalculation(int(new_x) / tile_size, int(new_y) / tile_size, new_x, new_y);
-		new_x = shift[0];
-		new_y = shift[1];
-		if (shift[2] == 0) {
-			new_vx = 0;
-		}
-		else {
-			new_vy = 0;
-			//player.setInAir(false);
-		}
-	}
-	//top right corner
-	if (level_layout[(int(new_x) + player_width) / tile_size][int(new_y) / tile_size] == 1) {
-		std::vector<float> shift = collisionCalculation((int(new_x) + player_width) / tile_size, int(new_y) / tile_size, new_x + player_width, new_y);
-		new_x = shift[0] - player_width;
-		new_y = shift[1];
-		if (shift[2] == 0) {
-			new_vx = 0;
-		}
-		else {
-			new_vy = 0;
-			//player.setInAir(false);
-		}
-	}
+	int prev_x = int(pos.x);
+	int prev_y = int(pos.y);
+
 	//bottom left corner
 	if (level_layout[int(new_x) / tile_size][(int(new_y) + player_height) / tile_size] == 1) {
-		std::vector<float> shift = collisionCalculation(int(new_x) / tile_size, (int(new_y) + player_height) / tile_size, new_x, new_y + player_height);
+		std::vector<float> shift = collisionCalculation(int(new_x) / tile_size, (int(new_y) + player_height) / tile_size, prev_x / tile_size, (prev_y + player_height) / tile_size, new_x, new_y + player_height);
 		new_x = shift[0];
 		new_y = shift[1] - player_height;
 		if (shift[2] == 0) {
@@ -257,7 +248,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 	}
 	//bottom right corner
 	if (level_layout[(int(new_x) + player_width) / tile_size][(int(new_y) + player_height) / tile_size] == 1) {
-		std::vector<float> shift = collisionCalculation((int(new_x) + player_width) / tile_size, (int(new_y) + player_height) / tile_size, new_x + player_width, new_y + player_height);
+		std::vector<float> shift = collisionCalculation((int(new_x) + player_width) / tile_size, (int(new_y) + player_height) / tile_size, (prev_x + player_width) / tile_size, (prev_y + player_height) / tile_size, new_x + player_width, new_y + player_height);
 		new_x = shift[0] - player_width;
 		new_y = shift[1] - player_height;
 		if (shift[2] == 0) {
@@ -268,6 +259,33 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 			player.setInAir(false);
 		}
 	}
+	//top left corner
+	if (level_layout[int(new_x)/tile_size][int(new_y)/tile_size] == 1) {
+		std::vector<float> shift = collisionCalculation(int(new_x) / tile_size, int(new_y) / tile_size, prev_x / tile_size, prev_y / tile_size, new_x, new_y);
+		new_x = shift[0];
+		new_y = shift[1];
+		if (shift[2] == 0) {
+			new_vx = 0;
+		}
+		else {
+			new_vy = 0;
+			//player.setInAir(false);
+		}
+	}
+	//top right corner
+	if (level_layout[(int(new_x) + player_width) / tile_size][int(new_y) / tile_size] == 1) {
+		std::vector<float> shift = collisionCalculation((int(new_x) + player_width) / tile_size, int(new_y) / tile_size, (prev_x + player_width) / tile_size, prev_y / tile_size, new_x + player_width, new_y);
+		new_x = shift[0] - player_width;
+		new_y = shift[1];
+		if (shift[2] == 0) {
+			new_vx = 0;
+		}
+		else {
+			new_vy = 0;
+			//player.setInAir(false);
+		}
+	}
+
 
 	sf::Vector2f new_pos = sf::Vector2f(new_x, new_y);
 	sf::Vector2f new_vel = sf::Vector2f(new_vx, new_vy);
