@@ -32,6 +32,15 @@ class GameLogic
 
 	private:
 
+		enum PointType
+		{
+			top_left,
+			top_right,
+			bot_left,
+			bot_right,
+			center
+		};
+
 		//updates player's physics based on current postion and buttons press
 		void updatePlayerPosition(PlayerChar& player, float deltaMs);
 
@@ -43,7 +52,7 @@ class GameLogic
 
 		//determines where a point should be after a collision. also communicates information about which axis was effected
 		//last index is 0 for x-axis and 1 for y-axis
-		std::vector<float> collisionCalculation(int tileXCoord, int tileYCoord, int prevTileX, int prevTileY, float posx, float posy);
+		std::vector<float> collisionCalculation(int tileXCoord, int tileYCoord, int prevTileX, int prevTileY, float posx, float posy, PointType corner);
 
 		LevelState* level;
 
