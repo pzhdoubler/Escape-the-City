@@ -23,7 +23,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App) {
     App.clear(sf::Color(0,0,255));
 
     std::stringstream ss;
-    ss << "This is the Main Menu";
+    ss << "This is the Main Menu. Press O for options, or L for Level Select";
     hud.setString(ss.str());
     App.draw(hud);
 
@@ -72,7 +72,7 @@ bool AppLayer::optionMenu(sf::RenderWindow &App) {
     App.clear(sf::Color(128, 56, 211));
 
     std::stringstream ss;
-    ss << "This is the Option Screen";
+    ss << "This is the Option Screen. Press B to go back";
     hud.setString(ss.str());
     App.draw(hud);
 
