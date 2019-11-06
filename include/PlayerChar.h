@@ -33,6 +33,10 @@ public:
   // method returns the velocity of the character as a vector
   sf::Vector2f getVelocity();
 
+  void respawn();
+
+  void setSpawnPt(sf::Vector2f& pos);
+
   // returns the player character
   bool getType();
 
@@ -46,14 +50,22 @@ public:
 
   void printPlayerChar();
 
+  void interact();
+
+  bool interacted();
+
 private:
    sf::Vector2f pos;
    sf::Vector2f vel;
+   sf::Vector2f spawn;
    //defines which character
    bool player;
    int height;
    int width;
    bool in_air;
+   bool interaction;
+
+
 
 };
 

@@ -9,7 +9,7 @@ public:
 
   Items();
 
-  sf::Sprite item;
+  sf::Texture item;
 
   void draw(sf::RenderWindow& window);
 
@@ -19,7 +19,7 @@ public:
   //returns the position of the hazard
   sf::Vector2f getPos();
 
-
+  void PlayerContact(PlayerChar &player);
   void Pickup();
 
 

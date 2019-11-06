@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <GameElements.h>
+#include <PlayerChar.h>
 
 class Interactables : public GameElements {
 public:
@@ -11,7 +12,9 @@ public:
 
   virtual void draw(sf::RenderWindow& window)= 0;
 
+  virtual void setPos(sf::Vector2f& pos);
 
+  void PlayerContact(PlayerChar &player, int id);
 
 private:
 

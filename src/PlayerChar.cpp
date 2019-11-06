@@ -7,9 +7,11 @@ PlayerChar::PlayerChar(bool player){
   this->height = 18;
   this->width = 15;
   this->in_air = true;
+  this->interaction = false;
   if (player){
     fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Red);
+
 
 
   }
@@ -79,6 +81,24 @@ void PlayerChar::printPlayerChar() {
 	printf("\n");
 }
 
+void PlayerChar::setSpawnPt(sf::Vector2f& pos){
+  this->spawn = pos;
+}
+
+void PlayerChar::respawn(){
+  //sf::Vector2f zero;
+  //this->setVelocity(zero);
+  setPos(spawn);
+
+}
+
+void PlayerChar::interact(){
+  this->interaction= !interaction;
+}
+
+bool PlayerChar::interacted(){
+  return interaction;
+}
 
 /*void PlayerChar::UseItem(){
 

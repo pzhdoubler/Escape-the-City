@@ -9,7 +9,7 @@ public:
 
   Hazards();
 
-  //sf::Sprite hazard;
+  //sf::Texture hazard;
   sf::RectangleShape hazard;
 
   void draw(sf::RenderWindow& window);
@@ -20,6 +20,7 @@ public:
   //returns the position of the hazard
   sf::Vector2f getPos();
 
+  void PlayerContact(PlayerChar &player);
 
   void Toggle();
 

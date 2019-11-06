@@ -4,7 +4,9 @@
 
 
 void Enemies::draw(sf::RenderWindow& window){
-  window.draw(enemy);
+  sf::Sprite e;
+  e.setTexture(enemy);
+  window.draw(e);
 }
 
 

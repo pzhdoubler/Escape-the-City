@@ -9,7 +9,7 @@ public:
   //defalt constructor
   Button();
 
-  sf::Sprite button;
+  sf::Texture button;
 
 
   void draw(sf::RenderWindow& window);
@@ -23,6 +23,8 @@ public:
   sf::Vector2f getPos();
 
   void Toggle();
+
+  void PlayerContact(PlayerChar &player);
 
 
 

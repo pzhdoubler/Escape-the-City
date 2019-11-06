@@ -6,7 +6,9 @@ Button::Button(){
 }
 
 void Button::draw(sf::RenderWindow &window){
-  window.draw(button);
+  sf::Sprite b;
+  b.setTexture(button);
+  window.draw(b);
 }
 
 void Button::setPos(sf::Vector2f& pos){
@@ -21,4 +23,10 @@ sf::Vector2f Button::getPos(){
 //tells if the button has been pressed
 void Button::Toggle(){
   this->pressed = !pressed;
+}
+
+void Button::PlayerContact(PlayerChar &player){
+  if(player.interacted()==1){
+  this->Toggle();
+}
 }

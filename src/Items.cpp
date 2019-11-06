@@ -8,7 +8,9 @@ Items::Items(){
 }
 
 void Items::draw(sf::RenderWindow& window){
-  window.draw(item);
+  sf::Sprite i;
+  i.setTexture(item);
+  window.draw(i);
 }
 
 //set item's position only used at creation of a item

@@ -10,7 +10,7 @@ public:
   //defalt constructor
   Enemies(){};
 
-  sf::Sprite enemy;
+  sf::Texture enemy;
 
   void draw(sf::RenderWindow& window);
 

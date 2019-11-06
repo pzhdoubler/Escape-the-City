@@ -33,3 +33,7 @@ void Hazards::Toggle(){
   this->pos.y = this->pos.y;
 
 }
+
+void Hazards::PlayerContact(PlayerChar &player){
+  player.respawn();
+}
