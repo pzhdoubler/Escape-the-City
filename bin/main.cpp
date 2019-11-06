@@ -27,32 +27,27 @@ int main(int argc, char** argv)
             while (App.pollEvent(event))
             {
                 if (event.type == sf::Event::Closed) {
+                    appLayer.isPlaying = true;
                     paused = true;
                     App.close();
                 }
             }
 
-            appLayer.mainMenu(App);
-
+            appLayer.mainMenu(App, paused);
         }
 
-		LevelReader loader; //to be done inside app layer once fully implemented
-		//current level options:
-		//level_prototype.txt
-		//level_0_tutorial.txt
-		loader.loadMap("level_0_tutorial.txt");
 
-		//recieve level and initialize Views
-		LevelState level = loader.createLevelState();
+        if (paused) {
+            return 0;
+        }
 
-        //decided to put appLayer above, before initalizing logic and screenview so it loads after the blue screen
-        //is removed
+		logic.init(appLayer.level);
 
-		logic.init(level);
-
-		screen.init(level);
+        //gets here and then dies
+		screen.init(appLayer.level);
 
 		controller.init(logic);
+
 
 		//initialize controller
 

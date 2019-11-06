@@ -13,8 +13,6 @@
 class AppLayer {
 
 private:
-    LevelReader loader;
-    LevelState level;
     sf::Text hud;
     sf::Font font;
     bool optionMenu(sf::RenderWindow& App);
@@ -30,9 +28,13 @@ public:
     ScreenView screen;
 
     bool isPlaying = false; //will change to isPlaying
+    bool levelSelected= false; //will use in main to skip level initialization if we decide to select a level here
 
     AppLayer();
-    bool mainMenu(sf::RenderWindow& App); //will change to mainMenu
+    bool mainMenu(sf::RenderWindow& App, bool& paused); //will change to mainMenu
+
+    LevelReader loader;
+    LevelState level;
 
 };
 
