@@ -60,7 +60,6 @@ void LevelReader::loadMap(const std::string& level){
 				this->buttonPos.resize(6);
 				this->buttonPos[array[x][y] - 4] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
-				printf("%d ", buttonPos[array[x][y] - 4]);
 			}
 			//pressure plates
 			else if(array[x][y] >= 10 or array[x][y] <=15){
@@ -99,18 +98,18 @@ void LevelReader::loadMap(const std::string& level){
 }
 
 void LevelReader::setFastSpawnPt(sf::Vector2f pt){
-	fastSpawnPt = pt;
+	this->fastSpawnPt = pt;
 }
 
 void LevelReader::setJumpSpawnPt(sf::Vector2f pt){
-	jumpSpawnPt = pt;
+	this->jumpSpawnPt = pt;
 }
 
 void LevelReader::setExitPt(sf::Vector2f pt){
-	exitPt = pt;
+	this->exitPt = pt;
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, tileSize);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, movPlatformPos);
 	return currentLevelState;
 }
