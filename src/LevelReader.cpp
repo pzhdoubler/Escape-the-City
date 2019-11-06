@@ -18,7 +18,6 @@ void LevelReader::loadMap(const std::string& level){
 	this->tileSize = 20;
 	std::ifstream file;
 	//file.open("..\\levels\\" + level);
-	//file.open("..\\levels\\" + "level_tutorial.csv");
 	file.open("..\\levels\\level_tutorial.csv");
 	if(!file.is_open()){
 		std::cout << "Failed to load file";
@@ -35,12 +34,51 @@ void LevelReader::loadMap(const std::string& level){
 		}
 		array.push_back(v);
 	}
-
 	
 	for(int x = 0; x < array.size(); x++){
 		for(int y = 0; y < array[x].size(); y++){
-			if(array[x][y] == 0){
+			if(array[x][y] == -1){
+				this->map[y][x] = 0;
+			}
+			else if(array[x][y] == 0){
 				this->map[y][x] = 1;
+			}
+			else if(array[x][y] == 1){
+				this->jumpSpawnPt = sf::Vector2f(y, x);
+				this->map[y][x] = 2;
+			}
+			else if(array[x][y] == 2){
+				this->fastSpawnPt = sf::Vector2f(y, x);
+				this->map[y][x] = 3;
+			}
+			else if(array[x][y] == 3){
+				this->exitPt = sf::Vector2f(y, x);
+				this->map[y][x] = 4;
+			}
+			//button ids
+			else if(array[x][y] >= 4 or array[x][y] <=9){
+				this->buttonPos[array[x][y]] = sf::Vector2f(y, x);
+				this->map[y][x] = array[x][y] + 1;
+			}
+			//pressure plates
+			else if(array[x][y] >= 10 or array[x][y] <=15){
+				this->pressurePlatePos[array[x][y]] = sf::Vector2f(y, x);
+				this->map[y][x] = array[x][y] + 1;
+			}
+			//toggle doors
+			else if(array[x][y] >= 16 or array[x][y] <=21){
+				this->doorPos[array[x][y]] = sf::Vector2f(y, x);
+				this->map[y][x] = array[x][y] + 1;
+			}
+			//toggle hazards
+			else if(array[x][y] >= 22 or array[x][y] <=27){
+				this->hazardPos[array[x][y]] = sf::Vector2f(y, x);
+				this->map[y][x] = array[x][y] + 1;
+			}
+			//moving platforms
+			else if(array[x][y] >= 28 or array[x][y] <=33){
+				this->movPlatformPos[array[x][y]] = sf::Vector2f(y, x);
+				this->map[y][x] = array[x][y] + 1;
 			}
 			else{
 				this->map[y][x] = 0;
@@ -49,8 +87,8 @@ void LevelReader::loadMap(const std::string& level){
 	}
 	file.close();
 
-	this->fastSpawnPt = sf::Vector2f(1*20, 28*20);
-	this->jumpSpawnPt = sf::Vector2f(2*20, 28*20);
+	//this->fastSpawnPt = sf::Vector2f(1*20, 28*20);
+	//this->jumpSpawnPt = sf::Vector2f(2*20, 28*20);
 
 }
 

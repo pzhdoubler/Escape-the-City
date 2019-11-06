@@ -43,7 +43,7 @@ private:
 	std::vector<sf::Vector2f> doorPos;
 
 	//vector of toggle spike positions
-	std::vector<sf::Vector2f> spikePos;
+	std::vector<sf::Vector2f> hazardPos;
 
 	//vector of moving platform positions
 	std::vector<sf::Vector2f> movPlatformPos;
