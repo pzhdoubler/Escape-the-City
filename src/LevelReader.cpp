@@ -44,40 +44,46 @@ void LevelReader::loadMap(const std::string& level){
 				this->map[y][x] = 1;
 			}
 			else if(array[x][y] == 1){
-				this->jumpSpawnPt = sf::Vector2f(y, x);
+				this->jumpSpawnPt = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = 2;
 			}
 			else if(array[x][y] == 2){
-				this->fastSpawnPt = sf::Vector2f(y, x);
+				this->fastSpawnPt = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = 3;
 			}
 			else if(array[x][y] == 3){
-				this->exitPt = sf::Vector2f(y, x);
+				this->exitPt = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = 4;
 			}
 			//button ids
 			else if(array[x][y] >= 4 or array[x][y] <=9){
-				this->buttonPos[array[x][y]] = sf::Vector2f(y, x);
+				this->buttonPos.resize(6);
+				this->buttonPos[array[x][y] - 4] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				printf("%d ", buttonPos[array[x][y] - 4]);
 			}
 			//pressure plates
 			else if(array[x][y] >= 10 or array[x][y] <=15){
-				this->pressurePlatePos[array[x][y]] = sf::Vector2f(y, x);
+				this->pressurePlatePos.resize(6);
+				this->pressurePlatePos[array[x][y] - 10] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
 			}
 			//toggle doors
 			else if(array[x][y] >= 16 or array[x][y] <=21){
-				this->doorPos[array[x][y]] = sf::Vector2f(y, x);
+				this->doorPos.resize(6);
+				this->doorPos[array[x][y] - 16] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
 			}
 			//toggle hazards
 			else if(array[x][y] >= 22 or array[x][y] <=27){
-				this->hazardPos[array[x][y]] = sf::Vector2f(y, x);
+				this->hazardPos.resize(6);
+				this->hazardPos[array[x][y] - 22] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
 			}
 			//moving platforms
 			else if(array[x][y] >= 28 or array[x][y] <=33){
-				this->movPlatformPos[array[x][y]] = sf::Vector2f(y, x);
+				this->movPlatformPos.resize(6);
+				this->movPlatformPos[array[x][y] - 28] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
 			}
 			else{
