@@ -41,7 +41,7 @@ class GameLogic
 			center
 		};
 
-		//updates player's physics based on current postion and buttons press
+		//updates player's physics based on current postion
 		void updatePlayerPosition(PlayerChar& player, float deltaMs);
 
 		//determines if the player is going to take damage or die based on current position
@@ -59,13 +59,13 @@ class GameLogic
 		std::shared_ptr<PlayerChar> fast_man;
 		std::shared_ptr<PlayerChar> jump_man;
 
-		std::vector<Interactables> buttons;
+		std::vector<std::shared_ptr<Interactables>> buttons;
 
-		std::vector<Interactables> hazards;
+		std::vector<std::shared_ptr<Interactables>> hazards;
 
-		std::vector<Interactables> enemies;
+		std::vector<std::shared_ptr<Interactables>> enemies;
 
-		std::vector<Interactables> items;
+		std::vector<std::shared_ptr<Interactables>> items;
 
 		int GRAVITY;
 		int FRICTION;
@@ -73,7 +73,6 @@ class GameLogic
 		int JUMP_RUN, JUMP_HEIGHT, JUMP_MAX_X, JUMP_MAX_Y;
 		float FAST_VERT, JUMP_VERT, MIN_VERT;
 		float FAST_AIR_MULT, JUMP_AIR_MULT;
-		bool FAST_HOLD_UP, JUMP_HOLD_UP;
 
 };
 

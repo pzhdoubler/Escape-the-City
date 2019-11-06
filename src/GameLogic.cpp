@@ -1,5 +1,6 @@
 #include <GameLogic.h>
 
+#include <Hazards.h>
 #include <cmath>
 
 
@@ -7,6 +8,7 @@ GameLogic::GameLogic()
 {
 	fast_man = std::make_shared<PlayerChar>(true);
 	jump_man = std::make_shared<PlayerChar>(false);
+	//initialize all interactable lists here
 }
 
 
@@ -15,9 +17,16 @@ bool GameLogic::init(LevelState &level)
 	this->level = &level;
 	//Read any important values from level
 	//eg hazards, enemies, etc
+	//sf::Vector2f grav_test_start(200, 200);
+	//static Hazards spike;
+	//spike.setPos(grav_test_start);
+	//Interactables* button_ptr = &spike;
+	//buttons.push_back(button_ptr);
 
 	fast_man->setPos(level.getFastSpawnPt());
+	fast_man->setSpawnPt(level.getFastSpawnPt());
 	jump_man->setPos(level.getJumpSpawnPt());
+	jump_man->setSpawnPt(level.getJumpSpawnPt());
 
 	//sf::Vector2f grav_test_start(200, 200);
 	//fast_man->setPos(grav_test_start);
@@ -70,6 +79,11 @@ bool GameLogic::update(float deltaMs)
 std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMENTS NEXT
 {
 	std::vector<GameElements*> drawables;
+
+	//for (int i = 0; i < buttons.size(); i++) {
+	//	GameElements* game_ptr = buttons[i];
+	//	drawables.push_back(game_ptr);
+	//}
 
 	GameElements* fast_ptr = fast_man.get();
 	GameElements* jump_ptr = jump_man.get();

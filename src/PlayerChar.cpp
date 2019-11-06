@@ -82,7 +82,8 @@ void PlayerChar::printPlayerChar() {
 }
 
 void PlayerChar::setSpawnPt(sf::Vector2f& pos){
-  this->spawn = pos;
+  this->spawn.x = pos.x;
+  this->spawn.y = pos.y;
 }
 
 void PlayerChar::respawn(){

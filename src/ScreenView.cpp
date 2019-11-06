@@ -50,6 +50,9 @@ void ScreenView::update(sf::RenderWindow &mainWindow, GameLogic &gameLogic) {
     mainWindow.draw(level);
 	std::vector<GameElements*> drawables = gameLogic.getDrawables();
 
-	drawables.at(0)->draw(mainWindow);
-    drawables.at(1)->draw(mainWindow);
+	for (int i = 0; i < drawables.size(); i++) {
+		drawables.at(i)->draw(mainWindow);
+	}
+	//drawables.at(0)->draw(mainWindow);
+    //sdrawables.at(1)->draw(mainWindow);
 }
