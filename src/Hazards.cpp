@@ -4,6 +4,9 @@
 
 Hazards::Hazards(){
   this->toggled= 0;
+  hazard.setSize(sf::Vector2f(40,30));
+  hazard.setFillColor(sf::Color::Red);
+
 
 }
 
@@ -27,5 +30,6 @@ sf::Vector2f Hazards::getPos(){
 //
 void Hazards::Toggle(){
   this->toggled= !toggled;
+  this->pos.y = this->pos.y;
 
 }
