@@ -26,6 +26,8 @@ class Controller
 			JUMP_JUMP,
 			JUMP_DOWN,
 			JUMP_USE,
+			FAST_JUMP_RELEASE,
+			JUMP_JUMP_RELEASE,
 			CONTROLS_LEN
 		};
 
@@ -38,6 +40,8 @@ class Controller
 		GameLogic* logic;
 
 		int bindings[CONTROLS_LEN];
+
+		bool fast_jumped, jump_jumped;
 
 };
 

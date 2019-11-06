@@ -28,19 +28,26 @@ bool GameLogic::init(LevelState &level)
 	//set starting positions and speeds
 	//stored in level state
 
+	int tileSize = level.getTileSize();
 	//read in physics constants
 	GRAVITY = 1000;
-	FRICTION = 800;
+	FRICTION = 1500;
 
 	FAST_MAX_X = 2500;
 	FAST_MAX_Y = 2500;
 	FAST_RUN = 1000;
-	FAST_VERT = 500;
+	FAST_HEIGHT = 4;
+	FAST_VERT = std::sqrt(2*GRAVITY*FAST_HEIGHT*tileSize);
+	FAST_AIR_MULT = 0.3;
 
 	JUMP_MAX_X = 1000;
 	JUMP_MAX_Y = 2000;
 	JUMP_RUN = 500;
-	JUMP_VERT = 1000;
+	JUMP_HEIGHT = 10;
+	JUMP_VERT = std::sqrt(2*GRAVITY*JUMP_HEIGHT*tileSize);
+	JUMP_AIR_MULT = 0.7;
+
+	MIN_VERT = std::sqrt(GRAVITY*tileSize);
 
 	return true;
 }
@@ -76,9 +83,10 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 }
 
 
-void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
+bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 {
 	float seconds = deltaMs;
+	bool success = false;
 
 	sf::Vector2f fast_vel = fast_man->getVelocity();
 	sf::Vector2f jump_vel = jump_man->getVelocity();
@@ -86,15 +94,35 @@ void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 	switch (button)
 	{
 		case Controller::FAST_LEFT:
-			fast_vel.x -= (FAST_RUN+FRICTION) * seconds;
+			if (!fast_man->isInAir()) {
+				fast_vel.x -= (FAST_RUN + FRICTION) * seconds;
+			}
+			else {
+				fast_vel.x -= FAST_RUN * FAST_AIR_MULT * seconds;
+			}
+			success = true;
 			break;
 		case Controller::FAST_RIGHT:
-			fast_vel.x += (FAST_RUN+FRICTION) * seconds;
+			if (!fast_man->isInAir()) {
+				fast_vel.x += (FAST_RUN + FRICTION) * seconds;
+			}
+			else {
+				fast_vel.x += FAST_RUN * FAST_AIR_MULT * seconds;
+			}
+			success = true;
 			break;
 		case Controller::FAST_JUMP:
 			if (!fast_man->isInAir()) {
 				fast_vel.y = (-1)*FAST_VERT;
 				fast_man->setInAir(true);
+				success = true;
+			}
+			success = true;
+			break;
+		case Controller::FAST_JUMP_RELEASE:
+			if (fast_man->isInAir() && fast_vel.y < (-1)*MIN_VERT) {
+				fast_vel.y = (-1)*MIN_VERT;
+				success = true;
 			}
 			break;
 		case Controller::FAST_DOWN:
@@ -102,15 +130,34 @@ void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::FAST_USE:
 			break;
 		case Controller::JUMP_LEFT:
-			jump_vel.x -= (JUMP_RUN+FRICTION) * seconds;
+			if (!jump_man->isInAir()) {
+				jump_vel.x -= (JUMP_RUN + FRICTION) * seconds;
+			}
+			else {
+				jump_vel.x -= JUMP_RUN * JUMP_AIR_MULT * seconds;
+			}
+			success = true;
 			break;
 		case Controller::JUMP_RIGHT:
-			jump_vel.x += (JUMP_RUN+FRICTION) * seconds;
+			if (!jump_man->isInAir()) {
+				jump_vel.x += (JUMP_RUN + FRICTION) * seconds;
+			}
+			else {
+				jump_vel.x += JUMP_RUN * JUMP_AIR_MULT * seconds;
+			}
+			success = true;
 			break;
 		case Controller::JUMP_JUMP:
 			if (!jump_man->isInAir()) {
 				jump_vel.y = (-1)*JUMP_VERT;
 				jump_man->setInAir(true);
+				success = true;
+			}
+			break;
+		case Controller::JUMP_JUMP_RELEASE:
+			if (jump_man->isInAir() && jump_vel.y < (-1)*MIN_VERT) {
+				jump_vel.y = (-1)*MIN_VERT;
+				success = true;
 			}
 			break;
 		case Controller::JUMP_DOWN:
@@ -125,6 +172,7 @@ void GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 	fast_man->setVelocity(fast_vel);
 	jump_man->setVelocity(jump_vel);
 
+	return success;
 }
 
 
@@ -315,5 +363,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 	player.setVelocity(new_vel);
 
 }
+//if bad
+//then git gud
 
 

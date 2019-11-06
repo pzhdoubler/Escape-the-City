@@ -27,7 +27,7 @@ class GameLogic
 		std::vector<GameElements*> getDrawables();
 
 		//Recives button input and updates gamestate based on given time and button
-		void buttonPress(Controller::Controls button, float deltaMs);
+		bool buttonPress(Controller::Controls button, float deltaMs);
 
 
 	private:
@@ -69,8 +69,11 @@ class GameLogic
 
 		int GRAVITY;
 		int FRICTION;
-		int FAST_RUN, FAST_VERT, FAST_MAX_X, FAST_MAX_Y;
-		int JUMP_RUN, JUMP_VERT, JUMP_MAX_X, JUMP_MAX_Y;
+		int FAST_RUN, FAST_HEIGHT, FAST_MAX_X, FAST_MAX_Y;
+		int JUMP_RUN, JUMP_HEIGHT, JUMP_MAX_X, JUMP_MAX_Y;
+		float FAST_VERT, JUMP_VERT, MIN_VERT;
+		float FAST_AIR_MULT, JUMP_AIR_MULT;
+		bool FAST_HOLD_UP, JUMP_HOLD_UP;
 
 };
 
