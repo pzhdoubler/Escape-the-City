@@ -9,7 +9,8 @@ public:
 
   Hazards();
 
-  sf::Sprite hazard;
+  //sf::Sprite hazard;
+  sf::RectangleShape hazard;
 
   void draw(sf::RenderWindow& window);
 
