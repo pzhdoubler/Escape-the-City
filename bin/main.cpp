@@ -94,19 +94,17 @@ int main(int argc, char** argv)
                             App.close();
                         }
                     }
-                    appLayer.pauseMenu(App);
+                    appLayer.pauseMenu(App, paused);
+
 			    }
+                if (appLayer.returnToMain) {
+                    printf("should send to main\n");
+                    appLayer.isPlaying = false;
+                    break;
+                }
 			    clock.restart();
 			}
 
-			//work on getting it to read one time
-            while (App.pollEvent(event)) {
-                if (event.type == sf::Event::KeyPressed) {
-                    if (event.key.code == sf::Keyboard::Enter) {
-                        printf("enter pressed");
-                    }
-                }
-            }
 
 
 			//update controller

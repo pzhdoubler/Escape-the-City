@@ -21,7 +21,6 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
 
 
     App.clear(sf::Color(0,0,255));
-
     std::stringstream ss;
     ss << "This is the Main Menu. Press O for options or L for Level Select";
     hud.setCharacterSize(28);
@@ -97,17 +96,15 @@ bool AppLayer::optionMenu(sf::RenderWindow &App) {
     return optionMenuOpen;
 }
 
-bool AppLayer::pauseMenu(sf::RenderWindow &App) {
+bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
     App.clear(sf::Color(255,128,255,128));
 
     std::stringstream ss;
     ss << "Paused. Press SpaceBar to go back";
     hud.setCharacterSize(28);
-    hud.setPosition(10,100);
     hud.setString(ss.str());
     ss << "Or press a button below to go to Main Menu";
     hud.setCharacterSize(28);
-    hud.setPosition(10, 110);
     hud.setString(ss.str());
     App.draw(hud);
 
@@ -133,7 +130,8 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App) {
             printf("button clicked!\n");
             printf("going to main menu...\n");
             pauseMenuOpen = false;
-            //mainMenu(&App, &paused);
+            returnToMain = true;
+            //mainMenu(App, paused);
             return pauseMenuOpen;
         }
     }

@@ -29,11 +29,11 @@ public:
     ScreenView screen;
 
     bool isPlaying = false; //will change to isPlaying
-    bool levelSelected= false; //will use in main to skip level initialization if we decide to select a level here
+    bool returnToMain = false; //will be activated on pause menu button press to go back to main
 
     AppLayer();
     bool mainMenu(sf::RenderWindow& App, bool& paused); //will change to mainMenu
-    bool pauseMenu(sf::RenderWindow& App);
+    bool pauseMenu(sf::RenderWindow& App, bool& paused);
     bool pauseMenuOpen = false;
 
     LevelReader loader;
