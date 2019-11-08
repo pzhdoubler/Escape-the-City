@@ -14,11 +14,15 @@ public:
 
   virtual void setPos(sf::Vector2f& pos) = 0;
 
-  void PlayerContact(PlayerChar &player, int id);
+  virtual Vector2f getPos() = 0;
+
+  virtual void PlayerContact(PlayerChar &player, int id) = 0;
+
+  enum Color {Red, Blue, Green, Purple, Yellow, Orange };
 
 private:
 
-enum Color {Red, Blue, Green, Purple, Yellow, Orange };
+
 
 };
 
