@@ -263,6 +263,13 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			break;
 		case Controller::JUMP_USE:
 			break;
+		case Controller::JUMP_RESPAWN:
+			jump_man->respawn();
+			break;
+			case Controller::FAST_RESPAWN:
+				fast_man->respawn();
+				break;
+
 
 		default:
 			break;
@@ -437,7 +444,7 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 				new_vy = JUMP_MAX_Y;
 			}
 		}
-	}	
+	}
 
 	int tile_size = level->getTileSize();
 	int player_height = player.getHeight();
@@ -516,5 +523,3 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 }
 //if bad
 //then git gud
-
-

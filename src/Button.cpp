@@ -25,8 +25,9 @@ void Button::Toggle(){
   this->pressed = !pressed;
 }
 
-void Button::PlayerContact(PlayerChar &player){
+void Button::PlayerContact(PlayerChar &player,int id){
   if(player.interacted()==1){
   this->Toggle();
 }
+
 }

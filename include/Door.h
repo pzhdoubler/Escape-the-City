@@ -1,30 +1,37 @@
-#ifndef ENEMIES_H_
-#define ENEMIES_H_
+#ifndef DOOR_H_
+#define DOOR_H_
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
 
-class Enemies : public Interactables{
+class Door : public Interactables{
 public:
-
   //defalt constructor
-  Enemies(){};
+  Door();
 
-  sf::Texture enemy;
+  sf::Texture door;
+
 
   void draw(sf::RenderWindow& window);
 
-  //sets the enemy's position
+
+  //methods to set a position for the door
   void setPos(sf::Vector2f& pos);
 
-  //returns the position of the enemu
+
+  //returns the position of the door
   sf::Vector2f getPos();
+
+  void Open();
 
   void PlayerContact(PlayerChar &player,int id);
 
 private:
   sf::Vector2f pos;
+  bool open;
+
 
 };
 
-#endif // !ENEMIES_H_
+
+#endif //!DOOR_H_

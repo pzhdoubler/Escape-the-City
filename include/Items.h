@@ -19,7 +19,7 @@ public:
   //returns the position of the hazard
   sf::Vector2f getPos();
 
-  void PlayerContact(PlayerChar &player);
+  void PlayerContact(PlayerChar &player, int id);
   void Pickup();
 
 

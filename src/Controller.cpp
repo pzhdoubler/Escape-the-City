@@ -17,12 +17,14 @@ bool Controller::init(GameLogic &logic)
 	bindings[FAST_JUMP] = sf::Keyboard::Up;
 	bindings[FAST_DOWN] = sf::Keyboard::Down;
 	bindings[FAST_USE] = sf::Keyboard::RShift;
+	bindings[FAST_RESPAWN] = sf::Keyboard::Comma;
 
 	bindings[JUMP_LEFT] = sf::Keyboard::A;
 	bindings[JUMP_RIGHT] = sf::Keyboard::D;
 	bindings[JUMP_JUMP] = sf::Keyboard::W;
 	bindings[JUMP_DOWN] = sf::Keyboard::S;
 	bindings[JUMP_USE] = sf::Keyboard::LShift;
+	bindings[JUMP_RESPAWN] = sf::Keyboard::R;
 
 	fast_jumped = false;
 	jump_jumped = false;
@@ -56,6 +58,9 @@ bool Controller::editKey(Controls key, int new_binding)
 		case FAST_USE:
 			bindings[FAST_USE] = new_binding;
 			return true;
+		case FAST_RESPAWN:
+			bindings[FAST_RESPAWN] = new_binding;
+			return true;
 		case JUMP_LEFT:
 			bindings[JUMP_LEFT] = new_binding;
 			return true;
@@ -71,6 +76,10 @@ bool Controller::editKey(Controls key, int new_binding)
 		case JUMP_USE:
 			bindings[JUMP_USE] = new_binding;
 			return true;
+		case JUMP_RESPAWN:
+			bindings[JUMP_RESPAWN] = new_binding;
+			return true;
+
 		default:
 			return false;
 	}
@@ -85,7 +94,7 @@ bool Controller::update(float deltaMs)
 	}
 
 
-	for(int i = 1; i < CONTROLS_LEN; i++) 
+	for(int i = 1; i < CONTROLS_LEN; i++)
 	{
 		bool pressed = false;
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[i]))) {

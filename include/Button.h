@@ -24,7 +24,7 @@ public:
 
   void Toggle();
 
-  void PlayerContact(PlayerChar &player);
+  void PlayerContact(PlayerChar &player,int id);
 
 
 

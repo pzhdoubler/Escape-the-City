@@ -5,7 +5,7 @@
 class GameLogic;
 
 
-class Controller 
+class Controller
 {
 
 	public:
@@ -21,11 +21,13 @@ class Controller
 			FAST_JUMP,
 			FAST_DOWN,
 			FAST_USE,
+			FAST_RESPAWN,
 			JUMP_LEFT,
 			JUMP_RIGHT,
 			JUMP_JUMP,
 			JUMP_DOWN,
 			JUMP_USE,
+			JUMP_RESPAWN,
 			FAST_JUMP_RELEASE,
 			JUMP_JUMP_RELEASE,
 			CONTROLS_LEN

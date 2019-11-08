@@ -18,7 +18,7 @@ public:
 
 private:
 
-
+enum Color {Red, Blue, Green, Purple, Yellow, Orange };
 
 };
 

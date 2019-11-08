@@ -87,8 +87,7 @@ void PlayerChar::setSpawnPt(sf::Vector2f& pos){
 }
 
 void PlayerChar::respawn(){
-  //sf::Vector2f zero;
-  //this->setVelocity(zero);
+  this->vel =sf::Vector2f(0, 0);
   setPos(spawn);
 
 }

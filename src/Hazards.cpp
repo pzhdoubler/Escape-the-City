@@ -34,6 +34,6 @@ void Hazards::Toggle(){
 
 }
 
-void Hazards::PlayerContact(PlayerChar &player){
+void Hazards::PlayerContact(PlayerChar &player, int id){
   player.respawn();
 }
