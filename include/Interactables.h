@@ -14,7 +14,7 @@ public:
 
   virtual void setPos(sf::Vector2f& pos) = 0;
 
-  virtual Vector2f getPos() = 0;
+  virtual sf::Vector2f getPos() = 0;
 
   virtual void PlayerContact(PlayerChar &player, int id) = 0;
 
