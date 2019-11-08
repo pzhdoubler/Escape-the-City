@@ -23,7 +23,8 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
     App.clear(sf::Color(0,0,255));
 
     std::stringstream ss;
-    ss << "This is the Main Menu. Press O for options, or L for Level Select";
+    ss << "This is the Main Menu. Press O for options or L for Level Select";
+    hud.setCharacterSize(28);
     hud.setString(ss.str());
     App.draw(hud);
 
@@ -81,6 +82,7 @@ bool AppLayer::optionMenu(sf::RenderWindow &App) {
 
     std::stringstream ss;
     ss << "This is the Option Screen. Press B to go back";
+    hud.setCharacterSize(28);
     hud.setString(ss.str());
     App.draw(hud);
 
@@ -95,11 +97,56 @@ bool AppLayer::optionMenu(sf::RenderWindow &App) {
     return optionMenuOpen;
 }
 
+bool AppLayer::pauseMenu(sf::RenderWindow &App) {
+    App.clear(sf::Color(255,128,255,128));
+
+    std::stringstream ss;
+    ss << "Paused. Press SpaceBar to go back";
+    hud.setCharacterSize(28);
+    hud.setPosition(10,100);
+    hud.setString(ss.str());
+    ss << "Or press a button below to go to Main Menu";
+    hud.setCharacterSize(28);
+    hud.setPosition(10, 110);
+    hud.setString(ss.str());
+    App.draw(hud);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        printf("returning to game...\n");
+        pauseMenuOpen = false;
+        return pauseMenuOpen;
+    }
+
+    sf::Texture button1;
+    sf::Sprite buttonImage1;
+    if (!button1.loadFromFile( "..\\resources\\rsz_button_template.png"))
+        std::cout << "Can't find the image" << std::endl;
+    buttonImage1.setPosition( 300.0f, 400.0f );
+    buttonImage1.setTexture(button1);
+    App.draw(buttonImage1);
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+
+        if (buttonImage1.getGlobalBounds().contains(mouseLocF)) {
+            printf("button clicked!\n");
+            printf("going to main menu...\n");
+            pauseMenuOpen = false;
+            //mainMenu(&App, &paused);
+            return pauseMenuOpen;
+        }
+    }
+    App.display();
+    return pauseMenuOpen;
+}
+
 bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     App.clear(sf::Color(56, 211, 128));
 
     std::stringstream ss;
     ss << "This is the LevelSelect Screen. Press a button for a level";
+    hud.setCharacterSize(28);
     hud.setString(ss.str());
     App.draw(hud);
 

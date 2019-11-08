@@ -76,7 +76,38 @@ int main(int argc, char** argv)
 
 			screen.update(App, logic);
 
-			controller.update(deltaMs);
+			//with all this, if you pause in the air, sometimes the character won't get redrawn so look into that
+			//it actually only makes the character not get redrawn if you pause the screen while the character is
+			//falling. If you pause as your character starts jumping, it works alright
+			//because of the while loop it pauses screen updates and you can see this when you pause as the character
+			//starts a jump. It will start to fall when you unpause
+			if (controller.update(deltaMs)) {
+			    printf("paused\n");
+			    appLayer.pauseMenuOpen = true;
+			    while (appLayer.pauseMenuOpen) {
+                    sf::Event event;
+                    while (App.pollEvent(event)) {
+                        if (event.type == sf::Event::Closed) {
+                            appLayer.pauseMenuOpen = false;
+                            //isPlaying = true;
+                            paused = true;
+                            App.close();
+                        }
+                    }
+                    appLayer.pauseMenu(App);
+			    }
+			    clock.restart();
+			}
+
+			//work on getting it to read one time
+            while (App.pollEvent(event)) {
+                if (event.type == sf::Event::KeyPressed) {
+                    if (event.key.code == sf::Keyboard::Enter) {
+                        printf("enter pressed");
+                    }
+                }
+            }
+
 
 			//update controller
 

@@ -22,6 +22,7 @@ private:
 
 
 
+
 public:
 
     GameLogic logic;
@@ -32,6 +33,8 @@ public:
 
     AppLayer();
     bool mainMenu(sf::RenderWindow& App, bool& paused); //will change to mainMenu
+    bool pauseMenu(sf::RenderWindow& App);
+    bool pauseMenuOpen = false;
 
     LevelReader loader;
     LevelState level;
