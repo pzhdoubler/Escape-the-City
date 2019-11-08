@@ -17,7 +17,7 @@ LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawn
 	for(int r = 0; r < 40; r++){
 		this->collisionMap[r].resize(30);
 		for(int c = 0; c < 30; c++){
-			if(this->map[r][c] == 0 or this->map[r][c] == 2 or this->map[r][c] == 3 or this->map[r][c] == 4){
+			if(this->map[r][c] != 1 ){
 				this->collisionMap[r][c] = 0;
 			}
 			else{
