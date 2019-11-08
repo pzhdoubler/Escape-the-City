@@ -9,7 +9,7 @@ public:
   //defalt constructor
   Door();
 
-  sf::Texture door;
+  sf::RectangleShape door;
 
 
   void draw(sf::RenderWindow& window);

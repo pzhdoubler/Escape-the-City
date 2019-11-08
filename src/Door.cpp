@@ -3,6 +3,8 @@
 
 Door::Door(){
   this->open = false;
+  door.setSize(sf::Vector2f(40,30));
+  door.setFillColor(sf::Color::Green);
 }
 
 void Door::draw(sf::RenderWindow &window){
@@ -19,20 +21,22 @@ sf::Vector2f Door::getPos(){
 }
 
 //tells if the Door has been pressed
-void Door::Toggle(){
+void Door::Open(){
+  sf::Vector2f moveDown = sf::Vector2f(pos.x, pos.y);
+  sf::Vector2f moveUp = sf::Vector2f(pos.x + 30, pos.y);
   this->open = !open;
   if(open==false){
-    this->setPos(sf::Vector2f(pos.x - 30, pos.y));
+    this->setPos(moveUp);
   }
   else{
-    this->setPos(sf::Vector2f(pos.x + 30, pos.y));
+    this->setPos(moveDown);
   }
 }
 
 void Door::PlayerContact(PlayerChar &player, int id){
   if(this->open==false){
-    vel=player.getVelocity();
+    sf::Vector2f vel=player.getVelocity();
     vel.x=0;
-    player.setVelocity(sf::Vector2f(vel));
+    player.setVelocity(vel);
   }
 }

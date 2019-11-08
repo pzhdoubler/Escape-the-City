@@ -1,4 +1,4 @@
-#include <Plates.h>
+/*#include <Plates.h>
 #include <SFML/Graphics.hpp>
 
 Plates::Plates(){
@@ -28,3 +28,4 @@ void Button::PlayerContact(PlayerChar &player, int id){
 
 
 }
+*/
