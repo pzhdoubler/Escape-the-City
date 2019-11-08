@@ -26,8 +26,9 @@ bool Controller::init(GameLogic &logic)
 	bindings[JUMP_USE] = sf::Keyboard::LShift;
 	bindings[JUMP_RESPAWN] = sf::Keyboard::R;
 
-	fast_jumped = false;
-	jump_jumped = false;
+	for (int i = 0; i < CONTROLS_LEN; i++) {
+		key_pressed[i] = false;
+	}
 
 	return true;
 
@@ -100,20 +101,15 @@ bool Controller::update(float deltaMs)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(bindings[i]))) {
 			pressed = true;
 			bool success = logic->buttonPress(Controls(i), deltaMs);
-			if (i == FAST_JUMP && success && !fast_jumped) {
-				fast_jumped = true;
-			}
-			if (i == JUMP_JUMP && success && !jump_jumped) {
-				jump_jumped = true;
+			//button release
+			if (success && !key_pressed[i]) {
+				key_pressed[i] = true;
 			}
 		}
-		if (i == FAST_JUMP && fast_jumped && !pressed) {
-			fast_jumped = false;
-			logic->buttonPress(FAST_JUMP_RELEASE, deltaMs);
-		}
-		if (i == JUMP_JUMP && jump_jumped && !pressed) {
-			jump_jumped = false;
-			logic->buttonPress(JUMP_JUMP_RELEASE, deltaMs);
+		//button release
+		if (key_pressed[i] && !pressed) {
+			key_pressed[i] = false;
+			logic->buttonPress(Controls(i+CONTROLS_LEN+1), deltaMs);
 		}
 	}
 

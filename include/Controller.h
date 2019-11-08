@@ -28,9 +28,20 @@ class Controller
 			JUMP_DOWN,
 			JUMP_USE,
 			JUMP_RESPAWN,
+			CONTROLS_LEN,
+			PAUSE_RELEASE,
+			FAST_LEFT_RELEASE,
+			FAST_RIGHT_RELEASE,
 			FAST_JUMP_RELEASE,
+			FAST_DOWN_RELEASE,
+			FAST_USE_RELEASE,
+			FAST_RESPAWN_RELEASE,
+			JUMP_LEFT_RELEASE,
+			JUMP_RIGHT_RELEASE,
 			JUMP_JUMP_RELEASE,
-			CONTROLS_LEN
+			JUMP_DOWN_RELEASE,
+			JUMP_USE_RELEASE,
+			JUMP_RESPAWN_RELEASE
 		};
 
 		bool editKey(Controls key, int new_binding);
@@ -42,6 +53,8 @@ class Controller
 		GameLogic* logic;
 
 		int bindings[CONTROLS_LEN];
+
+		bool key_pressed[CONTROLS_LEN];
 
 		bool fast_jumped, jump_jumped;
 

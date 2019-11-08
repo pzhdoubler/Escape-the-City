@@ -145,10 +145,11 @@ bool GameLogic::update(float deltaMs)
 {
 	//level->printLevelState();
 
-	//update player state
-
 	updatePlayerPosition(*fast_man, deltaMs);
 	updatePlayerPosition(*jump_man, deltaMs);
+
+	updatePlayerState(*fast_man, deltaMs);
+	updatePlayerState(*jump_man, deltaMs);
 
 	//update other level objects
 	return true;
@@ -277,14 +278,20 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			break;
 		case Controller::JUMP_USE:
 			break;
-		case Controller::JUMP_RESPAWN:
-			jump_man->respawn();
-			break;
 		case Controller::FAST_RESPAWN:
-			fast_man->respawn();
+			success = true;
 			break;
-
-
+		case Controller::FAST_RESPAWN_RELEASE:
+			fast_man->respawn();
+			success = true;
+			break;
+		case Controller::JUMP_RESPAWN:
+			success = true;
+			break;
+		case Controller::JUMP_RESPAWN_RELEASE:
+			jump_man->respawn();
+			success = true;
+			break;
 		default:
 			break;
 	}
