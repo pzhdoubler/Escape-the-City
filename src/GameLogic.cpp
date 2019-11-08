@@ -161,18 +161,27 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 
 	//hazards
 	for (int i = 0; i < hazards.size(); i++) {
-		GameElements* game_ptr = hazards[i].get();
-		drawables.push_back(game_ptr);
+		sf::Vector2f this_pos = hazards[i]->getPos();
+		if (int(this_pos.x) != 0 || int(this_pos.y) != 0) {
+			GameElements* game_ptr = hazards[i].get();
+			drawables.push_back(game_ptr);
+		}
 	}
 	//doors
 	for (int i = 0; i < doors.size(); i++) {
-		GameElements* game_ptr = doors[i].get();
-		drawables.push_back(game_ptr);
+		sf::Vector2f this_pos = doors[i]->getPos();
+		if (int(this_pos.x) != 0 || int(this_pos.y) != 0) {
+			GameElements* game_ptr = doors[i].get();
+			drawables.push_back(game_ptr);
+		}
 	}
 	//buttons
 	for (int i = 0; i < buttons.size(); i++) {
-		GameElements* game_ptr = buttons[i].get();
-		drawables.push_back(game_ptr);
+		sf::Vector2f this_pos = buttons[i]->getPos();
+		if (int(this_pos.x) != 0 || int(this_pos.y) != 0) {
+			GameElements* game_ptr = buttons[i].get();
+			drawables.push_back(game_ptr);
+		}
 	}
 	//players
 	GameElements* fast_ptr = fast_man.get();
