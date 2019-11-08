@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
 
-class Butto : public Interactables{
+class Plates : public Interactables{
 public:
   //defalt constructor
   Plates();
