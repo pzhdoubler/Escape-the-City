@@ -10,6 +10,7 @@ Items::Items(){
 void Items::draw(sf::RenderWindow& window){
   sf::Sprite i;
   i.setTexture(item);
+  i.setPosition(pos);
   window.draw(i);
 }
 

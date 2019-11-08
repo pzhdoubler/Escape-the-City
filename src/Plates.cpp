@@ -8,6 +8,7 @@ Plates::Plates(){
 void Plates::draw(sf::RenderWindow &window){
   sf::Sprite p;
   p.setTexture(plates);
+  p.setPosition(pos);
   window.draw(p);
 }
 

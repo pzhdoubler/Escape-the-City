@@ -6,6 +6,7 @@
 void Enemies::draw(sf::RenderWindow& window){
   sf::Sprite e;
   e.setTexture(enemy);
+  e.setPosition(pos);
   window.draw(e);
 }
 

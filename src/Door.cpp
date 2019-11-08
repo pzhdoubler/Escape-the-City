@@ -8,6 +8,7 @@ Door::Door(){
 }
 
 void Door::draw(sf::RenderWindow &window){
+  door.setPosition(pos);
   window.draw(door);
 }
 

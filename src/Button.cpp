@@ -8,6 +8,7 @@ Button::Button(){
 void Button::draw(sf::RenderWindow &window){
   sf::Sprite b;
   b.setTexture(button);
+  b.setPosition(pos);
   window.draw(b);
 }
 
@@ -28,6 +29,7 @@ void Button::Toggle(){
 void Button::PlayerContact(PlayerChar &player,int id){
   if(player.interacted()==1){
   this->Toggle();
+
 }
 
 }
