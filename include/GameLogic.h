@@ -64,6 +64,8 @@ class GameLogic
 
 		std::vector<std::shared_ptr<Interactables>> buttons;
 
+		std::vector<std::shared_ptr<Interactables>> pressure_plates;
+
 		std::vector<std::shared_ptr<Interactables>> hazards;
 
 		std::vector<std::shared_ptr<Interactables>> doors;

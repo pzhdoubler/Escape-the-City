@@ -12,7 +12,7 @@ public:
 	//Default constructor
 	LevelState(){};
 
-	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f> buttonPos, std::vector<sf::Vector2f> pressurePlatePos, std::vector<sf::Vector2f> doorPos, std::vector<sf::Vector2f> hazardPos, std::vector<sf::Vector2f> movPlatformPos);
+	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos);
 
 	sf::Vector2f& getFastSpawnPt();
 
@@ -22,11 +22,11 @@ public:
 
 	const std::vector<std::vector<int>>& getTileMap() const;
 
-	const std::vector<sf::Vector2f>& getButtonPos() const;
-	const std::vector<sf::Vector2f>& getPressurePlatePos() const;
-	const std::vector<sf::Vector2f>& getDoorPos() const;
-	const std::vector<sf::Vector2f>& getHazardPos() const;
-	const std::vector<sf::Vector2f>& getMovPlatformPos() const;
+	const std::vector<sf::Vector2f>& getButtonPos();
+	const std::vector<sf::Vector2f>& getPressurePlatePos();
+	const std::vector<sf::Vector2f>& getDoorPos();
+	const std::vector<sf::Vector2f>& getHazardPos();
+	const std::vector<sf::Vector2f>& getMovPlatformPos();
 
 	void printLevelState();
 

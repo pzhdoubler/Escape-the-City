@@ -2,6 +2,7 @@
 
 #include <Button.h>
 #include <Hazards.h>
+#include <Plates.h>
 #include <cmath>
 
 
@@ -17,6 +18,8 @@ GameLogic::GameLogic()
 		//assign color
 		buttons.push_back(ptr);
 	}
+	//pressure plates
+
 	//hazards
 	for (int i = 0; i < hazard_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Hazards>();
@@ -78,6 +81,8 @@ bool GameLogic::init(LevelState &level)
 			}
 		}
 	}
+
+	//pressure plates
 
 	fast_man->setPos(level.getFastSpawnPt());
 	fast_man->setSpawnPt(level.getFastSpawnPt());
@@ -266,9 +271,9 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::JUMP_RESPAWN:
 			jump_man->respawn();
 			break;
-			case Controller::FAST_RESPAWN:
-				fast_man->respawn();
-				break;
+		case Controller::FAST_RESPAWN:
+			fast_man->respawn();
+			break;
 
 
 		default:

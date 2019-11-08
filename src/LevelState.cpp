@@ -1,7 +1,7 @@
 #include <LevelState.h>
 #include <cstdio>
 
-LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f> buttonPos, std::vector<sf::Vector2f> pressurePlatePos, std::vector<sf::Vector2f> doorPos, std::vector<sf::Vector2f> hazardPos, std::vector<sf::Vector2f> movPlatformPos){
+LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos) {
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
 	this->jumpSpawnPt = jumpSpawnPt;
@@ -47,20 +47,20 @@ const std::vector<std::vector<int>>& LevelState::getCollisionMap() const{
 	return collisionMap;
 }
 
-const std::vector<sf::Vector2f>& LevelState::getButtonPos() const{
+const std::vector<sf::Vector2f>& LevelState::getButtonPos() {
 	return buttonPos;
 }
 
-const std::vector<sf::Vector2f>& LevelState::getPressurePlatePos() const{
+const std::vector<sf::Vector2f>& LevelState::getPressurePlatePos() {
 	return pressurePlatePos;
 }
-const std::vector<sf::Vector2f>& LevelState::getDoorPos() const{
+const std::vector<sf::Vector2f>& LevelState::getDoorPos() {
 	return doorPos;
 }
-const std::vector<sf::Vector2f>& LevelState::getHazardPos() const{
+const std::vector<sf::Vector2f>& LevelState::getHazardPos() {
 	return hazardPos;
 }
-const std::vector<sf::Vector2f>& LevelState::getMovPlatformPos() const{
+const std::vector<sf::Vector2f>& LevelState::getMovPlatformPos() {
 	return movPlatformPos;
 }
 

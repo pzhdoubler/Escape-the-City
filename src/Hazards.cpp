@@ -11,6 +11,7 @@ Hazards::Hazards(){
 }
 
 void Hazards::draw(sf::RenderWindow& window){
+  hazard.setPosition(pos);
   window.draw(hazard);
 }
 
