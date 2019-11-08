@@ -43,6 +43,8 @@ int main(int argc, char** argv)
             return 0;
         }
 
+
+
         //initialization
 		logic.init(appLayer.level);
 		screen.init(appLayer.level);
@@ -94,6 +96,9 @@ int main(int argc, char** argv)
                     printf("should send to main\n");
                     //initialize condition to restart the beginning mainMenu while loop
                     appLayer.isPlaying = false;
+                    //if we restart the level, we need to turn returnToMain back off or else it restarts the game
+                    //after every unpause
+                    appLayer.returnToMain = false;
                     //break out of game loop but keep entire application loop running
                     break;
                 }
