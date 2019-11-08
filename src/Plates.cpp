@@ -1,4 +1,4 @@
-/*#include <Plates.h>
+#include <Plates.h>
 #include <SFML/Graphics.hpp>
 
 Plates::Plates(){
@@ -6,7 +6,9 @@ Plates::Plates(){
 }
 
 void Plates::draw(sf::RenderWindow &window){
-  window.draw(plates);
+  sf::Sprite p;
+  p.setTexture(plates);
+  window.draw(p);
 }
 
 void Plates::setPos(sf::Vector2f& pos){
@@ -28,4 +30,3 @@ void Button::PlayerContact(PlayerChar &player, int id){
 
 
 }
-*/
