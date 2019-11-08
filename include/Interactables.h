@@ -12,7 +12,7 @@ public:
 
   virtual void draw(sf::RenderWindow& window)= 0;
 
-  virtual void setPos(sf::Vector2f& pos);
+  virtual void setPos(sf::Vector2f& pos) = 0;
 
   void PlayerContact(PlayerChar &player, int id);
 

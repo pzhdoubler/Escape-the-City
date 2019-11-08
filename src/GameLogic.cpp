@@ -1,5 +1,6 @@
 #include <GameLogic.h>
 
+#include <Button.h>
 #include <Hazards.h>
 #include <cmath>
 
@@ -9,6 +10,19 @@ GameLogic::GameLogic()
 	fast_man = std::make_shared<PlayerChar>(true);
 	jump_man = std::make_shared<PlayerChar>(false);
 	//initialize all interactable lists here
+	int hazard_num = 6;
+	//buttons
+	for (int i = 0; i < hazard_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
+		//assign color
+		buttons.push_back(ptr);
+	}
+	//hazards
+	for (int i = 0; i < hazard_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Hazards>();
+		//assign color
+		hazards.push_back(ptr);
+	}
 }
 
 
@@ -17,11 +31,53 @@ bool GameLogic::init(LevelState &level)
 	this->level = &level;
 	//Read any important values from level
 	//eg hazards, enemies, etc
-	//sf::Vector2f grav_test_start(200, 200);
-	//static Hazards spike;
-	//spike.setPos(grav_test_start);
-	//Interactables* button_ptr = &spike;
-	//buttons.push_back(button_ptr);
+
+	std::vector<std::vector<int>> tileMap = level.getTileMap();
+	int tileSize = level.getTileSize();
+
+	std::vector<sf::Vector2f> hazard_pos = level.getHazardPos();
+	std::vector<sf::Vector2f> button_pos = level.getButtonPos();
+	std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
+
+	//0 = no object
+	//1 = hazard
+	//2 = door
+	int objects[6] = { 0,0,0,0,0,0 };
+
+	//hazards
+	for (int i = 0; i < hazard_pos.size(); i++) {
+		sf::Vector2f this_hazard = hazard_pos[i];
+		hazards[i]->setPos(this_hazard);
+		if (int(this_hazard.x) != 0 || int(this_hazard.y) != 0) { //NEED CONSISTENT INVALID LOCATION
+			objects[i] = 1;
+			int size = 1;
+			int cur_x = int(this_hazard.x) / tileSize;
+			int cur_y = int(this_hazard.y) / tileSize;
+			int id = tileMap[cur_x][cur_y];
+			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
+			//set hazard size
+			if (orientation) {
+				//set hazard orient horizontal
+			}
+			else {
+				//set hazard orient vertical
+			}
+		}
+	}
+
+	//buttons
+	for (int i = 0; i < button_pos.size(); i++) {
+		sf::Vector2f this_button = button_pos[i];
+		buttons[i]->setPos(this_button);
+		if (int(this_button.x) != 0 || int(this_button.y) != 0) {
+			if (objects[i] == 1) {
+				//link to hazards[i]
+			}
+			else if (objects[i] == 2) {
+				//link to doors[i]
+			}
+		}
+	}
 
 	fast_man->setPos(level.getFastSpawnPt());
 	fast_man->setSpawnPt(level.getFastSpawnPt());
@@ -37,7 +93,6 @@ bool GameLogic::init(LevelState &level)
 	//set starting positions and speeds
 	//stored in level state
 
-	int tileSize = level.getTileSize();
 	//read in physics constants
 	GRAVITY = 1000;
 	FRICTION = 1500;
@@ -62,6 +117,25 @@ bool GameLogic::init(LevelState &level)
 }
 
 
+bool GameLogic::determineObjectLength(int x_start, int y_start, int id, int& size)
+{
+	std::vector<std::vector<int>> tileMap = level->getTileMap();
+	int cur_x = x_start + 1;
+	int cur_y = y_start + 1;
+	while (tileMap[x_start][cur_y] == id || tileMap[cur_x][y_start] == id) {
+		cur_x += 1;
+		cur_y += 1;
+		size += 1;
+	}
+	if (cur_y - y_start == size) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+
 bool GameLogic::update(float deltaMs)
 {
 	//level->printLevelState();
@@ -80,11 +154,22 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 {
 	std::vector<GameElements*> drawables;
 
-	//for (int i = 0; i < buttons.size(); i++) {
-	//	GameElements* game_ptr = buttons[i];
-	//	drawables.push_back(game_ptr);
-	//}
-
+	//hazards
+	for (int i = 0; i < hazards.size(); i++) {
+		GameElements* game_ptr = hazards[i].get();
+		drawables.push_back(game_ptr);
+	}
+	//doors
+	for (int i = 0; i < doors.size(); i++) {
+		GameElements* game_ptr = doors[i].get();
+		drawables.push_back(game_ptr);
+	}
+	//buttons
+	for (int i = 0; i < buttons.size(); i++) {
+		GameElements* game_ptr = buttons[i].get();
+		drawables.push_back(game_ptr);
+	}
+	//players
 	GameElements* fast_ptr = fast_man.get();
 	GameElements* jump_ptr = jump_man.get();
 
@@ -256,6 +341,58 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 	}
 
 	return to_return;
+}
+
+
+void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
+{
+	std::vector<std::vector<int>> tileMap = level->getTileMap();
+	int tile_size = level->getTileSize();
+
+	sf::Vector2f pos = player.getPos();
+
+	int x_pos = pos.x;
+	int y_pos = pos.y;
+	int player_height = player.getHeight();
+	int player_width = player.getWidth();
+
+	int id = 0;
+
+	//bottom left corner
+	if (tileMap[int(x_pos) / tile_size][(int(y_pos) + player_height) / tile_size] > 3) {
+		id = tileMap[int(x_pos) / tile_size][(int(y_pos) + player_height) / tile_size];
+	}
+	//bottom right corner
+	if (tileMap[int(x_pos + player_width) / tile_size][(int(y_pos) + player_height) / tile_size] > 3) {
+		id = tileMap[int(x_pos + player_width) / tile_size][(int(y_pos) + player_height) / tile_size];
+	}
+	//top left corner
+	if (tileMap[int(x_pos) / tile_size][int(y_pos) / tile_size] > 3) {
+		id = tileMap[int(x_pos) / tile_size][int(y_pos) / tile_size];
+	}
+	//top right corner
+	if (tileMap[int(x_pos + player_width) / tile_size][int(y_pos) / tile_size] > 3) {
+		id = tileMap[int(x_pos + player_width) / tile_size][int(y_pos) / tile_size];
+	}
+
+	//buttons and pressure plates
+	if (id >= 5 && id <= 16) {
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons[i]->PlayerContact(player, id);
+		}
+	}
+	//doors
+	if (id >= 17 && id <= 22) {
+		for (int i = 0; i < doors.size(); i++) {
+			doors[i]->PlayerContact(player, id);
+		}
+	}
+	//hazards
+	if (id >= 23 && id <= 28) {
+		for (int i = 0; i < hazards.size(); i++) {
+			hazards[i]->PlayerContact(player, id);
+		}
+	}
 }
 
 

@@ -41,6 +41,9 @@ class GameLogic
 			center
 		};
 
+		//determines the size of the hazard and returns true if horizontal and false for vertical
+		bool determineObjectLength(int x_start, int y_start, int id, int& size);
+
 		//updates player's physics based on current postion
 		void updatePlayerPosition(PlayerChar& player, float deltaMs);
 
@@ -62,6 +65,8 @@ class GameLogic
 		std::vector<std::shared_ptr<Interactables>> buttons;
 
 		std::vector<std::shared_ptr<Interactables>> hazards;
+
+		std::vector<std::shared_ptr<Interactables>> doors;
 
 		std::vector<std::shared_ptr<Interactables>> enemies;
 
