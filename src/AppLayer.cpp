@@ -4,14 +4,10 @@
 
 #include "AppLayer.h"
 #include <iostream>
-#include <sstream>
-#include <fstream>
 
 
 AppLayer::AppLayer() {
 
-
-    //trying to init level and screen outside of AppLayer and see if it still causes glitch, doesn't appear to be the case
     font.loadFromFile("..\\resources\\DS-DIGIT.TTF");
     hud.setFont(font);
 
@@ -19,31 +15,37 @@ AppLayer::AppLayer() {
 
 bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
 
-
-    App.clear(sf::Color(0,0,255));
-    std::stringstream ss;
-    ss << "This is the Main Menu. Press O for options or L for Level Select";
-    hud.setCharacterSize(28);
-    hud.setString(ss.str());
+    //set background color and string
+    App.clear(sf::Color(mainMenuR, mainMenuG, mainMenuB));
+    hud.setCharacterSize(characterSize);
+    hud.setPosition(stringXPos,stringYPos);
+    hud.setString(mainMenuString);
     App.draw(hud);
 
+    //if you press spaceBar to play, break out of AppLayer loop and load level
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         isPlaying = true;
         loader.loadMap("level_0_tutorial.txt");
-        //recieve level and initialize Views
         level = loader.createLevelState();
     }
 
+    //if you go to optionMenu
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) {
         printf("Going to Option Menu...\n");
         optionMenuOpen = true;
+        //while optionMenu is open
         while (optionMenuOpen) {
             sf::Event event;
             while (App.pollEvent(event)) {
+                //if you close out of the window
                 if (event.type == sf::Event::Closed) {
+                    //break out of optionMenu loop
                     optionMenuOpen = false;
+                    //break out of AppLayer loop
                     isPlaying = true;
+                    //never enter main game loop
                     paused = true;
+                    //close application
                     App.close();
                 }
             }
@@ -69,20 +71,17 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
         }
     }
 
-
     App.display();
-
 
     return isPlaying;
 }
 
 bool AppLayer::optionMenu(sf::RenderWindow &App) {
-    App.clear(sf::Color(128, 56, 211));
 
-    std::stringstream ss;
-    ss << "This is the Option Screen. Press B to go back";
-    hud.setCharacterSize(28);
-    hud.setString(ss.str());
+    App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
+    hud.setCharacterSize(characterSize);
+    hud.setPosition(stringXPos,stringYPos);
+    hud.setString(optionMenuString);
     App.draw(hud);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
@@ -92,20 +91,15 @@ bool AppLayer::optionMenu(sf::RenderWindow &App) {
     }
     App.display();
 
-
     return optionMenuOpen;
 }
 
 bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
-    App.clear(sf::Color(255,128,255,128));
+    App.clear(sf::Color(pauseMenuR, pauseMenuG, pauseMenuB, pauseMenuAlpha));
 
-    std::stringstream ss;
-    ss << "Paused. Press SpaceBar to go back";
-    hud.setCharacterSize(28);
-    hud.setString(ss.str());
-    ss << "Or press a button below to go to Main Menu";
-    hud.setCharacterSize(28);
-    hud.setString(ss.str());
+    hud.setCharacterSize(characterSize);
+    hud.setPosition(stringXPos,stringYPos);
+    hud.setString(pauseMenuString);
     App.draw(hud);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -118,20 +112,18 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
     sf::Sprite buttonImage1;
     if (!button1.loadFromFile( "..\\resources\\rsz_button_template.png"))
         std::cout << "Can't find the image" << std::endl;
-    buttonImage1.setPosition( 300.0f, 400.0f );
+    buttonImage1.setPosition(button1PauseMenuXPos, button1PauseMenuYPos);
     buttonImage1.setTexture(button1);
     App.draw(buttonImage1);
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
         sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
-
         if (buttonImage1.getGlobalBounds().contains(mouseLocF)) {
             printf("button clicked!\n");
             printf("going to main menu...\n");
             pauseMenuOpen = false;
             returnToMain = true;
-            //mainMenu(App, paused);
             return pauseMenuOpen;
         }
     }
@@ -140,12 +132,11 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
 }
 
 bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
-    App.clear(sf::Color(56, 211, 128));
+    App.clear(sf::Color(levelSelectR, levelSelectG, levelSelectB));
 
-    std::stringstream ss;
-    ss << "This is the LevelSelect Screen. Press a button for a level";
-    hud.setCharacterSize(28);
-    hud.setString(ss.str());
+    hud.setCharacterSize(characterSize);
+    hud.setPosition(stringXPos,stringYPos);
+    hud.setString(levelSelectMenuString);
     App.draw(hud);
 
     sf::Texture button1;
@@ -160,24 +151,19 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
         std::cout << "Can't find the image" << std::endl;
     if (!button3.loadFromFile( "..\\resources\\rsz_button_template.png"))
         std::cout << "Can't find the image" << std::endl;
-    buttonImage1.setPosition( 50.0f, 50.0f );
+    buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
     buttonImage1.setTexture(button1);
     App.draw(buttonImage1);
-    buttonImage2.setPosition( 150.0f, 50.0f );
+    buttonImage2.setPosition(button2LevelSelectXPos,button2LevelSelectYPos);
     buttonImage2.setTexture(button2);
     App.draw(buttonImage2);
-    buttonImage3.setPosition( 250.0f, 50.0f );
+    buttonImage3.setPosition(button3LevelSelectXPos,button3LevelSelectYPos);
     buttonImage3.setTexture(button3);
     App.draw(buttonImage3);
-
-
-
-
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
         sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
-
         if (buttonImage1.getGlobalBounds().contains(mouseLocF)) {
             printf("button clicked!\n");
             levelSelectOpen = false;
@@ -193,6 +179,12 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
         if (buttonImage3.getGlobalBounds().contains(mouseLocF)) {
             printf("press the first button\n");
         }
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
+        printf("Going back to Main Menu...\n");
+        levelSelectOpen = false;
+        return levelSelectOpen;
     }
 
     App.display();

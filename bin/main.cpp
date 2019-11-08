@@ -20,45 +20,40 @@ int main(int argc, char** argv)
 	while (App.isOpen()) 
 	{
         bool paused = false; //Controller will return true or false based on pausing pref
-
+        //while you're not playing at the main menus
         while(!appLayer.isPlaying) {
-            //essentially trying to do a while loop for appLayer.update
             sf::Event event;
             while (App.pollEvent(event))
             {
+                //if you close out of the window
                 if (event.type == sf::Event::Closed) {
+                    //break out of mainMenu loop
                     appLayer.isPlaying = true;
+                    //set game loop condition to true so we don't go there
                     paused = true;
+                    //close out of application
                     App.close();
                 }
             }
-
             appLayer.mainMenu(App, paused);
         }
 
-
+        //check and see if we exited mainMenu without starting game, if so, return
         if (paused) {
             return 0;
         }
 
+        //initialization
 		logic.init(appLayer.level);
-
-        //gets here and then dies
 		screen.init(appLayer.level);
-
 		controller.init(logic);
 
-
-		//initialize controller
-
 		sf::Clock clock;
-
-
-
 
 		//main game loop
 		while (!paused) 
 		{
+		    //start clock
 			float deltaMs = clock.getElapsedTime().asSeconds();
 			clock.restart();
 
@@ -71,43 +66,39 @@ int main(int argc, char** argv)
 				}
 			}
 
-
+			//updates
 			logic.update(deltaMs);
-
 			screen.update(App, logic);
-
-			//with all this, if you pause in the air, sometimes the character won't get redrawn so look into that
-			//it actually only makes the character not get redrawn if you pause the screen while the character is
-			//falling. If you pause as your character starts jumping, it works alright
-			//because of the while loop it pauses screen updates and you can see this when you pause as the character
-			//starts a jump. It will start to fall when you unpause
+			//controller update and check to see if game is paused
 			if (controller.update(deltaMs)) {
 			    printf("paused\n");
 			    appLayer.pauseMenuOpen = true;
 			    while (appLayer.pauseMenuOpen) {
                     sf::Event event;
                     while (App.pollEvent(event)) {
+                        //if you close out of window
                         if (event.type == sf::Event::Closed) {
+                            //breaks out of appLayer while loop
                             appLayer.pauseMenuOpen = false;
-                            //isPlaying = true;
+                            //breaks out of game loop
                             paused = true;
+                            //close out of application
                             App.close();
                         }
                     }
                     appLayer.pauseMenu(App, paused);
 
 			    }
+			    //if we pressed the mainMenu button in pause Menu
                 if (appLayer.returnToMain) {
                     printf("should send to main\n");
+                    //initialize condition to restart the beginning mainMenu while loop
                     appLayer.isPlaying = false;
+                    //break out of game loop but keep entire application loop running
                     break;
                 }
 			    clock.restart();
 			}
-
-
-
-			//update controller
 
 			App.display();
 		}
