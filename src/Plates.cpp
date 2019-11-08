@@ -25,7 +25,7 @@ void Plates::Toggle(){
   this->open = true;
 }
 
-void Button::PlayerContact(PlayerChar &player, int id){
+void Plates::PlayerContact(PlayerChar &player, int id){
   this->Toggle();
 
 
