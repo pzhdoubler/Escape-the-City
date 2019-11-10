@@ -24,11 +24,18 @@ public:
 
   void Toggle();
 
+  void setSize(int size);
+
+  void setOrientation(bool orient);
 
 
 private:
   sf::Vector2f pos;
   bool toggled;
+  int size;
+  bool orient;
+
+
 
 };
 

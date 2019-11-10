@@ -8,8 +8,18 @@ Door::Door(){
 }
 
 void Door::draw(sf::RenderWindow &window){
+
+  if(open == false){
+  if(orient== true){
+    door.setRotation(90);
+  }
+  else{
+    door.setRotation(0);
+  }
   door.setPosition(pos);
   window.draw(door);
+}
+
 }
 
 void Door::setPos(sf::Vector2f& pos){
@@ -22,7 +32,7 @@ sf::Vector2f Door::getPos(){
 }
 
 //tells if the Door has been pressed
-void Door::Open(){
+void Door::Toggle(){
   sf::Vector2f moveDown = sf::Vector2f(pos.x, pos.y);
   sf::Vector2f moveUp = sf::Vector2f(pos.x + 30, pos.y);
   this->open = !open;
@@ -34,10 +44,17 @@ void Door::Open(){
   }
 }
 
+void Door::setOrientation(bool orient){
+  this->orient = orient;
+}
+
 void Door::PlayerContact(PlayerChar &player, int id){
   if(this->open==false){
-    sf::Vector2f vel=player.getVelocity();
-    vel.x=0;
+    sf::Vector2f vel = player.getVelocity();
+    sf::Vector2f position = getPos();
+    vel.x = 0;
+    position.x = position.x-20;
     player.setVelocity(vel);
+    player.setPos(position);
   }
 }

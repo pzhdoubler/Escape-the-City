@@ -11,6 +11,8 @@ public:
 
   sf::Texture button;
 
+  sf::Texture pressedButton;
+
 
   void draw(sf::RenderWindow& window);
 
@@ -27,10 +29,13 @@ public:
   void PlayerContact(PlayerChar &player,int id);
 
 
+  void setToggleable(Interactables* interactable);
 
 private:
   sf::Vector2f pos;
   bool pressed;
+
+  Interactables* interactable;
 
 
 };

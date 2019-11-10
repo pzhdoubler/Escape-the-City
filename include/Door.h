@@ -22,14 +22,19 @@ public:
   //returns the position of the door
   sf::Vector2f getPos();
 
-  void Open();
+  void Toggle();
+
+  void setSize(int size);
+
+  void setOrientation(bool orient);
 
   void PlayerContact(PlayerChar &player,int id);
 
 private:
   sf::Vector2f pos;
   bool open;
-
+  int size;
+  bool orient;
 
 };
 

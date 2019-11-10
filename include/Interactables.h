@@ -16,6 +16,8 @@ public:
 
   virtual sf::Vector2f getPos() = 0;
 
+  virtual void Toggle() = 0;
+
   virtual void PlayerContact(PlayerChar &player, int id) = 0;
 
   enum Color {Red, Blue, Green, Purple, Yellow, Orange };

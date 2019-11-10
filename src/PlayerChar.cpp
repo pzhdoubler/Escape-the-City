@@ -11,9 +11,6 @@ PlayerChar::PlayerChar(bool player){
   if (player){
     fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Red);
-
-
-
   }
   else{
     jump_man.setSize(sf::Vector2f(width, height));
