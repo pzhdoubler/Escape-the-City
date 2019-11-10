@@ -58,26 +58,27 @@ bool GameLogic::init(LevelState &level)
 			int cur_y = int(this_hazard.y) / tileSize;
 			int id = tileMap[cur_x][cur_y];
 			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
-			//set hazard size
-			if (orientation) {
-				//set hazard orient horizontal
-			}
-			else {
-				//set hazard orient vertical
-			}
+			//set hazard size and orientation
+			Hazards* haz = dynamic_cast<Hazards*>(hazards[i].get());
+			haz->setSize(size);
+			haz->setOrientation(orientation);
 		}
 	}
+	
 
 	//buttons
 	for (int i = 0; i < button_pos.size(); i++) {
 		sf::Vector2f this_button = button_pos[i];
 		buttons[i]->setPos(this_button);
 		if (int(this_button.x) != 0 || int(this_button.y) != 0) {
+			Button* but = dynamic_cast<Button*>(buttons[i].get());
 			if (objects[i] == 1) {
 				//link to hazards[i]
+				but->setToggleable(hazards[i].get());
 			}
 			else if (objects[i] == 2) {
 				//link to doors[i]
+				but->setToggleable(doors[i].get());
 			}
 		}
 	}
@@ -102,21 +103,21 @@ bool GameLogic::init(LevelState &level)
 	GRAVITY = 1000;
 	FRICTION = 1500;
 
-	FAST_MAX_X = 2500;
-	FAST_MAX_Y = 2500;
+	FAST_MAX_X = 800;
+	FAST_MAX_Y = 1000;
 	FAST_RUN = 1000;
 	FAST_HEIGHT = 4;
 	FAST_VERT = std::sqrt(2*GRAVITY*FAST_HEIGHT*tileSize);
-	FAST_AIR_MULT = 0.3;
+	FAST_AIR_MULT = 0.7;
 
-	JUMP_MAX_X = 1000;
-	JUMP_MAX_Y = 2000;
-	JUMP_RUN = 500;
+	JUMP_MAX_X = 300;
+	JUMP_MAX_Y = 1200;
+	JUMP_RUN = 400;
 	JUMP_HEIGHT = 10;
 	JUMP_VERT = std::sqrt(2*GRAVITY*JUMP_HEIGHT*tileSize);
-	JUMP_AIR_MULT = 0.7;
+	JUMP_AIR_MULT = 1.0;
 
-	MIN_VERT = std::sqrt(GRAVITY*tileSize);
+	MIN_VERT = std::sqrt(2*GRAVITY*tileSize/4);
 
 	return true;
 }
@@ -448,6 +449,18 @@ void GameLogic::updatePlayerPosition(PlayerChar& player, float deltaMs)
 		//passed zero
 		if (sign != std::signbit(new_vx)) {
 			new_vx = 0;
+		}
+	}
+
+	//limit to max horizontal speed
+	if (std::abs(int(new_vx)) > JUMP_MAX_X) {
+		if (!player.getType()) { //if jump char
+			new_vx = std::pow(-1,std::signbit(new_vx))*JUMP_MAX_X;
+		}
+		else {
+			if (std::abs(int(new_vx)) > FAST_MAX_X) {
+				new_vx = std::pow(-1, std::signbit(new_vx))*FAST_MAX_X;
+			}
 		}
 	}
 
