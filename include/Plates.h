@@ -24,6 +24,8 @@ public:
 
   void Toggle();
 
+  void setToggleable(Interactables* interactable);
+
   void PlayerContact(PlayerChar &player, int id);
 
 
@@ -31,6 +33,7 @@ public:
 private:
   sf::Vector2f pos;
   bool open;
+  Interactables* interactable;
 
 
 };

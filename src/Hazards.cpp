@@ -3,9 +3,10 @@
 
 
 Hazards::Hazards(){
-  this->toggled= false;
+  this->toggled = false;
+  this->orient = true;
   this->size = 1;
-  hazard.setSize(sf::Vector2f(40,30));
+  hazard.setSize(sf::Vector2f(20,20));
   hazard.setFillColor(sf::Color::Red);
 
 
@@ -14,17 +15,17 @@ Hazards::Hazards(){
 void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
   if(toggled== false){
-    if(orient == true){
-      hazard.setRotation(90);
-      for(int i; i< size; i++){
+    if(orient){
+      hazard.setRotation(0);
+      for(int i = 0; i< size; i++){
       hazard.setPosition(position);
       window.draw(hazard);
-      position.y=position.y-15;
+      position.x=position.x+20;
     }
   }
     else{
-      hazard.setRotation(0);
-      for(int i; i< size; i++){
+      hazard.setRotation(90);
+      for(int i = 0; i<= size; i++){
       hazard.setPosition(position);
       window.draw(hazard);
       position.x=position.x+20;

@@ -12,14 +12,15 @@ void Door::draw(sf::RenderWindow &window){
   if(open == false){
   if(orient== true){
     door.setRotation(90);
+    door.setPosition(pos);
+    window.draw(door);
   }
   else{
     door.setRotation(0);
+    door.setPosition(pos);
+    window.draw(door);
   }
-  door.setPosition(pos);
-  window.draw(door);
 }
-
 }
 
 void Door::setPos(sf::Vector2f& pos){
@@ -46,6 +47,10 @@ void Door::Toggle(){
 
 void Door::setOrientation(bool orient){
   this->orient = orient;
+}
+
+void Door::setSize(int size){
+  this->size = size;
 }
 
 void Door::PlayerContact(PlayerChar &player, int id){

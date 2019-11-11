@@ -26,6 +26,10 @@ void Plates::Toggle(){
   this->open = true;
 }
 
+//void Plates::setToggleable(Interactables* interactable){
+//  this->interactable = interactable;
+//}
+
 void Plates::PlayerContact(PlayerChar &player, int id){
   this->Toggle();
 
