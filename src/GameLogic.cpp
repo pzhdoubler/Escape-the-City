@@ -431,21 +431,15 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 
 	//buttons and pressure plates
 	if (id >= 5 && id <= 16) {
-		for (int i = 0; i < buttons.size(); i++) {
-			buttons[i]->PlayerContact(player, id);
-		}
+		buttons[id-5]->PlayerContact(player, id);
 	}
 	//doors
 	if (id >= 17 && id <= 22) {
-		for (int i = 0; i < doors.size(); i++) {
-			doors[i]->PlayerContact(player, id);
-		}
+		doors[id-17]->PlayerContact(player, id);
 	}
 	//hazards
 	if (id >= 23 && id <= 28) {
-		for (int i = 0; i < hazards.size(); i++) {
-			hazards[i]->PlayerContact(player, id);
-		}
+		hazards[id-23]->PlayerContact(player, id);
 	}
 }
 

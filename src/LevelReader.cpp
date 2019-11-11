@@ -90,7 +90,6 @@ void LevelReader::loadMap(const std::string& level){
 				this->map[y][x] = array[x][y] + 1;
 				int index = array[x][y] - 22;
 				if (int(hazardPos[index].x) == 0 && int(hazardPos[index].y) == 0) {
-					printf("in hazards, index %d\n", index);
 					this->hazardPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
 				}
 			}
