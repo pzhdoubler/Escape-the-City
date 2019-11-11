@@ -21,6 +21,7 @@ void Door::draw(sf::RenderWindow &window){
     window.draw(door);
   }
 }
+window.draw(door);
 }
 
 void Door::setPos(sf::Vector2f& pos){
@@ -56,9 +57,9 @@ void Door::setSize(int size){
 void Door::PlayerContact(PlayerChar &player, int id){
   if(this->open==false){
     sf::Vector2f vel = player.getVelocity();
-    sf::Vector2f position = getPos();
+    sf::Vector2f position = player.getPos();
     vel.x = 0;
-    position.x = position.x-20;
+    position.x = position.x-1;
     player.setVelocity(vel);
     player.setPos(position);
   }

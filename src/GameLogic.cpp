@@ -1,5 +1,5 @@
 #include <GameLogic.h>
-
+#include <Door.h>
 #include <Button.h>
 #include <Hazards.h>
 #include <Plates.h>
@@ -12,6 +12,7 @@ GameLogic::GameLogic()
 	jump_man = std::make_shared<PlayerChar>(false);
 	//initialize all interactable lists here
 	int hazard_num = 6;
+	int door_num = 6;
 	//buttons
 	for (int i = 0; i < hazard_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
@@ -26,6 +27,11 @@ GameLogic::GameLogic()
 		//assign color
 		hazards.push_back(ptr);
 	}
+	for (int i = 0; i < door_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Door>();
+		//assign color
+		doors.push_back(ptr);
+	}
 }
 
 
@@ -39,6 +45,7 @@ bool GameLogic::init(LevelState &level)
 	int tileSize = level.getTileSize();
 
 	std::vector<sf::Vector2f> hazard_pos = level.getHazardPos();
+	std::vector<sf::Vector2f> door_pos = level.getDoorPos();
 	std::vector<sf::Vector2f> button_pos = level.getButtonPos();
 	std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
 
@@ -64,7 +71,22 @@ bool GameLogic::init(LevelState &level)
 			haz->setOrientation(orientation);
 		}
 	}
-	
+	for (int i = 0; i < door_pos.size(); i++) {
+		sf::Vector2f this_door = door_pos[i];
+		doors[i]->setPos(this_door);
+		if (int(this_door.x) != 0 || int(this_door.y) != 0) {
+			objects[i] = 2;
+			int size = 1;
+			int cur_x = int(this_door.x) / tileSize;
+			int cur_y = int(this_door.y) / tileSize;
+			int id = tileMap[cur_x][cur_y];
+			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
+			//set hazard size and orientation
+			Door* doo = dynamic_cast<Door*>(doors[i].get());
+			doo->setSize(size);
+			doo->setOrientation(orientation);
+			}
+		}
 
 	//buttons
 	for (int i = 0; i < button_pos.size(); i++) {
@@ -82,6 +104,9 @@ bool GameLogic::init(LevelState &level)
 			}
 		}
 	}
+
+
+
 
 	//pressure plates
 
