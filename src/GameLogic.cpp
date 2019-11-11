@@ -14,7 +14,7 @@ GameLogic::GameLogic()
 	int hazard_num = 6;
 	int door_num = 6;
 	//buttons
-	for (int i = 0; i < hazard_num; i++) {
+	for (int i = 0; i < door_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
 		//assign color
 		buttons.push_back(ptr);
@@ -27,6 +27,7 @@ GameLogic::GameLogic()
 		//assign color
 		hazards.push_back(ptr);
 	}
+	//doors
 	for (int i = 0; i < door_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Door>();
 		//assign color
@@ -58,7 +59,7 @@ bool GameLogic::init(LevelState &level)
 	for (int i = 0; i < hazard_pos.size(); i++) {
 		sf::Vector2f this_hazard = hazard_pos[i];
 		hazards[i]->setPos(this_hazard);
-		if (int(this_hazard.x) != 0 || int(this_hazard.y) != 0) { //NEED CONSISTENT INVALID LOCATION
+		if (int(this_hazard.x) != 0 || int(this_hazard.y) != 0) {
 			objects[i] = 1;
 			int size = 1;
 			int cur_x = int(this_hazard.x) / tileSize;
@@ -71,6 +72,8 @@ bool GameLogic::init(LevelState &level)
 			haz->setOrientation(orientation);
 		}
 	}
+
+	//doors
 	for (int i = 0; i < door_pos.size(); i++) {
 		sf::Vector2f this_door = door_pos[i];
 		doors[i]->setPos(this_door);
@@ -85,8 +88,8 @@ bool GameLogic::init(LevelState &level)
 			Door* doo = dynamic_cast<Door*>(doors[i].get());
 			doo->setSize(size);
 			doo->setOrientation(orientation);
-			}
 		}
+	}
 
 	//buttons
 	for (int i = 0; i < button_pos.size(); i++) {
@@ -104,9 +107,6 @@ bool GameLogic::init(LevelState &level)
 			}
 		}
 	}
-
-
-
 
 	//pressure plates
 
@@ -131,16 +131,16 @@ bool GameLogic::init(LevelState &level)
 	FAST_MAX_X = 800;
 	FAST_MAX_Y = 1000;
 	FAST_RUN = 1000;
-	FAST_HEIGHT = 4;
+	FAST_HEIGHT = 3.5;
 	FAST_VERT = std::sqrt(2*GRAVITY*FAST_HEIGHT*tileSize);
 	FAST_AIR_MULT = 0.7;
 
-	JUMP_MAX_X = 300;
+	JUMP_MAX_X = 250;
 	JUMP_MAX_Y = 1200;
-	JUMP_RUN = 400;
-	JUMP_HEIGHT = 10;
+	JUMP_RUN = 375;
+	JUMP_HEIGHT = 10.2;
 	JUMP_VERT = std::sqrt(2*GRAVITY*JUMP_HEIGHT*tileSize);
-	JUMP_AIR_MULT = 1.0;
+	JUMP_AIR_MULT = 2.0;
 
 	MIN_VERT = std::sqrt(2*GRAVITY*tileSize/4);
 

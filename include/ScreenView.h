@@ -17,6 +17,8 @@ class ScreenView {
 private:
     sf::Texture levelOutline;
 
+	sf::Texture background;
+
 
 public:
 	//default constructor

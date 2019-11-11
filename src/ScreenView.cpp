@@ -21,14 +21,17 @@ void ScreenView::init(LevelState &level) {
     textureCanvas.create(800,600);
     int width = 40;
     int height = 30;
-    textureCanvas.clear(sf::Color::White);
+    textureCanvas.clear(sf::Color(0,0,0,0));
+	static sf::Texture bg;
+	bg.loadFromFile("..\\resources\\citybackground.png"); //Do in resource manager
+	background = bg;
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             if (level.getTileMap()[i][j] == 1) {
 				sf::RectangleShape border;
                 border.setSize(sf::Vector2f(level.getTileSize(), level.getTileSize()));
-                border.setFillColor(sf::Color::Black);
+                border.setFillColor(sf::Color(50,50,50,255));
                 border.setPosition(i*level.getTileSize(), 580 - j*level.getTileSize());
                 textureCanvas.draw(border);
 				//printf("[ %d, %d ]\n", i, j);
@@ -46,6 +49,8 @@ void ScreenView::update(sf::RenderWindow &mainWindow, GameLogic &gameLogic) {
 
     //the PlayerCharacter objects in the vector each have their own draw method so we can just call that and send in our
     //mainWindow reference
+	sf::Sprite bg(background);
+	mainWindow.draw(bg);
 	sf::Sprite level(levelOutline);
     mainWindow.draw(level);
 	std::vector<GameElements*> drawables = gameLogic.getDrawables();

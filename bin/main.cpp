@@ -10,6 +10,7 @@
 int main(int argc, char** argv) 
 {
 	sf::RenderWindow App(sf::VideoMode(800, 600, 32), "Escape the City - SFML", sf::Style::Close);
+	App.setFramerateLimit(120);
 
 	//initialize app layer
 	AppLayer appLayer;

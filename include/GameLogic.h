@@ -74,10 +74,10 @@ class GameLogic
 
 		std::vector<std::shared_ptr<Interactables>> items;
 
-		int GRAVITY;
-		int FRICTION;
-		int FAST_RUN, FAST_HEIGHT, FAST_MAX_X, FAST_MAX_Y;
-		int JUMP_RUN, JUMP_HEIGHT, JUMP_MAX_X, JUMP_MAX_Y;
+		float GRAVITY;
+		float FRICTION;
+		float FAST_RUN, FAST_HEIGHT, FAST_MAX_X, FAST_MAX_Y;
+		float JUMP_RUN, JUMP_HEIGHT, JUMP_MAX_X, JUMP_MAX_Y;
 		float FAST_VERT, JUMP_VERT, MIN_VERT;
 		float FAST_AIR_MULT, JUMP_AIR_MULT;
 
