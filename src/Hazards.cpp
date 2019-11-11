@@ -7,7 +7,7 @@ Hazards::Hazards(){
   this->orient = true;
   this->size = 1;
 
-  hazard.loadFromFile("..\\resources\\pixil-frame-0 (2).png");
+  hazard.loadFromFile("..\\resources\\Spikes.png");
 
 
 }
