@@ -6,8 +6,8 @@ Hazards::Hazards(){
   this->toggled = false;
   this->orient = true;
   this->size = 1;
-  hazard.setSize(sf::Vector2f(20,20));
-  hazard.setFillColor(sf::Color::Red);
+
+  hazard.loadFromFile("..\\resources\\pixil-frame-0 (2).png");
 
 
 }
@@ -15,19 +15,25 @@ Hazards::Hazards(){
 void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
   if(toggled== false){
-    if(orient){
-      hazard.setRotation(0);
-      for(int i = 0; i< size; i++){
-      hazard.setPosition(position);
-      window.draw(hazard);
+    //horizontal surface
+    if(orient == false){
+      for(int i = 0; i< this->size; i++){
+        sf::Sprite h;
+        h.setTexture(hazard);
+        h.setRotation(0);
+       h.setPosition(position);
+      window.draw(h);
       position.x=position.x+20;
     }
   }
+  //vertical surface
     else{
-      hazard.setRotation(90);
-      for(int i = 0; i<= size; i++){
-      hazard.setPosition(position);
-      window.draw(hazard);
+      for(int i = 0; i<= this->size; i++){
+        sf::Sprite h;
+        h.setTexture(hazard);
+        h.setRotation(90);
+       h.setPosition(position);
+      window.draw(h);
       position.x=position.x+20;
     }
     }

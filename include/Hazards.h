@@ -9,8 +9,9 @@ public:
 
   Hazards();
 
-  //sf::Texture hazard;
-  sf::RectangleShape hazard;
+  sf::Texture hazard;
+
+
 
   void draw(sf::RenderWindow& window);
 
