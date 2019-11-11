@@ -63,28 +63,44 @@ void LevelReader::loadMap(const std::string& level){
 			}
 			//button ids
 			else if(array[x][y] >= 4 && array[x][y] <=9){
-				this->buttonPos[array[x][y] - 4] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 4;
+				if (int(buttonPos[index].x) == 0 && int(buttonPos[index].y) == 0) {
+					this->buttonPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
 			}
 			//pressure plates
 			else if(array[x][y] >= 10 && array[x][y] <=15){
-				this->pressurePlatePos[array[x][y] - 10] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 10;
+				if (int(pressurePlatePos[index].x) == 0 && int(pressurePlatePos[index].y) == 0) {
+					this->pressurePlatePos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
 			}
 			//toggle doors
 			else if(array[x][y] >= 16 && array[x][y] <=21){
-				this->doorPos[array[x][y] - 16] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 16;
+				if (int(doorPos[index].x) == 0 && int(doorPos[index].y) == 0) {
+					this->doorPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
 			}
 			//toggle hazards
 			else if(array[x][y] >= 22 && array[x][y] <=27){
-				this->hazardPos[array[x][y] - 22] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 22;
+				if (int(hazardPos[index].x) == 0 && int(hazardPos[index].y) == 0) {
+					printf("in hazards, index %d\n", index);
+					this->hazardPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
 			}
 			//moving platforms
 			else if(array[x][y] >= 28 && array[x][y] <=33){
-				this->movPlatformPos[array[x][y] - 28] = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 28;
+				if (int(movPlatformPos[index].x) == 0 && int(movPlatformPos[index].y) == 0) {
+					this->movPlatformPos[array[x][y] - 28] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
 			}
 			else{
 				this->map[y][x] = 0;
