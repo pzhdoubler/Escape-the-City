@@ -89,8 +89,8 @@ void PlayerChar::respawn(){
 
 }
 
-void PlayerChar::interact(){
-  this->interaction= !interaction;
+void PlayerChar::interact(bool interact){
+  this->interaction= interact;
 }
 
 bool PlayerChar::interacted(){

@@ -50,7 +50,7 @@ public:
 
   void printPlayerChar();
 
-  void interact();
+  void interact(bool interact);
 
   bool interacted();
 
