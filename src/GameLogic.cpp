@@ -272,10 +272,9 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::FAST_DOWN:
 			break;
 		case Controller::FAST_USE:
-			fast_man->interact(true);
 			break;
 		case Controller::FAST_USE_RELEASE:
-			fast_man->interact(false);
+			fast_man->interact(true);
 			break;
 		case Controller::JUMP_LEFT:
 			if (!jump_man->isInAir()) {
@@ -311,10 +310,9 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::JUMP_DOWN:
 			break;
 		case Controller::JUMP_USE:
-			jump_man->interact(true);
 			break;
 		case Controller::JUMP_USE_RELEASE:
-			jump_man->interact(false);
+			jump_man->interact(true);
 			break;
 		case Controller::FAST_RESPAWN:
 			success = true;
@@ -453,6 +451,8 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 	if (id >= 23 && id <= 28) {
 		hazards[id-23]->PlayerContact(player, id);
 	}
+
+	player.interact(false);
 }
 
 
