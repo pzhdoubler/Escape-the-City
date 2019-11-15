@@ -34,7 +34,7 @@ void Hazards::draw(sf::RenderWindow& window){
         h.setRotation(90);
        h.setPosition(position);
       window.draw(h);
-      position.x=position.x+20;
+      position.y=position.y+20;
     }
     }
 }
@@ -72,6 +72,7 @@ void Hazards::setOrientation(bool orient){
 
 void Hazards::PlayerContact(PlayerChar &player, int id){
   if(toggled==false){
+
   player.respawn();
 }
 

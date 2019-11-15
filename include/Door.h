@@ -9,8 +9,8 @@ public:
   //defalt constructor
   Door();
 
-  sf::RectangleShape door;
 
+  sf::Texture door;
 
   void draw(sf::RenderWindow& window);
 

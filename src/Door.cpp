@@ -3,25 +3,35 @@
 
 Door::Door(){
   this->open = false;
-  door.setSize(sf::Vector2f(40,30));
-  door.setFillColor(sf::Color::Green);
+  this->size = 2;
+  door.loadFromFile("..\\resources\\Door_Texture.png");
 }
 
 void Door::draw(sf::RenderWindow &window){
-
+  sf::Vector2f position = pos;
   if(open == false){
   if(orient== true){
-    door.setRotation(90);
-    door.setPosition(pos);
-    window.draw(door);
+    for(int i = 0; i< this->size; i++){
+    sf::Sprite d;
+    d.setTexture(door);
+    d.setRotation(90);
+    d.setPosition(position);
+    window.draw(d);
+    position.x=position.x+20;
+  }
+
   }
   else{
-    door.setRotation(0);
-    door.setPosition(pos);
-    window.draw(door);
+    for(int i = 0; i< this->size; i++){
+    sf::Sprite d;
+    d.setTexture(door);
+    d.setRotation(0);
+    d.setPosition(position);
+    window.draw(d);
+    position.y=position.y+20;
+  }
   }
 }
-window.draw(door);
 }
 
 void Door::setPos(sf::Vector2f& pos){
@@ -55,12 +65,37 @@ void Door::setSize(int size){
 }
 
 void Door::PlayerContact(PlayerChar &player, int id){
+  sf::Vector2f vel = player.getVelocity();
+  sf::Vector2f position = player.getPos();
   if(this->open==false){
-    sf::Vector2f vel = player.getVelocity();
-    sf::Vector2f position = player.getPos();
+    if(this->orient == false){
     vel.x = 0;
-    position.x = position.x-1;
-    player.setVelocity(vel);
-    player.setPos(position);
+    if(position.x>pos.x){
+
+      position.x = pos.x+20;
+      player.setVelocity(vel);
+      player.setPos(position);
   }
+    else{
+      position.x = pos.x-16;
+      player.setVelocity(vel);
+      player.setPos(position);
+  }
+  }
+  else{
+
+    vel.y = 0;
+    if(position.y>pos.y){
+
+      position.y = pos.y+10;
+      player.setVelocity(vel);
+      player.setPos(position);
+  }
+    else{
+      position.y = pos.y-10;
+      player.setVelocity(vel);
+      player.setPos(position);
+  }
+}
+}
 }
