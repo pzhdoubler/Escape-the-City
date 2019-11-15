@@ -90,7 +90,7 @@ void PlayerChar::respawn(){
 }
 
 void PlayerChar::interact(bool interact){
-  this->interaction= interact;
+  this->interaction = interact;
 }
 
 bool PlayerChar::interacted(){

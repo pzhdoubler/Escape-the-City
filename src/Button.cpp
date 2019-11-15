@@ -3,6 +3,8 @@
 
 Button::Button(){
   this->pressed = false;
+  button.loadFromFile("..\\resources\\Button.png");
+  pressedButton.loadFromFile("..\\resources\\ButtonPressed.png");
 }
 
 void Button::draw(sf::RenderWindow &window){
@@ -42,7 +44,7 @@ void Button::setToggleable(Interactables* interactable){
 }
 
 void Button::PlayerContact(PlayerChar &player,int id){
-  if(player.interacted()==1){
+  if(player.interacted()==true){
   this->Toggle();
   interactable->Toggle();
 }

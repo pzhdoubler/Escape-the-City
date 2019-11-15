@@ -12,7 +12,7 @@ void Door::draw(sf::RenderWindow &window){
   if(open == false){
   if(orient== true){
     for(int i = 0; i< this->size; i++){
-    position.x=position.x+20;  
+    position.x=position.x+20;
     sf::Sprite d;
     d.setTexture(door);
     d.setRotation(90);
@@ -46,15 +46,14 @@ sf::Vector2f Door::getPos(){
 
 //tells if the Door has been pressed
 void Door::Toggle(){
-  sf::Vector2f moveDown = sf::Vector2f(pos.x, pos.y);
-  sf::Vector2f moveUp = sf::Vector2f(pos.x + 30, pos.y);
+  //sf::Vector2f moveDown = sf::Vector2f(pos.x, pos.y);
+  //sf::Vector2f moveUp = sf::Vector2f(pos.x + 30, pos.y);
   this->open = !open;
-  if(open==false){
-    this->setPos(moveUp);
-  }
-  else{
-    this->setPos(moveDown);
-  }
+  //if(open==false){
+  //  this->setPos(moveUp);
+//  }
+//  else{
+//  }
 }
 
 void Door::setOrientation(bool orient){

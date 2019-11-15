@@ -272,6 +272,7 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::FAST_DOWN:
 			break;
 		case Controller::FAST_USE:
+		success = true;
 			break;
 		case Controller::FAST_USE_RELEASE:
 			fast_man->interact(true);
@@ -310,6 +311,7 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::JUMP_DOWN:
 			break;
 		case Controller::JUMP_USE:
+		success = true;
 			break;
 		case Controller::JUMP_USE_RELEASE:
 			jump_man->interact(true);
