@@ -395,15 +395,27 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 	}
 	//bot exposed corner
 	else if (down != 1 && (corner == top_left || corner == top_right) && tile_size - (int(posy) % tile_size) < (tile_size / 4)) {
-		to_return.push_back(posx);
-		to_return.push_back(int(posy) + y_diff);
-		to_return.push_back(1);
+		if (corner == top_left && prevTileX != tileXCoord && prevTileY == tileYCoord) {
+			to_return.push_back(int(posx) + x_diff);
+			to_return.push_back(posy);
+			to_return.push_back(0);
+		}
+		else if (corner == top_right && prevTileX == tileXCoord && prevTileY == tileYCoord) {
+			to_return.push_back(int(posx) + x_diff);
+			to_return.push_back(posy);
+			to_return.push_back(0);
+		}
+		else {
+			to_return.push_back(posx);
+			to_return.push_back(int(posy) + y_diff);
+			to_return.push_back(1);
+		}
 	}
 	//default to x collision
 	else {
 		to_return.push_back(int(posx) + x_diff);
 		to_return.push_back(posy);
-		to_return.push_back(0);	to_return.push_back(1);
+		to_return.push_back(0);
 	}
 
 	return to_return;
