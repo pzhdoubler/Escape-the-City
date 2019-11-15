@@ -92,7 +92,7 @@ void Door::PlayerContact(PlayerChar &player, int id){
   }
     else{
       player.setInAir(false);
-      position.y = pos.y-19;
+      position.y = pos.y-18;
       player.setVelocity(vel);
       player.setPos(position);
   }
