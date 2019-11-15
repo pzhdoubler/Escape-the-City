@@ -25,7 +25,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
     //if you press spaceBar to play, break out of AppLayer loop and load level
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         isPlaying = true;
-        loader.loadMap("level_0_tutorial.txt");
+        loader.loadMap("level_tutorial.csv");
         level = loader.createLevelState();
     }
 

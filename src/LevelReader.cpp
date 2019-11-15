@@ -17,8 +17,7 @@ LevelReader::LevelReader(){
 void LevelReader::loadMap(const std::string& level){
 	this->tileSize = 20;
 	std::ifstream file;
-	//file.open("..\\levels\\" + level);
-	file.open("..\\levels\\level_tutorial.csv");
+	file.open("..\\levels\\" + level);
 	if(!file.is_open()){
 		std::cout << "Failed to load file";
 	}
@@ -107,9 +106,6 @@ void LevelReader::loadMap(const std::string& level){
 		}
 	}
 	file.close();
-
-	//this->fastSpawnPt = sf::Vector2f(1*20, 28*20);
-	//this->jumpSpawnPt = sf::Vector2f(2*20, 28*20);
 
 }
 
