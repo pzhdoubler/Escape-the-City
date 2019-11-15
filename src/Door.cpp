@@ -12,12 +12,13 @@ void Door::draw(sf::RenderWindow &window){
   if(open == false){
   if(orient== true){
     for(int i = 0; i< this->size; i++){
+    position.x=position.x+20;  
     sf::Sprite d;
     d.setTexture(door);
     d.setRotation(90);
     d.setPosition(position);
     window.draw(d);
-    position.x=position.x+20;
+
   }
 
   }
@@ -86,13 +87,13 @@ void Door::PlayerContact(PlayerChar &player, int id){
 
     vel.y = 0;
     if(position.y>pos.y){
-
-      position.y = pos.y+10;
+      position.y = pos.y+20;
       player.setVelocity(vel);
       player.setPos(position);
   }
     else{
-      position.y = pos.y-10;
+      player.setInAir(false);
+      position.y = pos.y-19;
       player.setVelocity(vel);
       player.setPos(position);
   }

@@ -154,8 +154,12 @@ bool GameLogic::determineObjectLength(int x_start, int y_start, int id, int& siz
 	int cur_x = x_start + 1;
 	int cur_y = y_start + 1;
 	while (tileMap[x_start][cur_y] == id || tileMap[cur_x][y_start] == id) {
+		if(tileMap[cur_x][y_start] == id){
 		cur_x += 1;
+	}
+		if(tileMap[x_start][cur_y] == id){
 		cur_y += 1;
+	}
 		size += 1;
 	}
 	if (cur_y - y_start == size) {

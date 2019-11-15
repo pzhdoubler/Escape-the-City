@@ -16,7 +16,7 @@ void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
   if(toggled== false){
     //horizontal surface
-    if(orient == false){
+    if(orient == true){
       for(int i = 0; i< this->size; i++){
         sf::Sprite h;
         h.setTexture(hazard);
@@ -28,7 +28,8 @@ void Hazards::draw(sf::RenderWindow& window){
   }
   //vertical surface
     else{
-      for(int i = 0; i<= this->size; i++){
+      position.x=position.x+20;
+      for(int i = 0; i< this->size; i++){      
         sf::Sprite h;
         h.setTexture(hazard);
         h.setRotation(90);
