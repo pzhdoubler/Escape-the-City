@@ -12,11 +12,13 @@ public:
 	//Default constructor
 	LevelState(){};
 
-	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos);
+	LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, sf::Vector2f exitPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos);
 
 	sf::Vector2f& getFastSpawnPt();
 
 	sf::Vector2f& getJumpSpawnPt();
+
+	sf::Vector2f& getExitPt();
 
 	int getTileSize();
 

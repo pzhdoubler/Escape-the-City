@@ -10,6 +10,7 @@ GameLogic::GameLogic()
 {
 	fast_man = std::make_shared<PlayerChar>(true);
 	jump_man = std::make_shared<PlayerChar>(false);
+	exitPos = std::make_shared<Exit>();
 	//initialize all interactable lists here
 	int hazard_num = 6;
 	int door_num = 6;
@@ -110,6 +111,8 @@ bool GameLogic::init(LevelState &level)
 
 	//pressure plates
 
+	exitPos->setPos(level.getExitPt());
+
 	fast_man->setPos(level.getFastSpawnPt());
 	fast_man->setSpawnPt(level.getFastSpawnPt());
 	jump_man->setPos(level.getJumpSpawnPt());
@@ -182,7 +185,9 @@ bool GameLogic::update(float deltaMs)
 	updatePlayerState(*jump_man, deltaMs);
 
 	//update other level objects
-	return true;
+
+	bool level_end = exitPos->levelEnd();
+	return level_end;
 }
 
 
@@ -214,10 +219,13 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 			drawables.push_back(game_ptr);
 		}
 	}
+	//exit point
+	GameElements* exit_ptr = exitPos.get();
 	//players
 	GameElements* fast_ptr = fast_man.get();
 	GameElements* jump_ptr = jump_man.get();
 
+	drawables.push_back(exit_ptr);
 	drawables.push_back(fast_ptr);
 	drawables.push_back(jump_ptr);
 
@@ -453,6 +461,10 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 		id = tileMap[int(x_pos + player_width) / tile_size][int(y_pos) / tile_size];
 	}
 
+	//exit position
+	if (id == 4) {
+		exitPos->PlayerContact(player, id);
+	}
 	//buttons and pressure plates
 	if (id >= 5 && id <= 16) {
 		buttons[id-5]->PlayerContact(player, id);

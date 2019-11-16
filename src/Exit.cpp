@@ -3,7 +3,7 @@
 
 Exit::Exit(){
   fast_exit = false;
-  jump_exit = true;
+  jump_exit = false;
 
   exit.loadFromFile("..\\resources\\Exit.png");
 }

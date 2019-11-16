@@ -20,6 +20,8 @@ public:
   //returns the position of the exit
   sf::Vector2f getPos();
 
+  void Toggle() {};
+
   bool levelEnd();
 
   void PlayerContact(PlayerChar &player,int id);

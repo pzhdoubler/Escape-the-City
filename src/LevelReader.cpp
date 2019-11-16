@@ -57,8 +57,10 @@ void LevelReader::loadMap(const std::string& level){
 				this->map[y][x] = 3;
 			}
 			else if(array[x][y] == 3){
-				this->exitPt = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = 4;
+				if (int(exitPt.x) == 0 && int(exitPt.y) == 0) {
+					this->exitPt = sf::Vector2f(y*tileSize, x*tileSize);
+				}
 			}
 			//button ids
 			else if(array[x][y] >= 4 && array[x][y] <=9){
@@ -122,6 +124,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, movPlatformPos);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, exitPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, movPlatformPos);
 	return currentLevelState;
 }

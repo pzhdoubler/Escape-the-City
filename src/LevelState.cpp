@@ -1,10 +1,11 @@
 #include <LevelState.h>
 #include <cstdio>
 
-LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos) {
+LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, sf::Vector2f exitPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos) {
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
 	this->jumpSpawnPt = jumpSpawnPt;
+	this->exitPt = exitPt;
 	this->tileSize = tileSize;
 	this->buttonPos = buttonPos;
 	this->pressurePlatePos = pressurePlatePos;
@@ -33,6 +34,10 @@ sf::Vector2f& LevelState::getFastSpawnPt(){
 
 sf::Vector2f& LevelState::getJumpSpawnPt(){
 	return jumpSpawnPt;
+}
+
+sf::Vector2f& LevelState::getExitPt() {
+	return exitPt;
 }
 
 int LevelState::getTileSize(){
