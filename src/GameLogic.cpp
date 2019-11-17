@@ -4,6 +4,8 @@
 #include <Hazards.h>
 #include <Plates.h>
 #include <cmath>
+#include <string>
+#include "tinyxml2.h"
 
 
 GameLogic::GameLogic()
@@ -128,22 +130,32 @@ bool GameLogic::init(LevelState &level)
 	//stored in level state
 
 	//read in physics constants
-	GRAVITY = 1000;
-	FRICTION = 1500;
 
-	FAST_MAX_X = 800;
-	FAST_MAX_Y = 1000;
-	FAST_RUN = 1000;
-	FAST_HEIGHT = 3.5;
-	FAST_VERT = std::sqrt(2*GRAVITY*FAST_HEIGHT*tileSize);
-	FAST_AIR_MULT = 0.7;
+	tinyxml2::XMLDocument config;
+	tinyxml2::XMLError result = config.LoadFile("..\\config\\constants.xml");
+	if (result != tinyxml2::XML_SUCCESS)
+		return false;
 
-	JUMP_MAX_X = 250;
-	JUMP_MAX_Y = 1200;
-	JUMP_RUN = 375;
-	JUMP_HEIGHT = 10.2;
-	JUMP_VERT = std::sqrt(2*GRAVITY*JUMP_HEIGHT*tileSize);
-	JUMP_AIR_MULT = 2.0;
+	tinyxml2::XMLElement* general = config.FirstChildElement("general");
+	tinyxml2::XMLElement* fast = config.FirstChildElement("fastman");
+	tinyxml2::XMLElement* jump = config.FirstChildElement("jumpman");
+
+	GRAVITY = std::stof(general->FirstChildElement("gravity")->GetText());
+	FRICTION = std::stof(general->FirstChildElement("gravity")->GetText());
+
+	FAST_MAX_X = std::stof(fast->FirstChildElement("max_horiz_speed")->GetText());
+	FAST_MAX_Y = std::stof(fast->FirstChildElement("max_vert_speed")->GetText());
+	FAST_RUN = std::stof(fast->FirstChildElement("run_speed")->GetText());
+	FAST_HEIGHT = std::stof(fast->FirstChildElement("jump_height")->GetText());
+	FAST_AIR_MULT = std::stof(fast->FirstChildElement("air_multiplier")->GetText());
+	FAST_VERT = std::sqrt(2 * GRAVITY * FAST_HEIGHT * tileSize);
+
+	JUMP_MAX_X = std::stof(jump->FirstChildElement("max_horiz_speed")->GetText());
+	JUMP_MAX_Y = std::stof(jump->FirstChildElement("max_vert_speed")->GetText());
+	JUMP_RUN = std::stof(jump->FirstChildElement("run_speed")->GetText());
+	JUMP_HEIGHT = std::stof(jump->FirstChildElement("jump_height")->GetText());
+	JUMP_AIR_MULT = std::stof(jump->FirstChildElement("air_multiplier")->GetText());
+	JUMP_VERT = std::sqrt(2 * GRAVITY * JUMP_HEIGHT * tileSize);
 
 	MIN_VERT = std::sqrt(2*GRAVITY*tileSize/4);
 
