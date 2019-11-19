@@ -263,7 +263,7 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
             printf("button clicked!\n");
             levelSelectOpen = false;
             isPlaying = true;
-            loader.loadMap("level_0_tutorial.txt");
+            loader.loadMap("level_tutorial.csv");
             level = loader.createLevelState();
             printf("Going to level 1...\n");
             return levelSelectOpen;

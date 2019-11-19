@@ -70,7 +70,18 @@ int main(int argc, char** argv)
 			}
 
 			//updates
-			logic.update(deltaMs);
+
+			//if logic.update is true, then we need to return to the main menu
+			if (logic.update(deltaMs)) {
+			    appLayer.returnToMain = true;
+			    if (appLayer.returnToMain) {
+			        paused = true;
+			        printf("should send to main\n");
+			        appLayer.isPlaying = false;
+			        appLayer.returnToMain = false;
+			        break;
+			    }
+			}
 			screen.update(App, logic);
 			//controller update and check to see if game is paused
 			if (controller.update(deltaMs)) {
