@@ -24,6 +24,8 @@ public:
 
   bool levelEnd();
 
+  void reset();
+
   void PlayerContact(PlayerChar &player,int id);
 
 private:

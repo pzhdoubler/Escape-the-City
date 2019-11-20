@@ -199,6 +199,7 @@ bool GameLogic::update(float deltaMs)
 	//update other level objects
 
 	bool level_end = exitPos->levelEnd();
+	exitPos->reset();
 	return level_end;
 }
 

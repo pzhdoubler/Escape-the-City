@@ -38,6 +38,11 @@ bool Exit::levelEnd(){
   }
 }
 
+void Exit::reset(){
+  fast_exit = false;
+  jump_exit = false;
+}
+
 
 void Exit::PlayerContact(PlayerChar &player,int id){
   if(player.getType() == true){
