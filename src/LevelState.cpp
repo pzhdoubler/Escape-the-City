@@ -1,7 +1,7 @@
 #include <LevelState.h>
 #include <cstdio>
 
-LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, sf::Vector2f exitPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& movPlatformPos) {
+LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawnPt, sf::Vector2f jumpSpawnPt, sf::Vector2f exitPt, int tileSize, std::vector<sf::Vector2f>& buttonPos, std::vector<sf::Vector2f>& pressurePlatePos, std::vector<sf::Vector2f>& doorPos, std::vector<sf::Vector2f>& hazardPos, std::vector<sf::Vector2f>& itemPos, std::vector<sf::Vector2f>& movPlatformPos) {
 	this->map = map;
 	this->fastSpawnPt = fastSpawnPt;
 	this->jumpSpawnPt = jumpSpawnPt;
@@ -11,6 +11,7 @@ LevelState::LevelState(std::vector<std::vector<int>> map, sf::Vector2f fastSpawn
 	this->pressurePlatePos = pressurePlatePos;
 	this->doorPos = doorPos;
 	this->hazardPos = hazardPos;
+	this->itemPos = itemPos;
 	this->movPlatformPos = movPlatformPos;
 
 	//sets all barriers to 1, all other tiles are set to 0 for collision detection
@@ -64,6 +65,9 @@ const std::vector<sf::Vector2f>& LevelState::getDoorPos() {
 }
 const std::vector<sf::Vector2f>& LevelState::getHazardPos() {
 	return hazardPos;
+}
+const std::vector<sf::Vector2f>& LevelState::getItemPos() {
+	return itemPos;
 }
 const std::vector<sf::Vector2f>& LevelState::getMovPlatformPos() {
 	return movPlatformPos;

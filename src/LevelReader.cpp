@@ -102,6 +102,14 @@ void LevelReader::loadMap(const std::string& level){
 					this->movPlatformPos[array[x][y] - 28] = sf::Vector2f(y * tileSize, x * tileSize);
 				}
 			}
+			//items
+			else if (array[x][y] >= 34 && array[x][y] <= 39) {
+				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 34;
+				if (int(itemPos[index].x) == 0 && int(itemPos[index].y) == 0) {
+					this->itemPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
+			}
 			else{
 				this->map[y][x] = 0;
 			}
@@ -124,6 +132,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, exitPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, movPlatformPos);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, exitPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, itemPos, movPlatformPos);
 	return currentLevelState;
 }

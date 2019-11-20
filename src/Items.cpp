@@ -31,7 +31,7 @@ sf::Vector2f Items::getPos(){
 
 
 //tells if an item has been picked up
-void Items::Pickup(){
+void Items::Toggle(){
   this->pickup= !pickup;
 }
 

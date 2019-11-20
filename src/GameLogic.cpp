@@ -2,6 +2,7 @@
 #include <Door.h>
 #include <Button.h>
 #include <Hazards.h>
+#include <Items.h>
 #include <Plates.h>
 #include <cmath>
 #include <string>
@@ -16,6 +17,7 @@ GameLogic::GameLogic()
 	//initialize all interactable lists here
 	int hazard_num = 6;
 	int door_num = 6;
+	int item_num = 6;
 	//buttons
 	for (int i = 0; i < door_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
@@ -36,6 +38,11 @@ GameLogic::GameLogic()
 		//assign color
 		doors.push_back(ptr);
 	}
+	//items
+	for (int i = 0; i < item_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Items>();
+		items.push_back(ptr);
+	}
 }
 
 
@@ -51,7 +58,9 @@ bool GameLogic::init(LevelState &level)
 	std::vector<sf::Vector2f> hazard_pos = level.getHazardPos();
 	std::vector<sf::Vector2f> door_pos = level.getDoorPos();
 	std::vector<sf::Vector2f> button_pos = level.getButtonPos();
-	std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
+	//std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
+	std::vector<sf::Vector2f> item_pos = level.getItemPos();
+
 
 	//0 = no object
 	//1 = hazard
@@ -108,10 +117,15 @@ bool GameLogic::init(LevelState &level)
 				//link to doors[i]
 				but->setToggleable(doors[i].get());
 			}
+			but->Reset();
 		}
 	}
 
-	//pressure plates
+	//items
+	for (int i = 0; i < item_pos.size(); i++) {
+		sf::Vector2f this_item = item_pos[i];
+		items[i]->setPos(this_item);
+	}
 
 	exitPos->setPos(level.getExitPt());
 
@@ -489,6 +503,10 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 	//hazards
 	if (id >= 23 && id <= 28) {
 		hazards[id-23]->PlayerContact(player, id);
+	}
+	//items
+	if (id >= 35 && id <= 40) {
+		items[id - 35]->PlayerContact(player, id);
 	}
 
 	player.interact(false);
