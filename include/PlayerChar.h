@@ -54,6 +54,10 @@ public:
 
   bool interacted();
 
+  void setItem(int id);
+
+  void useItem();
+
 private:
    sf::Vector2f pos;
    sf::Vector2f vel;
@@ -64,6 +68,7 @@ private:
    int width;
    bool in_air;
    bool interaction;
+   int powerUp;
 
 
 
