@@ -64,6 +64,10 @@ void Door::setSize(int size){
   this->size = size;
 }
 
+void Door::Reset(){
+  this->open = false;
+}
+
 void Door::PlayerContact(PlayerChar &player, int id){
   sf::Vector2f vel = player.getVelocity();
   sf::Vector2f position = player.getPos();

@@ -27,6 +27,8 @@ public:
 
   void setSize(int size);
 
+  void Reset();
+
   void setOrientation(bool orient);
 
 

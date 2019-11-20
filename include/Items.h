@@ -22,6 +22,7 @@ public:
   void PlayerContact(PlayerChar &player, int id);
   void Pickup();
 
+  void Reset();
 
 
 private:

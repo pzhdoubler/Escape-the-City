@@ -29,7 +29,7 @@ void Hazards::draw(sf::RenderWindow& window){
   //vertical surface
     else{
       position.x=position.x+20;
-      for(int i = 0; i< this->size; i++){      
+      for(int i = 0; i< this->size; i++){
         sf::Sprite h;
         h.setTexture(hazard);
         h.setRotation(90);
@@ -59,7 +59,11 @@ sf::Vector2f Hazards::getPos(){
 //
 void Hazards::Toggle(){
   this->toggled= !toggled;
-  this->pos.y = this->pos.y;
+
+}
+
+void Hazards::Reset(){
+  this->toggled= false;
 
 }
 

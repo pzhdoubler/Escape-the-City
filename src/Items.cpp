@@ -32,3 +32,7 @@ void Items::Pickup(){
   this->pickup= !pickup;
 
 }
+
+void Items::PlayerContact(PlayerChar &player, int id){
+
+}

@@ -38,7 +38,7 @@ bool Exit::levelEnd(){
   }
 }
 
-void Exit::reset(){
+void Exit::Reset(){
   fast_exit = false;
   jump_exit = false;
 }

@@ -39,6 +39,11 @@ void Button::Toggle(){
 
 }
 
+void Button::Reset(){
+  this->pressed = false;
+  interactable->Reset();
+}
+
 void Button::setToggleable(Interactables* interactable){
   this->interactable = interactable;
 }
