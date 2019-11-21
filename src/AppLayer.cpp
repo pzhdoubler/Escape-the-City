@@ -22,54 +22,96 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
     hud.setString(mainMenuString);
     App.draw(hud);
 
-    //if you press spaceBar to play, break out of AppLayer loop and load level
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        isPlaying = true;
-        loader.loadMap("level_tutorial.csv");
-        level = loader.createLevelState();
-    }
+    //draw optionButton
+    sf::Texture optionButton;
+    sf::Sprite optionButtonImage;
+    if (!optionButton.loadFromFile( "..\\resources\\button_template_options.png"))
+        std::cout << "Can't find the option image" << std::endl;
+    optionButtonImage.setPosition(optionMenuButtonXPos, optionMenuButtonYPos);
+    optionButtonImage.setTexture(optionButton);
+    App.draw(optionButtonImage);
 
-    //if you go to optionMenu
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)) {
-        printf("Going to Option Menu...\n");
-        optionMenuOpen = true;
-        //while optionMenu is open
-        while (optionMenuOpen) {
-            sf::Event event;
-            while (App.pollEvent(event)) {
-                //if you close out of the window
-                if (event.type == sf::Event::Closed) {
-                    //break out of optionMenu loop
-                    optionMenuOpen = false;
-                    //break out of AppLayer loop
-                    isPlaying = true;
-                    //never enter main game loop
-                    paused = true;
-                    //close application
-                    App.close();
+    //draw levelSelectButton
+    sf::Texture levelSelectButton;
+    sf::Sprite levelSelectButtonImage;
+    if (!levelSelectButton.loadFromFile( "..\\resources\\button_template_levelSelect.png"))
+        std::cout << "Can't find the level image" << std::endl;
+    levelSelectButtonImage.setPosition(levelSelectMenuButtonXPos, levelSelectMenuButtonYPos);
+    levelSelectButtonImage.setTexture(levelSelectButton);
+    App.draw(levelSelectButtonImage);
+
+    //draw playButton
+    sf::Texture playButton;
+    sf::Sprite playButtonImage;
+    if (!playButton.loadFromFile( "..\\resources\\button_template_playGame.png"))
+        std::cout << "Can't find the play image" << std::endl;
+    playButtonImage.setPosition(playGameButtonXPos, playGameButtonYPos);
+    playButtonImage.setTexture(playButton);
+    App.draw(playButtonImage);
+
+    //optionButton clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (optionButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("Going to Option Menu...\n");
+            optionMenuOpen = true;
+            //while optionMenu is open
+            while (optionMenuOpen) {
+                sf::Event event;
+                while (App.pollEvent(event)) {
+                    //if you close out of the window
+                    if (event.type == sf::Event::Closed) {
+                        //break out of optionMenu loop
+                        optionMenuOpen = false;
+                        //break out of AppLayer loop
+                        isPlaying = true;
+                        //never enter main game loop
+                        paused = true;
+                        //close application
+                        App.close();
+                    }
                 }
+                optionMenu(App);
             }
-            optionMenu(App);
         }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)) {
-        printf("Going to LevelSelect...\n");
-        levelSelectOpen = true;
-        while (levelSelectOpen) {
-            sf::Event event;
-            while (App.pollEvent(event))
-            {
-                if (event.type == sf::Event::Closed) {
-                    levelSelectOpen = false;
-                    isPlaying = true;
-                    paused = true;
-                    App.close();
+    //levelSelect clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (levelSelectButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("Going to LevelSelect...\n");
+            levelSelectOpen = true;
+            while (levelSelectOpen) {
+                sf::Event event;
+                while (App.pollEvent(event))
+                {
+                    if (event.type == sf::Event::Closed) {
+                        levelSelectOpen = false;
+                        isPlaying = true;
+                        paused = true;
+                        App.close();
+                    }
+
                 }
+                levelSelectMenu(App);
             }
-            levelSelectMenu(App);
         }
     }
+
+    //play clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (playButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            isPlaying = true;
+            loader.loadMap("level_tutorial.csv");
+            level = loader.createLevelState();
+        }
+    }
+
 
     App.display();
 
@@ -78,44 +120,85 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused) {
 
 bool AppLayer::optionMenu(sf::RenderWindow &App) {
 
+    //draw menu
     App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(optionMenuString);
     App.draw(hud);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-        printf("Going back to Main Menu...\n");
-        optionMenuOpen = false;
-        return optionMenuOpen;
+    //draw back button
+    sf::Texture backButton;
+    sf::Sprite backButtonImage;
+    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+        std::cout << "Can't find the option image" << std::endl;
+    backButtonImage.setPosition(backButtonXPos, backButtonYPos);
+    backButtonImage.setTexture(backButton);
+    App.draw(backButtonImage);
+
+
+    //issue with back button: i would like to put all the buttons at the same y coordinates to be more
+    //aestetically pleasing but whenever a button is pushed, it registers like 50 mouse clicks so
+    //if I go from main to level select, it automatically presses the next button to go to level 1.
+    //same with pause, if you go back to main menu by clicking button, it registers so many times that
+    //by the time you make it to the main menu, the play button has already been clicked
+    //in the mean time, i changed some problematic coordinates to 400 and some to 300 so they don't overlap
+
+    //back clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("Going back to Main Menu...\n");
+            optionMenuOpen = false;
+            return optionMenuOpen;
+        }
     }
+
     App.display();
 
     return optionMenuOpen;
 }
 
 bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
-    App.clear(sf::Color(pauseMenuR, pauseMenuG, pauseMenuB, pauseMenuAlpha));
 
+    //draw pause menu
+    App.clear(sf::Color(pauseMenuR, pauseMenuG, pauseMenuB, pauseMenuAlpha));
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(pauseMenuString);
     App.draw(hud);
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        printf("returning to game...\n");
-        pauseMenuOpen = false;
-        return pauseMenuOpen;
-    }
+    //draw back button
+    sf::Texture backButton;
+    sf::Sprite backButtonImage;
+    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+        std::cout << "Can't find the option image" << std::endl;
+    backButtonImage.setPosition(backButtonXPos, backButtonYPos);
+    backButtonImage.setTexture(backButton);
+    App.draw(backButtonImage);
 
+    //draw mainMenu button
     sf::Texture button1;
     sf::Sprite buttonImage1;
-    if (!button1.loadFromFile( "..\\resources\\rsz_button_template.png"))
+    if (!button1.loadFromFile( "..\\resources\\button_template_mainMenu.png"))
         std::cout << "Can't find the image" << std::endl;
     buttonImage1.setPosition(button1PauseMenuXPos, button1PauseMenuYPos);
     buttonImage1.setTexture(button1);
     App.draw(buttonImage1);
 
+    //back clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("returning to game...\n");
+            pauseMenuOpen = false;
+            return pauseMenuOpen;
+        }
+    }
+
+    //mainMenu button clicked
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
         sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
@@ -132,24 +215,26 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
 }
 
 bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
-    App.clear(sf::Color(levelSelectR, levelSelectG, levelSelectB));
 
+    //draw levelSelect menu
+    App.clear(sf::Color(levelSelectR, levelSelectG, levelSelectB));
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(levelSelectMenuString);
     App.draw(hud);
 
+    //draw levelSelect buttons
     sf::Texture button1;
     sf::Sprite buttonImage1;
     sf::Texture button2;
     sf::Sprite buttonImage2;
     sf::Texture button3;
     sf::Sprite buttonImage3;
-    if (!button1.loadFromFile( "..\\resources\\rsz_button_template.png"))
+    if (!button1.loadFromFile( "..\\resources\\button_template.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button2.loadFromFile( "..\\resources\\rsz_button_template.png"))
+    if (!button2.loadFromFile( "..\\resources\\button_template.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button3.loadFromFile( "..\\resources\\rsz_button_template.png"))
+    if (!button3.loadFromFile( "..\\resources\\button_template.png"))
         std::cout << "Can't find the image" << std::endl;
     buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
     buttonImage1.setTexture(button1);
@@ -161,6 +246,16 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     buttonImage3.setTexture(button3);
     App.draw(buttonImage3);
 
+    //draw backButton
+    sf::Texture backButton;
+    sf::Sprite backButtonImage;
+    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+        std::cout << "Can't find the option image" << std::endl;
+    backButtonImage.setPosition(backButtonXPos, backButtonYPos);
+    backButtonImage.setTexture(backButton);
+    App.draw(backButtonImage);
+
+    //if buttons are clicked
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
         sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
@@ -168,7 +263,7 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
             printf("button clicked!\n");
             levelSelectOpen = false;
             isPlaying = true;
-            loader.loadMap("level_0_tutorial.txt");
+            loader.loadMap("level_tutorial.csv");
             level = loader.createLevelState();
             printf("Going to level 1...\n");
             return levelSelectOpen;
@@ -179,13 +274,13 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
         if (buttonImage3.getGlobalBounds().contains(mouseLocF)) {
             printf("press the first button\n");
         }
+        if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("Going back to Main Menu...\n");
+            levelSelectOpen = false;
+            return levelSelectOpen;
+        }
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) {
-        printf("Going back to Main Menu...\n");
-        levelSelectOpen = false;
-        return levelSelectOpen;
-    }
 
     App.display();
     return levelSelectOpen;

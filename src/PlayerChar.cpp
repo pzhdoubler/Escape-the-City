@@ -8,6 +8,7 @@ PlayerChar::PlayerChar(bool player){
   this->width = 15;
   this->in_air = true;
   this->interaction = false;
+  this->powerUp = 0;
   if (player){
     fast_man.setSize(sf::Vector2f(width, height));
     fast_man.setFillColor(sf::Color::Red);
@@ -97,7 +98,17 @@ bool PlayerChar::interacted(){
   return interaction;
 }
 
-/*void PlayerChar::UseItem(){
-
+void PlayerChar::setItem(int id){
+  if(id == 1){
+    this->powerUp = 1;
+  }
 }
-*/
+
+void PlayerChar::useItem(){
+  if(player && this->powerUp == 1){
+    this->vel.x = 2000;
+  }
+  if(player == false && this->powerUp == 1){
+  this->vel.y = 2000;
+  }
+}

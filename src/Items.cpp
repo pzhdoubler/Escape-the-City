@@ -3,15 +3,18 @@
 
 
 Items::Items(){
-  this->pickup= 0;
-
+  this->pickup= false;
+  item.loadFromFile("..\\resources\\Exit.png");
 }
 
 void Items::draw(sf::RenderWindow& window){
+  if(pickup == false){
   sf::Sprite i;
   i.setTexture(item);
   i.setPosition(pos);
   window.draw(i);
+}
+
 }
 
 //set item's position only used at creation of a item
@@ -28,7 +31,14 @@ sf::Vector2f Items::getPos(){
 
 
 //tells if an item has been picked up
-void Items::Pickup(){
+void Items::Toggle(){
   this->pickup= !pickup;
+}
 
+
+
+void Items::PlayerContact(PlayerChar &player, int id){
+  if(pickup==false){
+    pickup = true;
+    player.setItem(1);}
 }

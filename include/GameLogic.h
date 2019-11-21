@@ -8,6 +8,7 @@
 #include <PlayerChar.h>
 #include <GameElements.h>
 #include <Interactables.h>
+#include <Exit.h>
 #include <LevelState.h>
 #include <Controller.h>
 
@@ -61,6 +62,8 @@ class GameLogic
 
 		std::shared_ptr<PlayerChar> fast_man;
 		std::shared_ptr<PlayerChar> jump_man;
+
+		std::shared_ptr<Exit> exitPos;
 
 		std::vector<std::shared_ptr<Interactables>> buttons;
 

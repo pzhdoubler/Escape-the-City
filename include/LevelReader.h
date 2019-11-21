@@ -45,6 +45,9 @@ private:
 	//vector of toggle spike positions
 	std::vector<sf::Vector2f> hazardPos;
 
+	//vector of item positions
+	std::vector<sf::Vector2f> itemPos;
+
 	//vector of moving platform positions
 	std::vector<sf::Vector2f> movPlatformPos;
 

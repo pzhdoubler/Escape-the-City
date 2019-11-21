@@ -1,0 +1,22 @@
+<?xml version= "1.0"?>
+
+<general>
+  <gravity>1000</gravity>
+  <friction>1500</friction>
+</general>
+
+<fastman>
+  <max_horiz_speed>800</max_horiz_speed>
+  <max_vert_speed>1000</max_vert_speed>
+  <run_speed>1000</run_speed>
+  <jump_height>3.5</jump_height>
+  <air_multiplier>0.7</air_multiplier>
+</fastman>
+
+<jumpman>
+  <max_horiz_speed>250</max_horiz_speed>
+  <max_vert_speed>1200</max_vert_speed>
+  <run_speed>375</run_speed>
+  <jump_height>10.2</jump_height>
+  <air_multiplier>2.0</air_multiplier>
+</jumpman>

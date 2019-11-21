@@ -20,6 +20,8 @@ public:
 
   virtual void PlayerContact(PlayerChar &player, int id) = 0;
 
+  virtual void Reset() = 0;
+
   enum Color {Red, Blue, Green, Purple, Yellow, Orange };
 
 private:

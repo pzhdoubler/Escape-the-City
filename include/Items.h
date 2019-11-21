@@ -20,7 +20,10 @@ public:
   sf::Vector2f getPos();
 
   void PlayerContact(PlayerChar &player, int id);
-  void Pickup();
+  void Toggle();
+
+  void Reset() {};
+
 
 
 

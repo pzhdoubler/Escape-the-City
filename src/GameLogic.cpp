@@ -2,17 +2,22 @@
 #include <Door.h>
 #include <Button.h>
 #include <Hazards.h>
+#include <Items.h>
 #include <Plates.h>
 #include <cmath>
+#include <string>
+#include "tinyxml2.h"
 
 
 GameLogic::GameLogic()
 {
 	fast_man = std::make_shared<PlayerChar>(true);
 	jump_man = std::make_shared<PlayerChar>(false);
+	exitPos = std::make_shared<Exit>();
 	//initialize all interactable lists here
 	int hazard_num = 6;
 	int door_num = 6;
+	int item_num = 6;
 	//buttons
 	for (int i = 0; i < door_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
@@ -33,6 +38,11 @@ GameLogic::GameLogic()
 		//assign color
 		doors.push_back(ptr);
 	}
+	//items
+	for (int i = 0; i < item_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Items>();
+		items.push_back(ptr);
+	}
 }
 
 
@@ -48,7 +58,9 @@ bool GameLogic::init(LevelState &level)
 	std::vector<sf::Vector2f> hazard_pos = level.getHazardPos();
 	std::vector<sf::Vector2f> door_pos = level.getDoorPos();
 	std::vector<sf::Vector2f> button_pos = level.getButtonPos();
-	std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
+	//std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
+	std::vector<sf::Vector2f> item_pos = level.getItemPos();
+
 
 	//0 = no object
 	//1 = hazard
@@ -105,10 +117,17 @@ bool GameLogic::init(LevelState &level)
 				//link to doors[i]
 				but->setToggleable(doors[i].get());
 			}
+			but->Reset();
 		}
 	}
 
-	//pressure plates
+	//items
+	for (int i = 0; i < item_pos.size(); i++) {
+		sf::Vector2f this_item = item_pos[i];
+		items[i]->setPos(this_item);
+	}
+
+	exitPos->setPos(level.getExitPt());
 
 	fast_man->setPos(level.getFastSpawnPt());
 	fast_man->setSpawnPt(level.getFastSpawnPt());
@@ -125,22 +144,32 @@ bool GameLogic::init(LevelState &level)
 	//stored in level state
 
 	//read in physics constants
-	GRAVITY = 1000;
-	FRICTION = 1500;
 
-	FAST_MAX_X = 800;
-	FAST_MAX_Y = 1000;
-	FAST_RUN = 1000;
-	FAST_HEIGHT = 3.5;
-	FAST_VERT = std::sqrt(2*GRAVITY*FAST_HEIGHT*tileSize);
-	FAST_AIR_MULT = 0.7;
+	tinyxml2::XMLDocument config;
+	tinyxml2::XMLError result = config.LoadFile("..\\config\\constants.xml");
+	if (result != tinyxml2::XML_SUCCESS)
+		return false;
 
-	JUMP_MAX_X = 250;
-	JUMP_MAX_Y = 1200;
-	JUMP_RUN = 375;
-	JUMP_HEIGHT = 10.2;
-	JUMP_VERT = std::sqrt(2*GRAVITY*JUMP_HEIGHT*tileSize);
-	JUMP_AIR_MULT = 2.0;
+	tinyxml2::XMLElement* general = config.FirstChildElement("general");
+	tinyxml2::XMLElement* fast = config.FirstChildElement("fastman");
+	tinyxml2::XMLElement* jump = config.FirstChildElement("jumpman");
+
+	GRAVITY = std::stof(general->FirstChildElement("gravity")->GetText());
+	FRICTION = std::stof(general->FirstChildElement("gravity")->GetText());
+
+	FAST_MAX_X = std::stof(fast->FirstChildElement("max_horiz_speed")->GetText());
+	FAST_MAX_Y = std::stof(fast->FirstChildElement("max_vert_speed")->GetText());
+	FAST_RUN = std::stof(fast->FirstChildElement("run_speed")->GetText());
+	FAST_HEIGHT = std::stof(fast->FirstChildElement("jump_height")->GetText());
+	FAST_AIR_MULT = std::stof(fast->FirstChildElement("air_multiplier")->GetText());
+	FAST_VERT = std::sqrt(2 * GRAVITY * FAST_HEIGHT * tileSize);
+
+	JUMP_MAX_X = std::stof(jump->FirstChildElement("max_horiz_speed")->GetText());
+	JUMP_MAX_Y = std::stof(jump->FirstChildElement("max_vert_speed")->GetText());
+	JUMP_RUN = std::stof(jump->FirstChildElement("run_speed")->GetText());
+	JUMP_HEIGHT = std::stof(jump->FirstChildElement("jump_height")->GetText());
+	JUMP_AIR_MULT = std::stof(jump->FirstChildElement("air_multiplier")->GetText());
+	JUMP_VERT = std::sqrt(2 * GRAVITY * JUMP_HEIGHT * tileSize);
 
 	MIN_VERT = std::sqrt(2*GRAVITY*tileSize/4);
 
@@ -182,7 +211,10 @@ bool GameLogic::update(float deltaMs)
 	updatePlayerState(*jump_man, deltaMs);
 
 	//update other level objects
-	return true;
+
+	bool level_end = exitPos->levelEnd();
+	exitPos->Reset();
+	return level_end;
 }
 
 
@@ -214,10 +246,13 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 			drawables.push_back(game_ptr);
 		}
 	}
+	//exit point
+	GameElements* exit_ptr = exitPos.get();
 	//players
 	GameElements* fast_ptr = fast_man.get();
 	GameElements* jump_ptr = jump_man.get();
 
+	drawables.push_back(exit_ptr);
 	drawables.push_back(fast_ptr);
 	drawables.push_back(jump_ptr);
 
@@ -395,15 +430,27 @@ std::vector<float> GameLogic::collisionCalculation(int tileXCoord, int tileYCoor
 	}
 	//bot exposed corner
 	else if (down != 1 && (corner == top_left || corner == top_right) && tile_size - (int(posy) % tile_size) < (tile_size / 4)) {
-		to_return.push_back(posx);
-		to_return.push_back(int(posy) + y_diff);
-		to_return.push_back(1);
+		if (corner == top_left && prevTileX != tileXCoord && prevTileY == tileYCoord) {
+			to_return.push_back(int(posx) + x_diff);
+			to_return.push_back(posy);
+			to_return.push_back(0);
+		}
+		else if (corner == top_right && prevTileX == tileXCoord && prevTileY == tileYCoord) {
+			to_return.push_back(int(posx) + x_diff);
+			to_return.push_back(posy);
+			to_return.push_back(0);
+		}
+		else {
+			to_return.push_back(posx);
+			to_return.push_back(int(posy) + y_diff);
+			to_return.push_back(1);
+		}
 	}
 	//default to x collision
 	else {
 		to_return.push_back(int(posx) + x_diff);
 		to_return.push_back(posy);
-		to_return.push_back(0);	to_return.push_back(1);
+		to_return.push_back(0);
 	}
 
 	return to_return;
@@ -441,6 +488,10 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 		id = tileMap[int(x_pos + player_width) / tile_size][int(y_pos) / tile_size];
 	}
 
+	//exit position
+	if (id == 4) {
+		exitPos->PlayerContact(player, id);
+	}
 	//buttons and pressure plates
 	if (id >= 5 && id <= 16) {
 		buttons[id-5]->PlayerContact(player, id);
@@ -452,6 +503,10 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 	//hazards
 	if (id >= 23 && id <= 28) {
 		hazards[id-23]->PlayerContact(player, id);
+	}
+	//items
+	if (id >= 35 && id <= 40) {
+		items[id - 35]->PlayerContact(player, id);
 	}
 
 	player.interact(false);

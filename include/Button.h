@@ -28,6 +28,7 @@ public:
 
   void PlayerContact(PlayerChar &player,int id);
 
+  void Reset();
 
   void setToggleable(Interactables* interactable);
 

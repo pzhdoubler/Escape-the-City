@@ -28,6 +28,8 @@ public:
 
   void setOrientation(bool orient);
 
+  void Reset();
+
   void PlayerContact(PlayerChar &player,int id);
 
 private:

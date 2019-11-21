@@ -38,6 +38,7 @@ void LevelReader::loadMap(const std::string& level){
 	this->pressurePlatePos.resize(6);
 	this->doorPos.resize(6);
 	this->hazardPos.resize(6);
+	this->itemPos.resize(6);
 	this->movPlatformPos.resize(6);
 	
 	for(int x = 0; x < array.size(); x++){
@@ -57,8 +58,10 @@ void LevelReader::loadMap(const std::string& level){
 				this->map[y][x] = 3;
 			}
 			else if(array[x][y] == 3){
-				this->exitPt = sf::Vector2f(y*tileSize, x*tileSize);
 				this->map[y][x] = 4;
+				if (int(exitPt.x) == 0 && int(exitPt.y) == 0) {
+					this->exitPt = sf::Vector2f(y*tileSize, x*tileSize);
+				}
 			}
 			//button ids
 			else if(array[x][y] >= 4 && array[x][y] <=9){
@@ -100,6 +103,14 @@ void LevelReader::loadMap(const std::string& level){
 					this->movPlatformPos[array[x][y] - 28] = sf::Vector2f(y * tileSize, x * tileSize);
 				}
 			}
+			//items
+			else if (array[x][y] >= 34 && array[x][y] <= 39) {
+				this->map[y][x] = array[x][y] + 1;
+				int index = array[x][y] - 34;
+				if (int(itemPos[index].x) == 0 && int(itemPos[index].y) == 0) {
+					this->itemPos[index] = sf::Vector2f(y * tileSize, x * tileSize);
+				}
+			}
 			else{
 				this->map[y][x] = 0;
 			}
@@ -122,6 +133,6 @@ void LevelReader::setExitPt(sf::Vector2f pt){
 }
 
 LevelState LevelReader::createLevelState(){
-	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, movPlatformPos);
+	currentLevelState = LevelState(map, fastSpawnPt, jumpSpawnPt, exitPt, tileSize, buttonPos, pressurePlatePos, doorPos, hazardPos, itemPos, movPlatformPos);
 	return currentLevelState;
 }
