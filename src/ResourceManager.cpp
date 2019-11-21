@@ -9,10 +9,10 @@ const sf::Texture& ResourceManager::getTexture(int tileID){
 	this->tileID = tileID;
 	//if statements checking the tile id and the corresponding location
 	//on the sprite sheet (specified by rectX and rectY)
-	int rectX;
-	int rectY;
+	unsigned int rectX;
+	unsigned int rectY;
 	//Barrier tile
-	if(tileID == 1){
+	/*if(tileID == 1){
 		rectX = 0;
 		rectY = 0;
 		this->texture.update(spriteSheet, rectX, rectY);
@@ -52,6 +52,6 @@ const sf::Texture& ResourceManager::getTexture(int tileID){
 		rectX = 0;
 		rectY = 20;
 		this->texture.update(spriteSheet, rectX, rectY);
-	}
+	}*/
 	return texture;
 }
