@@ -10,7 +10,7 @@ bool Controller::init(GameLogic &logic)
 
 	this->logic = &logic;
 
-	bindings[PAUSE] = sf::Keyboard::P; //P key
+	bindings[PAUSE] = sf::Keyboard::Escape; //Escape key
 
 	//read in values from file, currently correspond to default keys in design doc
 	tinyxml2::XMLDocument config;
