@@ -246,6 +246,14 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 			drawables.push_back(game_ptr);
 		}
 	}
+	//items
+	for (int i = 0; i < items.size(); i++) {
+		sf::Vector2f this_pos = items[i]->getPos();
+		if (int(this_pos.x) != 0 || int(this_pos.y) != 0) {
+			GameElements* game_ptr = items[i].get();
+			drawables.push_back(game_ptr);
+		}
+	}
 	//exit point
 	GameElements* exit_ptr = exitPos.get();
 	//players
