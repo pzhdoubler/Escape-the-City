@@ -29,10 +29,12 @@ public:
 
   void PlayerContact(PlayerChar &player, int id);
 
+ void setTime(float deltaMs);
 
 
 private:
   sf::Vector2f pos;
+  float time;
   sf::Vector2f curPos;
   bool direction;
   int size;

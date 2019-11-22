@@ -234,6 +234,11 @@ bool GameLogic::update(float deltaMs)
 	updatePlayerState(*jump_man, deltaMs);
 
 	//update other level objects
+	for (int i = 0; i < platforms.size(); i++) {
+			Platforms* platform_ptr = dynamic_cast<Platforms*>(platforms[i].get());
+			platform_ptr->setTime(deltaMs);
+		}
+
 
 	bool level_end = exitPos->levelEnd();
 	exitPos->Reset();
@@ -553,7 +558,7 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 	}
 	//Platforms
 	if(id >= 29 && id <= 34){
-		platforms[id - 35]->PlayerContact(player, id);
+		platforms[id - 29]->PlayerContact(player, id);
 	}
 
 	player.interact(false);

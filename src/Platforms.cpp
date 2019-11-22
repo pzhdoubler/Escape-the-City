@@ -4,12 +4,12 @@
 Platforms::Platforms(){
   this->size = 2;
   this->direction =   true;
-  platform.loadFromFile("..\\resources\\pixil-frame-0 (2).png");
+  platform.loadFromFile("..\\resources\\Door_Texture.png");
 }
 
 void Platforms::draw(sf::RenderWindow &window){
   sf::Vector2f position = this->curPos;
-
+printf("%d.",time );
   if(this->direction){
 
   for(int i = 0; i< 2; i++){
@@ -60,6 +60,10 @@ void Platforms::Reset(){
   this->toggled = false;
 }
 
+void Platforms::setTime(float deltaMs){
+ this->time = deltaMs;
+}
+
 void Platforms::setSize(int size){
   this->size = size;
 }
@@ -67,17 +71,21 @@ void Platforms::setSize(int size){
 void Platforms::PlayerContact(PlayerChar &player, int id){
   sf::Vector2f vel = player.getVelocity();
   sf::Vector2f position = player.getPos();
-  printf("1" );
   vel.y = 0;
-  if(position.y>pos.y && position.x<curPos.x+40 && position.x>curPos.x){
-
-    position.y = pos.y+23;
+  if(position.y>pos.y && position.x<curPos.x+60 && position.x>curPos.x-20){
+    position.y = pos.y+20;
     player.setVelocity(vel);
     player.setPos(position);
 }
-  if(position.y<pos.y && position.x<curPos.x+40 && position.x>curPos.x){
+  if(position.y<pos.y && position.x<curPos.x+60 && position.x>curPos.x-20){
+    if(this->direction){
+    vel.x = vel.x + 11;
+  }
+    if(this->direction == false){
+      vel.x = vel.x - 11;
+    }
     player.setInAir(false);
-    position.y = pos.y-21;
+    position.y = pos.y-18;
     player.setVelocity(vel);
     player.setPos(position);
 }
