@@ -30,6 +30,7 @@ public:
 private:
   sf::Vector2f pos;
   bool pickup;
+  GameElements* interactable;
 
 };
 

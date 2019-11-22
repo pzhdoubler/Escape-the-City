@@ -9,6 +9,8 @@ public:
  //virtual draws to allow ScreenView to acess drawn methods
 	virtual void draw(sf::RenderWindow& window) = 0;
 
+	//virtual void Toggle() = 0;
+
 
 };
 

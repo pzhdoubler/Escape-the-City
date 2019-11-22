@@ -4,6 +4,7 @@
 #include <Hazards.h>
 #include <Items.h>
 #include <Plates.h>
+#include <Platforms.h>
 #include <cmath>
 #include <string>
 #include "tinyxml2.h"
@@ -18,6 +19,7 @@ GameLogic::GameLogic()
 	int hazard_num = 6;
 	int door_num = 6;
 	int item_num = 6;
+	int platform_num = 6;
 	//buttons
 	for (int i = 0; i < door_num; i++) {
 		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
@@ -43,6 +45,10 @@ GameLogic::GameLogic()
 		std::shared_ptr<Interactables> ptr = std::make_shared<Items>();
 		items.push_back(ptr);
 	}
+	for (int i = 0; i < platform_num; i++) {
+		std::shared_ptr<Interactables> ptr = std::make_shared<Platforms>();
+		platforms.push_back(ptr);
+	}
 }
 
 
@@ -60,6 +66,7 @@ bool GameLogic::init(LevelState &level)
 	std::vector<sf::Vector2f> button_pos = level.getButtonPos();
 	//std::vector<sf::Vector2f> pressure_plate_pos = level.getPressurePlatePos();
 	std::vector<sf::Vector2f> item_pos = level.getItemPos();
+	std::vector<sf::Vector2f> platform_pos = level.getMovPlatformPos();
 
 
 	//0 = no object
@@ -125,6 +132,22 @@ bool GameLogic::init(LevelState &level)
 	for (int i = 0; i < item_pos.size(); i++) {
 		sf::Vector2f this_item = item_pos[i];
 		items[i]->setPos(this_item);
+	}
+	//platforms
+	for (int i = 0; i < platform_pos.size(); i++) {
+		sf::Vector2f this_platform = platform_pos[i];
+		platforms[i]->setPos(this_platform);
+		if (int(this_platform.x) != 0 || int(this_platform.y) != 0) {
+			objects[i] = 2;
+			int size = 1;
+			int cur_x = int(this_platform.x) / tileSize;
+			int cur_y = int(this_platform.y) / tileSize;
+			int id = tileMap[cur_x][cur_y];
+			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
+			//set platform size and orientation
+			Platforms* platf = dynamic_cast<Platforms*>(platforms[i].get());
+			platf->setSize(size);
+		}
 	}
 
 	exitPos->setPos(level.getExitPt());
@@ -254,6 +277,14 @@ std::vector<GameElements*> GameLogic::getDrawables() //IMPLEMENT WITH GAMEELEMEN
 			drawables.push_back(game_ptr);
 		}
 	}
+	//platforms
+	for (int i = 0; i < platforms.size(); i++) {
+		sf::Vector2f this_pos = platforms[i]->getPos();
+		if (int(this_pos.x) != 0 || int(this_pos.y) != 0) {
+			GameElements* game_ptr = platforms[i].get();
+			drawables.push_back(game_ptr);
+		}
+	}
 	//exit point
 	GameElements* exit_ptr = exitPos.get();
 	//players
@@ -315,6 +346,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::FAST_DOWN:
 			break;
 		case Controller::FAST_USE:
+		fast_man->useItem();
+		fast_vel = fast_man->getVelocity();
 		success = true;
 			break;
 		case Controller::FAST_USE_RELEASE:
@@ -354,6 +387,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::JUMP_DOWN:
 			break;
 		case Controller::JUMP_USE:
+		jump_man->useItem();
+		jump_vel = jump_man->getVelocity();
 		success = true;
 			break;
 		case Controller::JUMP_USE_RELEASE:
@@ -515,6 +550,10 @@ void GameLogic::updatePlayerState(PlayerChar& player, float deltaMs)
 	//items
 	if (id >= 35 && id <= 40) {
 		items[id - 35]->PlayerContact(player, id);
+	}
+	//Platforms
+	if(id >= 29 && id <= 34){
+		platforms[id - 35]->PlayerContact(player, id);
 	}
 
 	player.interact(false);

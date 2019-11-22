@@ -4,7 +4,8 @@
 
 Items::Items(){
   this->pickup= false;
-  item.loadFromFile("..\\resources\\Exit.png");
+  item.loadFromFile("..\\resources\\Button.png");
+  interactable = this;
 }
 
 void Items::draw(sf::RenderWindow& window){
@@ -38,7 +39,8 @@ void Items::Toggle(){
 
 
 void Items::PlayerContact(PlayerChar &player, int id){
-  if(pickup==false){
+  if(pickup == false && player.powerUp == 0){
     pickup = true;
-    player.setItem(1);}
+    player.setItem(1, interactable);
+  }
 }

@@ -73,7 +73,7 @@ class GameLogic
 
 		std::vector<std::shared_ptr<Interactables>> doors;
 
-		std::vector<std::shared_ptr<Interactables>> moving_plats;
+		std::vector<std::shared_ptr<Interactables>> platforms;
 
 		std::vector<std::shared_ptr<Interactables>> items;
 

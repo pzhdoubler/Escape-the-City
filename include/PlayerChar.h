@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <GameElements.h>
 
+
 class PlayerChar : public GameElements {
 public:
 
@@ -54,9 +55,15 @@ public:
 
   bool interacted();
 
-  void setItem(int id);
+  void setItem(int id, GameElements* item);
 
   void useItem();
+
+  int getPowerUp();
+
+  //void Toggle();
+
+  int powerUp;
 
 private:
    sf::Vector2f pos;
@@ -68,8 +75,8 @@ private:
    int width;
    bool in_air;
    bool interaction;
-   int powerUp;
 
+   GameElements* item;
 
 
 };
