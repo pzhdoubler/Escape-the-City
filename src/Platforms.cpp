@@ -23,7 +23,7 @@ void Platforms::draw(sf::RenderWindow &window){
 }
 if(direction == false){
   for(int i = 0; i< 2; i++){
-  position.x=position.x-20;
+  position.x=position.x+20;
   sf::Sprite p;
   p.setTexture(platform);
   p.setPosition(position);
@@ -69,13 +69,13 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
   sf::Vector2f position = player.getPos();
   printf("1" );
   vel.y = 0;
-  if(position.y>pos.y){
+  if(position.y>pos.y && position.x<curPos.x+40 && position.x>curPos.x){
 
     position.y = pos.y+23;
     player.setVelocity(vel);
     player.setPos(position);
 }
-  else{
+  if(position.y<pos.y && position.x<curPos.x+40 && position.x>curPos.x){
     player.setInAir(false);
     position.y = pos.y-21;
     player.setVelocity(vel);
