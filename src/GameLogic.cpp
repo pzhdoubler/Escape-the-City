@@ -10,7 +10,7 @@
 #include "tinyxml2.h"
 
 
-GameLogic::GameLogic()
+GameLogic::GameLogic(ResourceManager& manager)
 {
 	fast_man = std::make_shared<PlayerChar>(true);
 	jump_man = std::make_shared<PlayerChar>(false);
@@ -30,7 +30,7 @@ GameLogic::GameLogic()
 
 	//hazards
 	for (int i = 0; i < hazard_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Hazards>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Hazards>(manager);
 		//assign color
 		hazards.push_back(ptr);
 	}

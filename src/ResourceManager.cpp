@@ -1,8 +1,8 @@
 #include <ResourceManager.h>
 
 ResourceManager::ResourceManager(){
-	this->spriteSheet.loadFromFile("..\\resources\\sprite_sheet");
-	this->texture.create(20, 20);
+	this->spriteSheet.loadFromFile("..\\resources\\sprite_sheet.png");
+	//this->texture.create(20, 20);
 }
 
 const sf::Texture& ResourceManager::getTexture(int tileID){
@@ -54,4 +54,46 @@ const sf::Texture& ResourceManager::getTexture(int tileID){
 		this->texture.update(spriteSheet, rectX, rectY);
 	}*/
 	return texture;
+}
+
+const sf::Texture& ResourceManager::getSpriteSheet()
+{
+	return spriteSheet;
+}
+
+
+sf::Vector2u& ResourceManager::getSpriteCoords(Sprites object)
+{
+	switch (object) {
+		case BARRIER:
+			spriteCoords.x = 0;
+			spriteCoords.y = 0;
+			break;
+		case JUMP_MAN:
+			spriteCoords.x = 40;
+			spriteCoords.y = 20;
+			break;
+		case FAST_MAN:
+			spriteCoords.x = 60;
+			spriteCoords.y = 20;
+			break;
+		case BUTTON_ON:
+			spriteCoords.x = 80;
+			spriteCoords.y = 0;
+			break;
+		case BUTTON_OFF:
+			spriteCoords.x = 100;
+			spriteCoords.y = 0;
+			break;
+		case DOOR:
+			spriteCoords.x = 20;
+			spriteCoords.y = 20;
+			break;
+		case HAZARDS:
+			spriteCoords.x = 0;
+			spriteCoords.y = 20;
+			break;
+	}
+
+	return spriteCoords;
 }

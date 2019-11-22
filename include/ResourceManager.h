@@ -9,12 +9,29 @@ public:
 
 	const sf::Texture& getTexture(int tileID);
 
+	const sf::Texture& getSpriteSheet();
+
+	enum Sprites
+	{
+		BARRIER,
+		JUMP_MAN,
+		FAST_MAN,
+		BUTTON_ON,
+		BUTTON_OFF,
+		DOOR,
+		HAZARDS,
+		EXIT
+	};
+
+	sf::Vector2u& getSpriteCoords(Sprites object);
+
 private:
 	sf::Texture spriteSheet;
 	sf::Texture texture;
 
 	int tileID; //used to reference which rectangle from the full sprite sheet to build the texture from
 
+	sf::Vector2u spriteCoords;
 	int rectX;
 	int rectY;
 };

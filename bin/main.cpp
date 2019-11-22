@@ -4,6 +4,7 @@
 #include <ScreenView.h>
 #include <LevelState.h>
 #include <LevelReader.h>
+#include <ResourceManager.h>
 #include <AppLayer.h>
 #include <Controller.h>
 
@@ -14,7 +15,8 @@ int main(int argc, char** argv)
 
 	//initialize app layer
 	AppLayer appLayer;
-	GameLogic logic;
+	ResourceManager resourceManager;
+	GameLogic logic(resourceManager);
 	ScreenView screen;
 	Controller controller;
 
