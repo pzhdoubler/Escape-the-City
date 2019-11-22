@@ -22,7 +22,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 	int platform_num = 6;
 	//buttons
 	for (int i = 0; i < door_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Button>(manager);
 		//assign color
 		buttons.push_back(ptr);
 	}

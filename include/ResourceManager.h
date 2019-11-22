@@ -23,7 +23,7 @@ public:
 		EXIT
 	};
 
-	sf::Vector2u& getSpriteCoords(Sprites object);
+	sf::Vector2i& getSpriteCoords(Sprites object);
 
 private:
 	sf::Texture spriteSheet;
@@ -31,7 +31,7 @@ private:
 
 	int tileID; //used to reference which rectangle from the full sprite sheet to build the texture from
 
-	sf::Vector2u spriteCoords;
+	sf::Vector2i spriteCoords;
 	int rectX;
 	int rectY;
 };

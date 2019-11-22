@@ -14,7 +14,7 @@ public:
 
   const sf::Texture* spriteSheet;
 
-  sf::Vector2u spriteCoords;
+  sf::Vector2i spriteCoords;
 
   void draw(sf::RenderWindow& window);
 
