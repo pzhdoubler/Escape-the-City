@@ -10,13 +10,17 @@
 #include <Interactables.h>
 #include <Exit.h>
 #include <LevelState.h>
+#include <ResourceManager.h>
 #include <Controller.h>
 
 class GameLogic
 {
 	public:
 		//Default constructor
-		GameLogic();
+		GameLogic() {};
+
+		//Constructor that takes resourcemanager
+		GameLogic(ResourceManager& manager);
 
 		//Initiallizes the gamestate based on the given LevelState description
 		bool init(LevelState &level);

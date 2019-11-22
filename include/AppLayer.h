@@ -18,7 +18,15 @@ private:
     sf::String mainMenuString = "This is the Main Menu\n "
                                 "Press a button below to continue";
     sf::String optionMenuString = "This is the Option Screen\n"
-                                  "Press Back to go back";
+                                  "Press the rebind button to rebind a key\n"
+                                  "Or press Back to go back";
+    sf::String whichCharKeyBind = "Choose which character you want to\n"
+                                  "change the bindings of";
+    sf::String keyBindString = "Press the button you want to change\n";
+    sf::String keyBindErrStr = "That isn't assigned yet my guy";
+    sf::String keyBindSuccStr = "That key is assigned to something\n"
+                               "What would you like to change it to?";
+
     sf::String pauseMenuString = "Paused\n "
                                  "Press Back to go back\n"
                                  "Or press a button below to go to Main Menu";
@@ -31,6 +39,15 @@ private:
 
     float optionMenuButtonXPos = 400.0f;
     float optionMenuButtonYPos = 300.0f;
+
+    float optionMenuRebindButtonXPos = 400.0f;
+    float optionMenuRebindButtonYPos = 400.0f;
+
+    float optionMenuFastButtonXPos = 300.0f;
+    float optionMenuFastButtonYPos = 500.0f;
+
+    float optionMenuJumpButtonXPos = 500.0f;
+    float optionMenuJumpButtonYPos = 500.0f;
 
     float levelSelectMenuButtonXPos = 200.0f;
     float levelSelectMenuButtonYPos = 300.0f;
@@ -51,7 +68,14 @@ private:
     float backButtonXPos = 700.0f;
     float backButtonYPos = 0.0f;
 
-    bool optionMenu(sf::RenderWindow& App);
+
+    bool keyBinding(sf::RenderWindow& App, sf::Sprite backButtonImage, bool& paused);
+    //std::string fromKtoS(const sf::Keyboard::Key& k);
+    std::vector<int> bindVectFast;
+    std::vector<int> bindVectJump;
+    std::vector<int> previousBinds;
+
+    bool optionMenu(sf::RenderWindow& App, bool& paused);
     bool optionMenuOpen = false;
     bool levelSelectMenu(sf::RenderWindow& App);
     bool levelSelectOpen = false;
@@ -88,7 +112,7 @@ public:
 
     AppLayer();
 
-    bool mainMenu(sf::RenderWindow& App, bool& paused);
+    bool mainMenu(sf::RenderWindow& App, bool& paused, Controller& controller, GameLogic& logic);
     bool pauseMenu(sf::RenderWindow& App, bool& paused);
     bool pauseMenuOpen = false;
 

@@ -2,26 +2,29 @@
 #include <SFML/Graphics.hpp>
 
 
-Hazards::Hazards(){
+Hazards::Hazards(ResourceManager& manager){
   this->toggled = false;
   this->orient = true;
   this->size = 1;
 
-  hazard.loadFromFile("..\\resources\\Spikes.png");
-
-
+  sf::Vector2u coords = manager.getSpriteCoords(ResourceManager::Sprites::HAZARDS);
+  spriteCoords.x = coords.x;
+  spriteCoords.y = coords.y;
+  spriteSheet = &manager.getSpriteSheet();
+  //hazard.loadFromFile("..\\resources\\Spikes.png");
 }
 
 void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
+  sf::IntRect spritePos(spriteCoords.x, spriteCoords.y, spriteCoords.x + 20, spriteCoords.y + 20);
   if(toggled== false){
     //horizontal surface
     if(orient == true){
       for(int i = 0; i< this->size; i++){
-        sf::Sprite h;
-        h.setTexture(hazard);
+        sf::Sprite h(*spriteSheet, spritePos);
+        //h.setTexture(hazard);
         h.setRotation(0);
-       h.setPosition(position);
+        h.setPosition(position);
       window.draw(h);
       position.x=position.x+20;
     }
@@ -30,10 +33,10 @@ void Hazards::draw(sf::RenderWindow& window){
     else{
       position.x=position.x+20;
       for(int i = 0; i< this->size; i++){
-        sf::Sprite h;
-        h.setTexture(hazard);
+		sf::Sprite h(*spriteSheet, spritePos);
+		//h.setTexture(hazard);
         h.setRotation(90);
-       h.setPosition(position);
+        h.setPosition(position);
       window.draw(h);
       position.y=position.y+20;
     }

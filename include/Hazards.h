@@ -3,15 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Hazards : public Interactables {
 public:
 
-  Hazards();
+  Hazards() {};
 
-  sf::Texture hazard;
+  Hazards(ResourceManager& manager);
 
+  const sf::Texture* spriteSheet;
 
+  sf::Vector2u spriteCoords;
 
   void draw(sf::RenderWindow& window);
 
