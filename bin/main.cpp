@@ -36,7 +36,7 @@ int main(int argc, char** argv)
                     App.close();
                 }
             }
-            appLayer.mainMenu(App, paused);
+            appLayer.mainMenu(App, paused, controller, logic);
         }
 
         //check and see if we exited mainMenu without starting game, if so, return
