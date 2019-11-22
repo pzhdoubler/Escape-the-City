@@ -3,41 +3,56 @@
 
 Platforms::Platforms(){
   this->size = 2;
-  this->direction =   true;
+  this->direction = true;
+  this->time = 0;
   platform.loadFromFile("..\\resources\\Door_Texture.png");
 }
 
 void Platforms::draw(sf::RenderWindow &window){
+  sf::RectangleShape pixel;
+  pixel.setSize(sf::Vector2f(3, 3));
+  pixel.setFillColor(sf::Color::Green);
+  pixel.setPosition(curPos);
   sf::Vector2f position = this->curPos;
-printf("%d.",time );
   if(this->direction){
 
   for(int i = 0; i< 2; i++){
-  position.x=position.x+20;
+
   sf::Sprite p;
   p.setTexture(platform);
   p.setPosition(position);
 
   window.draw(p);
-}this->curPos.x = curPos.x + 1;
+  position.x=position.x+20;
+}
+if(time>.05){
+  this->curPos.x = curPos.x + 1;
+  time= time-.05;
+}
 }
 if(direction == false){
   for(int i = 0; i< 2; i++){
-  position.x=position.x+20;
+
   sf::Sprite p;
   p.setTexture(platform);
   p.setPosition(position);
 
-  window.draw(p);}
-  this->curPos.x = curPos.x - 1;
+  window.draw(p);
+position.x=position.x+20;}
+  if(time>.05){
+    this->curPos.x = curPos.x - 1;
+    time= time-.05;
+  }
+
 }
-if(curPos.x<=pos.x-(this->size*10)){
+if(curPos.x<=pos.x){
   direction = true;
 
 }
-if(curPos.x>=pos.x){
+if(curPos.x>=pos.x+(this->size*20 )-40){
   direction = false;
 }
+window.draw(pixel);
 }
 
 void Platforms::setPos(sf::Vector2f& pos){
@@ -61,7 +76,7 @@ void Platforms::Reset(){
 }
 
 void Platforms::setTime(float deltaMs){
- this->time = deltaMs;
+ this->time = this->time + deltaMs;
 }
 
 void Platforms::setSize(int size){
@@ -71,18 +86,25 @@ void Platforms::setSize(int size){
 void Platforms::PlayerContact(PlayerChar &player, int id){
   sf::Vector2f vel = player.getVelocity();
   sf::Vector2f position = player.getPos();
-  vel.y = 0;
-  if(position.y>pos.y && position.x<curPos.x+60 && position.x>curPos.x-20){
+
+
+  if(position.y>curPos.y && position.x<curPos.x+40 && position.x>curPos.x-11){
+    vel.y = 0;
     position.y = pos.y+20;
     player.setVelocity(vel);
     player.setPos(position);
 }
-  if(position.y<pos.y && position.x<curPos.x+60 && position.x>curPos.x-20){
+  if(position.y<curPos.y && (position.x<curPos.x+40 && position.x>curPos.x-11)){
+    vel.y = 0;
     if(this->direction){
-    vel.x = vel.x + 11;
+    if(time>.05){
+      position.x= position.x + 1;
+    }
   }
     if(this->direction == false){
-      vel.x = vel.x - 11;
+      if(time>.05){
+        position.x= position.x - 1;
+      }
     }
     player.setInAir(false);
     position.y = pos.y-18;
