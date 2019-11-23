@@ -2,28 +2,32 @@
 #include <PlayerChar.h>
 
 
-PlayerChar::PlayerChar(bool player){
+PlayerChar::PlayerChar(bool player, ResourceManager& manager){
   this->player = player;
   this->height = 18;
   this->width = 15;
   this->in_air = true;
   this->interaction = false;
   this->powerUp = 0;
+  spriteSheet = &manager.getSpriteSheet();
   if (player){
-    fast_man.setSize(sf::Vector2f(width, height));
-    fast_man.setFillColor(sf::Color::Red);
+	  sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::FAST_MAN);
+	  spriteCoords.x = coords.x;
+	  spriteCoords.y = coords.y;
   }
   else{
-    jump_man.setSize(sf::Vector2f(width, height));
-    jump_man.setFillColor(sf::Color::Blue);
+	  sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::JUMP_MAN);
+	  spriteCoords.x = coords.x;
+	  spriteCoords.y = coords.y;
   }
 }
 
 void PlayerChar::draw(sf::RenderWindow &window){
-    jump_man.setPosition(pos);
-    window.draw(jump_man);
-    fast_man.setPosition(pos);
-    window.draw(fast_man);
+	sf::Vector2i size(20, 20);
+	sf::IntRect spritePos(spriteCoords, size);
+	sf::Sprite p(*spriteSheet, spritePos);
+	p.setPosition(pos);
+    window.draw(p);
 
 }
 

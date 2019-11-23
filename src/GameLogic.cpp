@@ -12,8 +12,8 @@
 
 GameLogic::GameLogic(ResourceManager& manager)
 {
-	fast_man = std::make_shared<PlayerChar>(true);
-	jump_man = std::make_shared<PlayerChar>(false);
+	fast_man = std::make_shared<PlayerChar>(true, manager);
+	jump_man = std::make_shared<PlayerChar>(false, manager);
 	exitPos = std::make_shared<Exit>();
 	//initialize all interactable lists here
 	int hazard_num = 6;

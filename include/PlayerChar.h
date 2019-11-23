@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <GameElements.h>
+#include <ResourceManager.h>
 
 
 class PlayerChar : public GameElements {
@@ -11,10 +12,11 @@ public:
   //default constructor
   PlayerChar(){};
   //Character contructor
-  PlayerChar(bool player);
+  PlayerChar(bool player, ResourceManager& manager);
 
-  sf::RectangleShape jump_man; //to be replaced with sprites
-  sf::RectangleShape fast_man;
+  const sf::Texture* spriteSheet;
+
+  sf::Vector2i spriteCoords;
   //sf::Sprite ;
 
   //void useItem();
