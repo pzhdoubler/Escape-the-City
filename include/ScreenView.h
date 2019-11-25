@@ -16,7 +16,7 @@
 class ScreenView {
 
 private:
-    sf::Texture levelOutline;
+	sf::RenderTexture textureCanvas;
 
 	sf::Texture background;
 
