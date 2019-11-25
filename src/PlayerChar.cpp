@@ -4,8 +4,8 @@
 
 PlayerChar::PlayerChar(bool player, ResourceManager& manager){
   this->player = player;
-  this->height = 20;
-  this->width = 20;
+  this->height = 18;
+  this->width = 15;
   this->in_air = true;
   this->interaction = false;
   this->powerUp = 0;
