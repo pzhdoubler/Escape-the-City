@@ -17,7 +17,6 @@ void ScreenView::init(LevelState &level, ResourceManager& manager) {
     //Draw rectangles by making a new RectangleShape obj with setSize(20,20), setFillColor(white), setPosition(i,j).
     //Every iteration, increment j by 20 until you hit 800 (max width). Then increment i by 20 and restart loop until
     // you hit 600 (max height)
-    sf::RenderTexture textureCanvas;
     textureCanvas.create(800,600);
     int width = 40;
     int height = 30;
@@ -43,8 +42,11 @@ void ScreenView::init(LevelState &level, ResourceManager& manager) {
         }
     }
 
-    static sf::Texture texture = textureCanvas.getTexture();
-	levelOutline = texture;
+	//if (levelOutline != NULL) {
+	//	printf("here\n");
+	//	delete levelOutline;
+	//	printf("here again\n");
+	//}
 }
 
 void ScreenView::update(sf::RenderWindow &mainWindow, GameLogic &gameLogic) {
@@ -55,7 +57,7 @@ void ScreenView::update(sf::RenderWindow &mainWindow, GameLogic &gameLogic) {
     //mainWindow reference
 	sf::Sprite bg(background);
 	mainWindow.draw(bg);
-	sf::Sprite level(levelOutline);
+	sf::Sprite level(textureCanvas.getTexture());
     mainWindow.draw(level);
 	std::vector<GameElements*> drawables = gameLogic.getDrawables();
 

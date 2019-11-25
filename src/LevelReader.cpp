@@ -34,12 +34,20 @@ void LevelReader::loadMap(const std::string& level){
 		array.push_back(v);
 	}
 
+	this->buttonPos.clear();
 	this->buttonPos.resize(6);
+	this->pressurePlatePos.clear();
 	this->pressurePlatePos.resize(6);
+	this->doorPos.clear();
 	this->doorPos.resize(6);
+	this->hazardPos.clear();
 	this->hazardPos.resize(6);
+	this->itemPos.clear();
 	this->itemPos.resize(6);
+	this->movPlatformPos.clear();
 	this->movPlatformPos.resize(6);
+	this->exitPt.x = 0;
+	this->exitPt.y = 0;
 	
 	for(int x = 0; x < array.size(); x++){
 		for(int y = 0; y < array[x].size(); y++){
