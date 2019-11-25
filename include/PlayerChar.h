@@ -57,7 +57,7 @@ public:
 
   bool interacted();
 
-  void setItem(int id, GameElements* item);
+  void setItem(int id);
 
   void useItem();
 
@@ -78,7 +78,6 @@ private:
    bool in_air;
    bool interaction;
 
-   GameElements* item;
 
 
 };
