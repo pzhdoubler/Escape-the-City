@@ -1,22 +1,33 @@
 #include <Button.h>
 #include <SFML/Graphics.hpp>
 
-Button::Button(){
+Button::Button(ResourceManager& manager){
   this->pressed = false;
-  button.loadFromFile("..\\resources\\Button.png");
-  pressedButton.loadFromFile("..\\resources\\ButtonPressed.png");
+
+  sf::Vector2i unpressed = manager.getSpriteCoords(ResourceManager::Sprites::BUTTON_OFF);
+  unpressedButton.x = unpressed.x;
+  unpressedButton.y = unpressed.y;
+  sf::Vector2i pressed = manager.getSpriteCoords(ResourceManager::Sprites::BUTTON_ON);
+  pressedButton.x = pressed.x;
+  pressedButton.y = pressed.y;
+  spriteSheet = &manager.getSpriteSheet();
+  //button.loadFromFile("..\\resources\\Button.png");
+  //pressedButton.loadFromFile("..\\resources\\ButtonPressed.png");
 }
 
 void Button::draw(sf::RenderWindow &window){
+  sf::Vector2i size(20, 20);
   if(pressed == true){
-    sf::Sprite b;
-    b.setTexture(button);
+	sf::IntRect pressedSpritePos(pressedButton, size);
+    sf::Sprite b(*spriteSheet, pressedSpritePos);
+    //b.setTexture(button);
     b.setPosition(pos);
     window.draw(b);
 }
   else{
-    sf::Sprite p;
-    p.setTexture(pressedButton);
+	sf::IntRect unpressedSpritePos(unpressedButton, size);
+	sf::Sprite p(*spriteSheet, unpressedSpritePos);
+    //p.setTexture(pressedButton);
     p.setPosition(pos);
     window.draw(p);
   }

@@ -3,14 +3,19 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Exit : public Interactables{
 public:
 
   //defalt constructor
-  Exit();
+  Exit() {};
 
-  sf::Texture exit;
+  Exit(ResourceManager& manager);
+
+  const sf::Texture* spriteSheet;
+
+  sf::Vector2i spriteCoords;
 
   void draw(sf::RenderWindow& window);
 

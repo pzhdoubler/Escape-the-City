@@ -2,21 +2,29 @@
 
 <general>
   <gravity>1000</gravity>
-  <friction>1500</friction>
+  <friction>3000</friction>
 </general>
 
 <fastman>
-  <max_horiz_speed>800</max_horiz_speed>
-  <max_vert_speed>1000</max_vert_speed>
-  <run_speed>1000</run_speed>
+  <!--tiles per second-->
+  <max_horiz_speed>15</max_horiz_speed>
+  <max_vert_speed>20</max_vert_speed>
+  <!--tiles to reach max horiz speed-->
+  <accel>5</accel>
+  <!--tiles cleared by max jump-->
   <jump_height>3.5</jump_height>
-  <air_multiplier>0.7</air_multiplier>
+  <!--applied to acceleration in air-->
+  <air_multiplier>0.3</air_multiplier>
 </fastman>
 
 <jumpman>
-  <max_horiz_speed>250</max_horiz_speed>
-  <max_vert_speed>1200</max_vert_speed>
-  <run_speed>375</run_speed>
+  <!--tiles per second-->
+  <max_horiz_speed>7</max_horiz_speed>
+  <max_vert_speed>20</max_vert_speed>
+  <!--tiles to reach max horiz speed-->
+  <accel>2</accel>
+  <!--tiles cleared by max jump-->
   <jump_height>10.2</jump_height>
+  <!--applied to acceleration in air-->
   <air_multiplier>2.0</air_multiplier>
 </jumpman>

@@ -12,7 +12,7 @@
 //
 //}
 
-void ScreenView::init(LevelState &level) {
+void ScreenView::init(LevelState &level, ResourceManager& manager) {
     //iterate through a 2d array that has either a 0 or 1. If 0, progress. If 1, draw a 20x20 box.
     //Draw rectangles by making a new RectangleShape obj with setSize(20,20), setFillColor(white), setPosition(i,j).
     //Every iteration, increment j by 20 until you hit 800 (max width). Then increment i by 20 and restart loop until
@@ -22,18 +22,22 @@ void ScreenView::init(LevelState &level) {
     int width = 40;
     int height = 30;
     textureCanvas.clear(sf::Color(0,0,0,0));
+	//background
 	static sf::Texture bg;
 	bg.loadFromFile("..\\resources\\citybackground.png"); //Do in resource manager
 	background = bg;
+	//barrier tiles
+	sf::Vector2i size(level.getTileSize(), level.getTileSize());
+	sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::BARRIER);
+	sf::Vector2i spriteCoords(coords.x, coords.y);
+	sf::IntRect spritePos(spriteCoords, size);
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             if (level.getTileMap()[i][j] == 1) {
-				sf::RectangleShape border;
-                border.setSize(sf::Vector2f(level.getTileSize(), level.getTileSize()));
-                border.setFillColor(sf::Color(50,50,50,255));
-                border.setPosition(i*level.getTileSize(), 580 - j*level.getTileSize());
-                textureCanvas.draw(border);
+				sf::Sprite border(manager.getSpriteSheet(), spritePos);
+				border.setPosition(i * level.getTileSize(), 580 - j * level.getTileSize());
+				textureCanvas.draw(border);
 				//printf("[ %d, %d ]\n", i, j);
             }
         }

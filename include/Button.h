@@ -3,15 +3,20 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Button : public Interactables{
 public:
   //defalt constructor
-  Button();
+  Button() {};
 
-  sf::Texture button;
+  Button(ResourceManager& manager);
 
-  sf::Texture pressedButton;
+  const sf::Texture* spriteSheet;
+
+  sf::Vector2i unpressedButton;
+
+  sf::Vector2i pressedButton;
 
 
   void draw(sf::RenderWindow& window);

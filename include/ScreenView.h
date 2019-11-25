@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "GameLogic.h"
 #include "LevelState.h"
+#include "ResourceManager.h"
 
 
 
@@ -31,7 +32,7 @@ public:
 
     //this guy will be called by constructor, and do the iteration of an array. Save it as a sprite object that can be
     //called by the update first before any other drawing takes place
-    void init(LevelState &level);
+    void init(LevelState &level, ResourceManager& manager);
 
 
 

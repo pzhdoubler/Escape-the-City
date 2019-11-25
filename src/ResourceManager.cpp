@@ -62,7 +62,7 @@ const sf::Texture& ResourceManager::getSpriteSheet()
 }
 
 
-sf::Vector2u& ResourceManager::getSpriteCoords(Sprites object)
+sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 {
 	switch (object) {
 		case BARRIER:
@@ -78,11 +78,11 @@ sf::Vector2u& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.y = 20;
 			break;
 		case BUTTON_ON:
-			spriteCoords.x = 80;
+			spriteCoords.x = 100;
 			spriteCoords.y = 0;
 			break;
 		case BUTTON_OFF:
-			spriteCoords.x = 100;
+			spriteCoords.x = 80;
 			spriteCoords.y = 0;
 			break;
 		case DOOR:
@@ -91,6 +91,10 @@ sf::Vector2u& ResourceManager::getSpriteCoords(Sprites object)
 			break;
 		case HAZARDS:
 			spriteCoords.x = 0;
+			spriteCoords.y = 20;
+			break;
+		case EXIT:
+			spriteCoords.x = 80;
 			spriteCoords.y = 20;
 			break;
 	}

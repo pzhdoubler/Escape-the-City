@@ -12,9 +12,9 @@
 
 GameLogic::GameLogic(ResourceManager& manager)
 {
-	fast_man = std::make_shared<PlayerChar>(true);
-	jump_man = std::make_shared<PlayerChar>(false);
-	exitPos = std::make_shared<Exit>();
+	fast_man = std::make_shared<PlayerChar>(true, manager);
+	jump_man = std::make_shared<PlayerChar>(false, manager);
+	exitPos = std::make_shared<Exit>(manager);
 	//initialize all interactable lists here
 	int hazard_num = 6;
 	int door_num = 6;
@@ -22,7 +22,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 	int platform_num = 6;
 	//buttons
 	for (int i = 0; i < door_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Button>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Button>(manager);
 		//assign color
 		buttons.push_back(ptr);
 	}
@@ -36,7 +36,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 	}
 	//doors
 	for (int i = 0; i < door_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Door>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Door>(manager);
 		//assign color
 		doors.push_back(ptr);
 	}
@@ -184,18 +184,26 @@ bool GameLogic::init(LevelState &level)
 	tinyxml2::XMLElement* jump = config.FirstChildElement("jumpman");
 
 	GRAVITY = std::stof(general->FirstChildElement("gravity")->GetText());
-	FRICTION = std::stof(general->FirstChildElement("gravity")->GetText());
+	FRICTION = std::stof(general->FirstChildElement("friction")->GetText());
 
-	FAST_MAX_X = std::stof(fast->FirstChildElement("max_horiz_speed")->GetText());
-	FAST_MAX_Y = std::stof(fast->FirstChildElement("max_vert_speed")->GetText());
-	FAST_RUN = std::stof(fast->FirstChildElement("run_speed")->GetText());
+	float f_xmax = std::stof(fast->FirstChildElement("max_horiz_speed")->GetText());
+	FAST_MAX_X = 2 * f_xmax * tileSize;
+	float f_ymax = std::stof(fast->FirstChildElement("max_vert_speed")->GetText());
+	FAST_MAX_Y = 2 * f_ymax * tileSize;
+	float f_acceleration = std::stof(fast->FirstChildElement("accel")->GetText());
+	//FAST_RUN = std::stof(fast->FirstChildElement("run_speed")->GetText());
+	FAST_RUN = (FAST_MAX_X * FAST_MAX_X) / (2 * f_acceleration*tileSize);
 	FAST_HEIGHT = std::stof(fast->FirstChildElement("jump_height")->GetText());
 	FAST_AIR_MULT = std::stof(fast->FirstChildElement("air_multiplier")->GetText());
 	FAST_VERT = std::sqrt(2 * GRAVITY * FAST_HEIGHT * tileSize);
 
-	JUMP_MAX_X = std::stof(jump->FirstChildElement("max_horiz_speed")->GetText());
-	JUMP_MAX_Y = std::stof(jump->FirstChildElement("max_vert_speed")->GetText());
-	JUMP_RUN = std::stof(jump->FirstChildElement("run_speed")->GetText());
+	float j_xmax = std::stof(jump->FirstChildElement("max_horiz_speed")->GetText());
+	JUMP_MAX_X = 2 * j_xmax * tileSize;
+	float j_ymax = std::stof(jump->FirstChildElement("max_vert_speed")->GetText());
+	JUMP_MAX_Y = 2 * j_ymax * tileSize;
+	float j_acceleration = std::stof(jump->FirstChildElement("accel")->GetText());
+	//JUMP_RUN = std::stof(jump->FirstChildElement("run_speed")->GetText());
+	JUMP_RUN = (JUMP_MAX_X * JUMP_MAX_X) / (2 * j_acceleration*tileSize);
 	JUMP_HEIGHT = std::stof(jump->FirstChildElement("jump_height")->GetText());
 	JUMP_AIR_MULT = std::stof(jump->FirstChildElement("air_multiplier")->GetText());
 	JUMP_VERT = std::sqrt(2 * GRAVITY * JUMP_HEIGHT * tileSize);
