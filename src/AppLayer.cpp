@@ -475,7 +475,13 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
 			return levelSelectOpen;
         }
         if (buttonImage3.getGlobalBounds().contains(mouseLocF)) {
-            printf("press the first button\n");
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			loader.loadMap("blank_level.csv");
+			level = loader.createLevelState();
+			printf("Going to level 3...\n");
+			return levelSelectOpen;
         }
         if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
             printf("Going back to Main Menu...\n");

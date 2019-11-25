@@ -10,7 +10,7 @@
   <max_horiz_speed>10</max_horiz_speed>
   <max_vert_speed>20</max_vert_speed>
   <!--tiles to reach max horiz speed-->
-  <accel>5</accel>
+  <accel>4</accel>
   <!--tiles cleared by max jump-->
   <jump_height>2.5</jump_height>
   <!--applied to acceleration in air-->
@@ -24,7 +24,7 @@
   <!--tiles to reach max horiz speed-->
   <accel>2</accel>
   <!--tiles cleared by max jump-->
-  <jump_height>7</jump_height>
+  <jump_height>7.5</jump_height>
   <!--applied to acceleration in air-->
   <air_multiplier>2.0</air_multiplier>
 </jumpman>
