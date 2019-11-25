@@ -14,7 +14,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 {
 	fast_man = std::make_shared<PlayerChar>(true, manager);
 	jump_man = std::make_shared<PlayerChar>(false, manager);
-	exitPos = std::make_shared<Exit>();
+	exitPos = std::make_shared<Exit>(manager);
 	//initialize all interactable lists here
 	int hazard_num = 6;
 	int door_num = 6;
@@ -36,7 +36,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 	}
 	//doors
 	for (int i = 0; i < door_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Door>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Door>(manager);
 		//assign color
 		doors.push_back(ptr);
 	}

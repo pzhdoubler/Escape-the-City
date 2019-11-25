@@ -93,6 +93,10 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.x = 0;
 			spriteCoords.y = 20;
 			break;
+		case EXIT:
+			spriteCoords.x = 80;
+			spriteCoords.y = 20;
+			break;
 	}
 
 	return spriteCoords;

@@ -3,14 +3,19 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Door : public Interactables{
 public:
+
+  Door() {};
+
   //defalt constructor
-  Door();
+  Door(ResourceManager& manager);
 
+  const sf::Texture* spriteSheet;
 
-  sf::Texture door;
+  sf::Vector2i spriteCoords;
 
   void draw(sf::RenderWindow& window);
 

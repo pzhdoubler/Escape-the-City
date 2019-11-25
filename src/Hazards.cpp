@@ -18,11 +18,11 @@ void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
   sf::Vector2i size(20, 20);
   sf::IntRect spritePos(spriteCoords, size);
+  sf::Sprite h(*spriteSheet, spritePos);
   if(toggled== false){
     //horizontal surface
     if(orient == true){
       for(int i = 0; i< this->size; i++){
-        sf::Sprite h(*spriteSheet, spritePos);
         //h.setTexture(hazard);
         h.setRotation(0);
         h.setPosition(position);
@@ -34,7 +34,6 @@ void Hazards::draw(sf::RenderWindow& window){
     else{
       position.x=position.x+20;
       for(int i = 0; i< this->size; i++){
-		sf::Sprite h(*spriteSheet, spritePos);
 		//h.setTexture(hazard);
         h.setRotation(90);
         h.setPosition(position);

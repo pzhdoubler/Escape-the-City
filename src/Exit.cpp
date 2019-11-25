@@ -1,18 +1,22 @@
 #include "Exit.h"
 #include <SFML/Graphics.hpp>
 
-Exit::Exit(){
+Exit::Exit(ResourceManager& manager){
   fast_exit = false;
   jump_exit = false;
 
-  exit.loadFromFile("..\\resources\\Exit.png");
+  sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::EXIT);
+  spriteCoords.x = coords.x;
+  spriteCoords.y = coords.y;
+  spriteSheet = &manager.getSpriteSheet();
 }
 
 
 
 void Exit::draw(sf::RenderWindow& window){
-  sf::Sprite e;
-  e.setTexture(exit);
+  sf::Vector2i size(40, 40);
+  sf::IntRect spritePos(spriteCoords, size);
+  sf::Sprite e(*spriteSheet, spritePos);
   e.setPosition(pos);
   window.draw(e);
 }

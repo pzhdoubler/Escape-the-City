@@ -1,20 +1,24 @@
 #include <Door.h>
 #include <SFML/Graphics.hpp>
 
-Door::Door(){
+Door::Door(ResourceManager& manager){
   this->open = false;
   this->size = 2;
-  door.loadFromFile("..\\resources\\Door_Texture.png");
+  sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::DOOR);
+  spriteCoords.x = coords.x;
+  spriteCoords.y = coords.y;
+  spriteSheet = &manager.getSpriteSheet();
 }
 
 void Door::draw(sf::RenderWindow &window){
   sf::Vector2f position = pos;
+  sf::Vector2i size(20, 20);
+  sf::IntRect spritePos(spriteCoords, size);
+  sf::Sprite d(*spriteSheet, spritePos);
   if(open == false){
   if(orient== true){
     for(int i = 0; i< this->size; i++){
     position.x=position.x+20;
-    sf::Sprite d;
-    d.setTexture(door);
     d.setRotation(90);
     d.setPosition(position);
     window.draw(d);
@@ -24,8 +28,6 @@ void Door::draw(sf::RenderWindow &window){
   }
   else{
     for(int i = 0; i< this->size; i++){
-    sf::Sprite d;
-    d.setTexture(door);
     d.setRotation(0);
     d.setPosition(position);
     window.draw(d);

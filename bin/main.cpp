@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 
         //initialization
 		logic.init(appLayer.level);
-		screen.init(appLayer.level);
+		screen.init(appLayer.level, resourceManager);
 		controller.init(logic);
 
 		sf::Clock clock;
