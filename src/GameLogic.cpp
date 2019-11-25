@@ -420,8 +420,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			jump_man->interact(true);
 			break;
 		case Controller::FAST_RESPAWN:
-			powerUpF = fast_man->getPowerUp();
-			items[powerUpF]->Reset();
+			//powerUpF = fast_man->getPowerUp();
+			//items[powerUpF]->Reset();
 			success = true;
 			break;
 		case Controller::FAST_RESPAWN_RELEASE:
@@ -432,8 +432,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			success = true;
 			break;
 		case Controller::JUMP_RESPAWN_RELEASE:
-			powerUpJ = jump_man->getPowerUp();
-			items[powerUpJ]->Reset();
+			//powerUpJ = jump_man->getPowerUp();
+			//items[powerUpJ]->Reset();
 			jump_man->respawn();
 			success = true;
 			break;

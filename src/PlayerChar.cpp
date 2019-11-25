@@ -4,8 +4,8 @@
 
 PlayerChar::PlayerChar(bool player, ResourceManager& manager){
   this->player = player;
-  this->height = 18;
-  this->width = 15;
+  this->height = 20;
+  this->width = 20;
   this->in_air = true;
   this->interaction = false;
   this->powerUp = 0;
@@ -90,7 +90,7 @@ void PlayerChar::setSpawnPt(sf::Vector2f& pos){
 
 void PlayerChar::respawn(){
   this->vel = sf::Vector2f(0, 0);
-  this->powerUp = 0;
+  //this->powerUp = 0;
   setPos(spawn);
 }
 
