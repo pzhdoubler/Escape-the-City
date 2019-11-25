@@ -214,7 +214,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
             //get a corresponding number for your key
             //std::string keyBinding = fromKtoS(keyboardKey);
             int keyBinding = keyboardKey;
-            std::cout << "keyBinding: " << keyBinding << std::endl;
+            //std::cout << "keyBinding: " << keyBinding << std::endl;
 
 
             //run through the XML bindings and add to a vector
@@ -231,7 +231,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                 if (keyBinding == s) {
                     fastButtons = true;
                     App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
-                    hud.setString(keyBindSuccStr);
+                    hud.setString(keyBindChangeStr);
                     App.draw(hud);
                     App.draw(backButtonImage);
                     App.display();
@@ -253,7 +253,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                     if (keyBinding == s) {
                         jumpButtons = true;
                         App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
-                        hud.setString(keyBindSuccStr);
+                        hud.setString(keyBindChangeStr);
                         App.draw(hud);
                         App.draw(backButtonImage);
                         App.display();
@@ -280,31 +280,19 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                 std::cout << "prev keyBinding is: " << prevBind << std::endl;
 
 
-
-                //load in the XML document
-                tinyxml2::XMLDocument config;
-                tinyxml2::XMLError result = config.LoadFile("..\\config\\controls.xml");
-                if (result != tinyxml2::XML_SUCCESS) {
-                    return false;
-                }
-
-                //get our pointers to the first child of the XML tree
-                tinyxml2::XMLElement* fast = config.FirstChildElement("fastman");
-                tinyxml2::XMLElement* jump = config.FirstChildElement("jumpman");
-
-
                 //first search through the fast elements
                 for (tinyxml2::XMLElement* key = fast->FirstChildElement(); key != NULL; key = key->NextSiblingElement()) {
 
                     //if we see an element that is equal to the previous binding we have a match
                     if (std::stoi(key->GetText()) == prevBind) {
-                        std::cout << key->GetText() << std::endl;
-                        key->DeleteAttribute(key->GetText());
-                        std::cout << key->GetText() << std::endl;
                         //now we need to write keyBinding in the place of key->GetText
                         key->SetText(keyBinding);
+                        App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
+                        hud.setString(keyBindSuccStr);
+                        App.draw(hud);
+                        App.draw(backButtonImage);
+                        App.display();
                     }
-
                 }
 
                 //then we search through jump elements
@@ -312,19 +300,18 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
 
                     //if we see an element that is equal to the previous binding we have a match
                     if (std::stoi(key->GetText()) == prevBind) {
-                        std::cout << key->GetText() << std::endl;
-                        key->DeleteAttribute(key->GetText());
-                        std::cout << key->GetText() << std::endl;
+
                         //now we need to write keyBinding in the place of key->GetText
                         key->SetText(keyBinding);
+                        App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
+                        hud.setString(keyBindSuccStr);
+                        App.draw(hud);
+                        App.draw(backButtonImage);
+                        App.display();
                     }
-
                 }
-
+                config.SaveFile("..\\config\\controls.xml");
             }
-
-
-
         }
 
         //close out of the application
@@ -466,22 +453,10 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
             return levelSelectOpen;
         }
         if (buttonImage2.getGlobalBounds().contains(mouseLocF)) {
-			printf("button clicked!\n");
-			levelSelectOpen = false;
-			isPlaying = true;
-			loader.loadMap("level_test.csv");
-			level = loader.createLevelState();
-			printf("Going to level 2...\n");
-			return levelSelectOpen;
+            printf("press the first button\n");
         }
         if (buttonImage3.getGlobalBounds().contains(mouseLocF)) {
-			printf("button clicked!\n");
-			levelSelectOpen = false;
-			isPlaying = true;
-			loader.loadMap("blank_level.csv");
-			level = loader.createLevelState();
-			printf("Going to level 3...\n");
-			return levelSelectOpen;
+            printf("press the first button\n");
         }
         if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
             printf("Going back to Main Menu...\n");
