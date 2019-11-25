@@ -22,7 +22,7 @@ public:
   void PlayerContact(PlayerChar &player, int id);
   void Toggle();
 
-  void Reset() {};
+  void Reset();
 
 
 
@@ -30,7 +30,6 @@ public:
 private:
   sf::Vector2f pos;
   bool pickup;
-  GameElements* interactable;
 
 };
 

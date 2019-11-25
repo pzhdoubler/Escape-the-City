@@ -5,7 +5,7 @@
 Items::Items(){
   this->pickup= false;
   item.loadFromFile("..\\resources\\Button.png");
-  interactable = this;
+
 }
 
 void Items::draw(sf::RenderWindow& window){
@@ -36,11 +36,16 @@ void Items::Toggle(){
   this->pickup= !pickup;
 }
 
+void Items::Reset(){
+  this->pickup = false;
+}
+
 
 
 void Items::PlayerContact(PlayerChar &player, int id){
   if(pickup == false && player.powerUp == 0){
     pickup = true;
-    player.setItem(1, interactable);
+    int i = id-35;
+    player.setItem(i);
   }
 }

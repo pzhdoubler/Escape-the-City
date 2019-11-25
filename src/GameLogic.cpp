@@ -110,6 +110,23 @@ bool GameLogic::init(LevelState &level)
 		}
 	}
 
+	//platforms
+	for (int i = 0; i < platform_pos.size(); i++) {
+		sf::Vector2f this_platform = platform_pos[i];
+		platforms[i]->setPos(this_platform);
+		if (int(this_platform.x) != 0 || int(this_platform.y) != 0) {
+			objects[i] = 3;
+			int size = 1;
+			int cur_x = int(this_platform.x) / tileSize;
+			int cur_y = int(this_platform.y) / tileSize;
+			int id = tileMap[cur_x][cur_y];
+			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
+			//set platform size and orientation
+			Platforms* platf = dynamic_cast<Platforms*>(platforms[i].get());
+			platf->setSize(size);
+		}
+	}
+
 	//buttons
 	for (int i = 0; i < button_pos.size(); i++) {
 		sf::Vector2f this_button = button_pos[i];
@@ -124,6 +141,9 @@ bool GameLogic::init(LevelState &level)
 				//link to doors[i]
 				but->setToggleable(doors[i].get());
 			}
+			else if (objects[i] == 3){
+				but->setToggleable(platforms[i].get());
+			}
 			but->Reset();
 		}
 	}
@@ -132,23 +152,9 @@ bool GameLogic::init(LevelState &level)
 	for (int i = 0; i < item_pos.size(); i++) {
 		sf::Vector2f this_item = item_pos[i];
 		items[i]->setPos(this_item);
+
 	}
-	//platforms
-	for (int i = 0; i < platform_pos.size(); i++) {
-		sf::Vector2f this_platform = platform_pos[i];
-		platforms[i]->setPos(this_platform);
-		if (int(this_platform.x) != 0 || int(this_platform.y) != 0) {
-			objects[i] = 2;
-			int size = 1;
-			int cur_x = int(this_platform.x) / tileSize;
-			int cur_y = int(this_platform.y) / tileSize;
-			int id = tileMap[cur_x][cur_y];
-			bool orientation = determineObjectLength(cur_x, cur_y, id, size);
-			//set platform size and orientation
-			Platforms* platf = dynamic_cast<Platforms*>(platforms[i].get());
-			platf->setSize(size);
-		}
-	}
+
 
 	exitPos->setPos(level.getExitPt());
 
@@ -310,6 +316,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 {
 	float seconds = deltaMs;
 	bool success = false;
+	int powerUpF = fast_man->getPowerUp();
+	int powerUpJ = jump_man->getPowerUp();
 
 	sf::Vector2f fast_vel = fast_man->getVelocity();
 	sf::Vector2f jump_vel = jump_man->getVelocity();
@@ -351,6 +359,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::FAST_DOWN:
 			break;
 		case Controller::FAST_USE:
+		powerUpF = fast_man->getPowerUp();
+		items[powerUpF]->Reset();
 		fast_man->useItem();
 		fast_vel = fast_man->getVelocity();
 		success = true;
@@ -392,6 +402,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 		case Controller::JUMP_DOWN:
 			break;
 		case Controller::JUMP_USE:
+		powerUpJ = jump_man->getPowerUp();
+		items[powerUpJ]->Reset();
 		jump_man->useItem();
 		jump_vel = jump_man->getVelocity();
 		success = true;
@@ -400,6 +412,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			jump_man->interact(true);
 			break;
 		case Controller::FAST_RESPAWN:
+			powerUpF = fast_man->getPowerUp();
+			items[powerUpF]->Reset();
 			success = true;
 			break;
 		case Controller::FAST_RESPAWN_RELEASE:
@@ -410,6 +424,8 @@ bool GameLogic::buttonPress(Controller::Controls button, float deltaMs)
 			success = true;
 			break;
 		case Controller::JUMP_RESPAWN_RELEASE:
+			powerUpJ = jump_man->getPowerUp();
+			items[powerUpJ]->Reset();
 			jump_man->respawn();
 			success = true;
 			break;

@@ -5,6 +5,7 @@ Platforms::Platforms(){
   this->size = 2;
   this->direction = true;
   this->time = 0;
+  this->toggled = false;
   platform.loadFromFile("..\\resources\\Door_Texture.png");
 }
 
@@ -25,9 +26,11 @@ void Platforms::draw(sf::RenderWindow &window){
   window.draw(p);
   position.x=position.x+20;
 }
-if(time>.05){
-  this->curPos.x = curPos.x + 1;
-  time= time-.05;
+
+if(time>.02){
+  if(this->toggled == false){
+  this->curPos.x = curPos.x + 1;}
+  time= time-.02;
 }
 }
 if(direction == false){
@@ -39,9 +42,10 @@ if(direction == false){
 
   window.draw(p);
 position.x=position.x+20;}
-  if(time>.05){
-    this->curPos.x = curPos.x - 1;
-    time= time-.05;
+  if(time>.02){
+    if(this->toggled == false){
+    this->curPos.x = curPos.x - 1;}
+    time= time-.02;
   }
 
 }
@@ -88,6 +92,7 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
   sf::Vector2f position = player.getPos();
 
 
+
   if(position.y>curPos.y && position.x<curPos.x+40 && position.x>curPos.x-11){
     vel.y = 0;
     position.y = pos.y+20;
@@ -97,12 +102,12 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
   if(position.y<curPos.y && (position.x<curPos.x+40 && position.x>curPos.x-11)){
     vel.y = 0;
     if(this->direction){
-    if(time>.05){
+    if(time>.02){
       position.x= position.x + 1;
     }
   }
     if(this->direction == false){
-      if(time>.05){
+      if(time>.02){
         position.x= position.x - 1;
       }
     }
@@ -111,5 +116,19 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
     player.setVelocity(vel);
     player.setPos(position);
 }
+ else if (position.x>curPos.x-15 && position.x<curPos.x+41){
+   printf("1" );
+  if(position.x>curPos.x+40 ){
+    printf("2" );
+  position.x = curPos.x+41;}
+  else if(position.x<curPos.x){
+    printf("3" );
+    //vel.x=0;
+  position.x = curPos.x-15;}
+  player.setVelocity(vel);
+  player.setPos(position);
+}
+
+
 
 }

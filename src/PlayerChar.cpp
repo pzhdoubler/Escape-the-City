@@ -86,12 +86,8 @@ void PlayerChar::setSpawnPt(sf::Vector2f& pos){
 
 void PlayerChar::respawn(){
   this->vel = sf::Vector2f(0, 0);
-  if(powerUp != 0){
-  //this->item->Toggle();
-}
   this->powerUp = 0;
   setPos(spawn);
-
 }
 
 void PlayerChar::interact(bool interact){
@@ -102,15 +98,12 @@ bool PlayerChar::interacted(){
   return interaction;
 }
 
-void PlayerChar::setItem(int id, GameElements* interactable){
-  this->item = interactable;
-  if(id == 1){
-    this->powerUp = 1;
-  }
+void PlayerChar::setItem(int id){
+    this->powerUp = id;
+
 }
 
 void PlayerChar::useItem(){
-  printf("%d", powerUp );
   if(player && this->powerUp == 1){
     this->vel.y = -300;
     this->powerUp = 0;
