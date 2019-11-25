@@ -10,10 +10,6 @@ Platforms::Platforms(){
 }
 
 void Platforms::draw(sf::RenderWindow &window){
-  sf::RectangleShape pixel;
-  pixel.setSize(sf::Vector2f(3, 3));
-  pixel.setFillColor(sf::Color::Green);
-  pixel.setPosition(curPos);
   sf::Vector2f position = this->curPos;
   if(this->direction){
 
@@ -56,7 +52,7 @@ if(curPos.x<=pos.x){
 if(curPos.x>=pos.x+(this->size*20 )-40){
   direction = false;
 }
-window.draw(pixel);
+
 }
 
 void Platforms::setPos(sf::Vector2f& pos){
@@ -93,13 +89,13 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
 
 
 
-  if(position.y>curPos.y && position.x<curPos.x+40 && position.x>curPos.x-11){
+  /*if(position.y>curPos.y && position.x<curPos.x+40 && position.x>curPos.x-11){
     vel.y = 0;
     position.y = pos.y+20;
     player.setVelocity(vel);
     player.setPos(position);
-}
-  if(position.y<curPos.y && (position.x<curPos.x+40 && position.x>curPos.x-11)){
+}*/
+  if(position.y<curPos.y-8 && (position.x<curPos.x+40 && position.x>curPos.x-11)&& position.y>curPos.y-10 ){
     vel.y = 0;
     if(this->direction){
     if(time>.02){
@@ -112,11 +108,11 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
       }
     }
     player.setInAir(false);
-    position.y = pos.y-18;
+    //position.y = pos.y-18;
     player.setVelocity(vel);
     player.setPos(position);
 }
- else if (position.x>curPos.x-15 && position.x<curPos.x+41){
+ /*else if (position.x>curPos.x-15 && position.x<curPos.x+41){
    printf("1" );
   if(position.x>curPos.x+40 ){
     printf("2" );
@@ -127,7 +123,7 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
   position.x = curPos.x-15;}
   player.setVelocity(vel);
   player.setPos(position);
-}
+}*/
 
 
 
