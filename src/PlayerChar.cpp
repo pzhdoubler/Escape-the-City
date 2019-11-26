@@ -118,19 +118,19 @@ void PlayerChar::useItem(){
 }
 if(player && (this->powerUp == 3 ||this->powerUp == 4)){
   if(this->vel.x<0){
-    this->vel.x = -400;
+    this->vel.x = -600;
   }
   else{
-    this->vel.x = -400;
+    this->vel.x = 600;
   }
   this->powerUp = 0;
 }
 if(player == false && (this->powerUp == 3 ||this->powerUp == 4)){
   if(this->vel.x<0){
-    this->vel.x = -400;
+    this->vel.x = -600;
   }
   else{
-    this->vel.x = 400;
+    this->vel.x = 600;
   }
 this->powerUp = 0;
 }
