@@ -36,6 +36,7 @@ public:
 private:
   sf::Vector2f pos;
   float time;
+  float time2;
   sf::Vector2f curPos;
   bool direction;
   int size;
