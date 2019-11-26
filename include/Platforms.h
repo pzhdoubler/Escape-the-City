@@ -31,6 +31,7 @@ public:
 
  void setTime(float deltaMs);
 
+  void setOrientation(bool orient);
 
 private:
   sf::Vector2f pos;
@@ -39,6 +40,7 @@ private:
   bool direction;
   int size;
   bool toggled;
+  bool orientation;
   Interactables* interactable;
 
 

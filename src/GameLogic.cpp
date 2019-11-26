@@ -124,6 +124,7 @@ bool GameLogic::init(LevelState &level)
 			//set platform size and orientation
 			Platforms* platf = dynamic_cast<Platforms*>(platforms[i].get());
 			platf->setSize(size);
+			platf->setOrientation(orientation);
 		}
 	}
 

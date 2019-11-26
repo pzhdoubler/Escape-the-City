@@ -108,13 +108,31 @@ void PlayerChar::setItem(int id){
 }
 
 void PlayerChar::useItem(){
-  if(player && this->powerUp == 1){
+  if(player && (this->powerUp == 1 ||this->powerUp == 2)){
     this->vel.y = -300;
     this->powerUp = 0;
   }
-  if(player == false && this->powerUp == 1){
+  if(player == false && (this->powerUp == 1 ||this->powerUp == 2)){
   this->vel.y = -500;
   this->powerUp = 0;
+}
+if(player && (this->powerUp == 3 ||this->powerUp == 4)){
+  if(this->vel.x<0){
+    this->vel.x = -400;
+  }
+  else{
+    this->vel.x = -400;
+  }
+  this->powerUp = 0;
+}
+if(player == false && (this->powerUp == 3 ||this->powerUp == 4)){
+  if(this->vel.x<0){
+    this->vel.x = -400;
+  }
+  else{
+    this->vel.x = 400;
+  }
+this->powerUp = 0;
 }
 }
 

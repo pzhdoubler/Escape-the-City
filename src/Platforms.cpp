@@ -5,23 +5,22 @@ Platforms::Platforms(){
   this->size = 2;
   this->direction = true;
   this->time = 0;
-  this->toggled = false;
+  this->toggled = true;
+  this->orientation = true;
   platform.loadFromFile("..\\resources\\Door_Texture.png");
 }
 
 void Platforms::draw(sf::RenderWindow &window){
   sf::Vector2f position = this->curPos;
+  if(orientation){
+    for(int i = 0; i< 2; i++){
+    sf::Sprite p;
+    p.setTexture(platform);
+    p.setPosition(position);
+    window.draw(p);
+    position.x=position.x+20;
+  }
   if(this->direction){
-
-  for(int i = 0; i< 2; i++){
-
-  sf::Sprite p;
-  p.setTexture(platform);
-  p.setPosition(position);
-
-  window.draw(p);
-  position.x=position.x+20;
-}
 
 if(time>.02){
   if(this->toggled == false){
@@ -30,29 +29,44 @@ if(time>.02){
 }
 }
 if(direction == false){
-  for(int i = 0; i< 2; i++){
-
-  sf::Sprite p;
-  p.setTexture(platform);
-  p.setPosition(position);
-
-  window.draw(p);
-position.x=position.x+20;}
   if(time>.02){
     if(this->toggled == false){
     this->curPos.x = curPos.x - 1;}
-    time= time-.02;
-  }
-
+    time= time-.02;}
 }
 if(curPos.x<=pos.x){
-  direction = true;
-
-}
+  direction = true;}
 if(curPos.x>=pos.x+(this->size*20 )-40){
-  direction = false;
+  direction = false;}
 }
+else{
+  for(int i = 0; i< 2; i++){
+  sf::Sprite p;
+  p.setTexture(platform);
+  p.setPosition(position);
+  window.draw(p);
+  position.x=position.x+20;
+}
+if(this->direction){
 
+if(time>.02){
+if(this->toggled == false){
+this->curPos.y = curPos.y + 1;}
+time= time-.02;
+}
+}
+if(direction == false){
+if(time>.02){
+  if(this->toggled == false){
+  this->curPos.y = curPos.y - 1;}
+  time= time-.02;}
+}
+if(curPos.y<=pos.y){
+direction = true;}
+if(curPos.y>=pos.y+(this->size*20 )-20){
+direction = false;}
+
+}
 }
 
 void Platforms::setPos(sf::Vector2f& pos){
@@ -72,7 +86,7 @@ void Platforms::Toggle(){
 }
 
 void Platforms::Reset(){
-  this->toggled = false;
+  this->toggled = true;
 }
 
 void Platforms::setTime(float deltaMs){
@@ -81,6 +95,10 @@ void Platforms::setTime(float deltaMs){
 
 void Platforms::setSize(int size){
   this->size = size;
+}
+
+void Platforms::setOrientation(bool orient){
+  this->orientation = orient;
 }
 
 void Platforms::PlayerContact(PlayerChar &player, int id){
@@ -95,20 +113,22 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
     player.setVelocity(vel);
     player.setPos(position);
 }*/
-  if(position.y<curPos.y-8 && (position.x<curPos.x+40 && position.x>curPos.x-11)&& position.y>curPos.y-10 ){
+  if(((position.y<curPos.y-6 && position.y>curPos.y-10) ) && (position.x<curPos.x+40 && position.x>curPos.x-20)){
     vel.y = 0;
     if(this->direction){
     if(time>.02){
+      printf("1" );
       position.x= position.x + 1;
     }
   }
     if(this->direction == false){
       if(time>.02){
+        printf("1" );
         position.x= position.x - 1;
       }
     }
     player.setInAir(false);
-    //position.y = pos.y-18;
+    position.y = curPos.y-10;
     player.setVelocity(vel);
     player.setPos(position);
 }
