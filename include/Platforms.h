@@ -3,14 +3,20 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Platforms : public Interactables{
 public:
   //defalt constructor
-  Platforms();
+  Platforms() {};
 
-  sf::Texture platform;
+  Platforms(ResourceManager& manager);
 
+  const sf::Texture* spriteSheet;
+
+  sf::Vector2i platOnCoords;
+
+  sf::Vector2i platOffCoords;
 
   void draw(sf::RenderWindow& window);
 

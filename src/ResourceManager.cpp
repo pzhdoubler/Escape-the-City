@@ -70,12 +70,12 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.y = 0;
 			break;
 		case JUMP_MAN:
-			spriteCoords.x = 40;
-			spriteCoords.y = 20;
+			spriteCoords.x = 100;
+			spriteCoords.y = 100;
 			break;
 		case FAST_MAN:
-			spriteCoords.x = 60;
-			spriteCoords.y = 20;
+			spriteCoords.x = 80;
+			spriteCoords.y = 100;
 			break;
 		case BUTTON_ON:
 			spriteCoords.x = 100;
@@ -93,9 +93,21 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.x = 0;
 			spriteCoords.y = 20;
 			break;
+		case PLATFORM_ON:
+			spriteCoords.x = 0;
+			spriteCoords.y = 60;
+			break;
+		case PLATFORM_OFF:
+			spriteCoords.x = 0;
+			spriteCoords.y = 40;
+			break;
 		case EXIT:
 			spriteCoords.x = 80;
 			spriteCoords.y = 20;
+			break;
+		default:
+			spriteCoords.x = 0;
+			spriteCoords.y = 0;
 			break;
 	}
 

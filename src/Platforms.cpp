@@ -1,26 +1,46 @@
 #include <Platforms.h>
 #include <SFML/Graphics.hpp>
 
-Platforms::Platforms(){
+Platforms::Platforms(ResourceManager& manager){
   this->size = 2;
   this->direction = true;
   this->time = 0;
   this->toggled = true;
   this->orientation = true;
   this->time2 = 0;
-  platform.loadFromFile("..\\resources\\Door_Texture.png");
+  //platform.loadFromFile("..\\resources\\Door_Texture.png");
+  sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::PLATFORM_ON);
+  platOnCoords.x = coords.x;
+  platOnCoords.y = coords.y;
+  coords = manager.getSpriteCoords(ResourceManager::Sprites::PLATFORM_OFF);
+  platOffCoords.x = coords.x;
+  platOffCoords.y = coords.y;
+  spriteSheet = &manager.getSpriteSheet();
 }
 
 void Platforms::draw(sf::RenderWindow &window){
   sf::Vector2f position = this->curPos;
-  if(orientation){
-    for(int i = 0; i< 2; i++){
-    sf::Sprite p;
-    p.setTexture(platform);
-    p.setPosition(position);
-    window.draw(p);
-    position.x=position.x+20;
+  sf::Vector2i size(40, 20);
+  if (toggled) {
+	  sf::IntRect spritePos(platOffCoords, size);
+	  sf::Sprite p(*spriteSheet, spritePos);
+	  p.setPosition(position);
+	  window.draw(p);
   }
+  else {
+	  sf::IntRect spritePos(platOnCoords, size);
+	  sf::Sprite p(*spriteSheet, spritePos);
+	  p.setPosition(position);
+	  window.draw(p);
+  }
+  if(orientation){
+  //  for(int i = 0; i< 2; i++){
+  //  sf::Sprite p;
+  //  p.setTexture(platform);
+  //  p.setPosition(position);
+  //  window.draw(p);
+  //  position.x=position.x+20;
+  //}
   if(this->direction){
 
 if(time>.02){
@@ -42,14 +62,15 @@ if(curPos.x<=pos.x){
 if(curPos.x>=pos.x+(this->size*20 )-40){
   direction = false;}
 }
+
 else{
-  for(int i = 0; i< 2; i++){
-  sf::Sprite p;
-  p.setTexture(platform);
-  p.setPosition(position);
-  window.draw(p);
-  position.x=position.x+20;
-}
+//  for(int i = 0; i< 2; i++){
+//  sf::Sprite p;
+//  p.setTexture(platform);
+//  p.setPosition(position);
+//  window.draw(p);
+//  position.x=position.x+20;
+//}
 if(this->direction){
 
 if(time>.02){
