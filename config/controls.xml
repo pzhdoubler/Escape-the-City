@@ -1,19 +1,18 @@
 <?xml version= "1.0"?>
-
 <fastman>
-  <left>71</left>
-  <right>72</right>
-  <jump>73</jump>
-  <down>74</down>
-  <use>42</use>
-  <respawn>49</respawn>
+    <left>71</left>
+    <right>72</right>
+    <jump>73</jump>
+    <down>74</down>
+    <use>42</use>
+    <respawn>49</respawn>
 </fastman>
 
 <jumpman>
-  <left>0</left>
-  <right>3</right>
-  <jump>22</jump>
-  <down>18</down>
-  <use>38</use>
-  <respawn>17</respawn>
+    <left>0</left>
+    <right>3</right>
+    <jump>22</jump>
+    <down>18</down>
+    <use>38</use>
+    <respawn>17</respawn>
 </jumpman>
