@@ -139,7 +139,7 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
     player.setVelocity(vel);
     player.setPos(position);
 }*/
-  if(((position.y<curPos.y-6 && position.y>curPos.y-10) ) && (position.x<curPos.x+40 && position.x>curPos.x-20)){
+  if((position.y + vel.y > curPos.y && position.y< curPos.y+10 ) && (position.x<curPos.x+40 && position.x>curPos.x-20)){
     vel.y = 0;
     if(orientation && toggled == false){
     if(this->direction){
