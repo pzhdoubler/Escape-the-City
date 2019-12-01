@@ -9,24 +9,39 @@
 
 AppLayer::AppLayer() {
 
-    font.loadFromFile("..\\resources\\DS-DIGIT.TTF");
+    //load font
+    font.loadFromFile("..\\resources\\XPED Italic.TTF");
     hud.setFont(font);
+
+    //set menu background
+    static sf::Texture mainbg;
+    mainbg.loadFromFile("..\\resources\\menuBackground.png");
+    mainbackground = mainbg;
+
+    //set level select background
+    static sf::Texture levelbg;
+    levelbg.loadFromFile("..\\resources\\levelSelectBackground2.jpg");
+    levelbackground = levelbg;
 
 }
 
 bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &controller, GameLogic &logic) {
 
     //set background color and string
-    App.clear(sf::Color(mainMenuR, mainMenuG, mainMenuB));
+    App.clear(sf::Color(0,0,0));
+    //load background image
+
+    sf::Sprite mainbg(mainbackground);
+    App.draw(mainbg);
     hud.setCharacterSize(characterSize);
-    hud.setPosition(stringXPos,stringYPos);
+    hud.setPosition(mainStringXPos,mainStringYPos);
     hud.setString(mainMenuString);
     App.draw(hud);
 
     //draw optionButton
     sf::Texture optionButton;
     sf::Sprite optionButtonImage;
-    if (!optionButton.loadFromFile( "..\\resources\\button_template_options.png"))
+    if (!optionButton.loadFromFile( "..\\resources\\optionsButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     optionButtonImage.setPosition(optionMenuButtonXPos, optionMenuButtonYPos);
     optionButtonImage.setTexture(optionButton);
@@ -35,7 +50,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw levelSelectButton
     sf::Texture levelSelectButton;
     sf::Sprite levelSelectButtonImage;
-    if (!levelSelectButton.loadFromFile( "..\\resources\\button_template_levelSelect.png"))
+    if (!levelSelectButton.loadFromFile( "..\\resources\\levelButton.png"))
         std::cout << "Can't find the level image" << std::endl;
     levelSelectButtonImage.setPosition(levelSelectMenuButtonXPos, levelSelectMenuButtonYPos);
     levelSelectButtonImage.setTexture(levelSelectButton);
@@ -44,7 +59,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw playButton
     sf::Texture playButton;
     sf::Sprite playButtonImage;
-    if (!playButton.loadFromFile( "..\\resources\\button_template_playGame.png"))
+    if (!playButton.loadFromFile( "..\\resources\\playButton.png"))
         std::cout << "Can't find the play image" << std::endl;
     playButtonImage.setPosition(playGameButtonXPos, playGameButtonYPos);
     playButtonImage.setTexture(playButton);
@@ -140,7 +155,7 @@ bool AppLayer::optionMenu(sf::RenderWindow &App, bool &paused) {
     //draw new text when a valid button is clicked
     sf::Texture bindButton;
     sf::Sprite bindButtonImage;
-    if (!bindButton.loadFromFile("..\\resources\\button_template_keyBinding.png"))
+    if (!bindButton.loadFromFile("..\\resources\\keybindButton.png"))
         std::cout << "Can't find the keyBinding image" << std::endl;
     bindButtonImage.setPosition(optionMenuRebindButtonXPos, optionMenuRebindButtonYPos);
     bindButtonImage.setTexture(bindButton);
@@ -401,7 +416,9 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
 bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
 
     //draw levelSelect menu
-    App.clear(sf::Color(levelSelectR, levelSelectG, levelSelectB));
+    App.clear(sf::Color(0,0,0));
+    sf::Sprite levelbg(levelbackground);
+    App.draw(levelbg);
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(levelSelectMenuString);
@@ -414,11 +431,50 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     sf::Sprite buttonImage2;
     sf::Texture button3;
     sf::Sprite buttonImage3;
-    if (!button1.loadFromFile( "..\\resources\\button_template.png"))
+    sf::Texture button4;
+    sf::Sprite buttonImage4;
+    sf::Texture button5;
+    sf::Sprite buttonImage5;
+    sf::Texture button6;
+    sf::Sprite buttonImage6;
+    sf::Texture button7;
+    sf::Sprite buttonImage7;
+    sf::Texture button8;
+    sf::Sprite buttonImage8;
+    sf::Texture button9;
+    sf::Sprite buttonImage9;
+    sf::Texture button10;
+    sf::Sprite buttonImage10;
+    sf::Texture button11;
+    sf::Sprite buttonImage11;
+    sf::Texture button12;
+    sf::Sprite buttonImage12;
+
+    if (!button1.loadFromFile( "..\\resources\\level1Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button2.loadFromFile( "..\\resources\\button_template.png"))
+    if (!button2.loadFromFile( "..\\resources\\level2Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button3.loadFromFile( "..\\resources\\button_template.png"))
+    if (!button3.loadFromFile( "..\\resources\\level3Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button4.loadFromFile( "..\\resources\\level4Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+
+    if (!button5.loadFromFile( "..\\resources\\level5Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button6.loadFromFile( "..\\resources\\level6Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button7.loadFromFile( "..\\resources\\level7Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button8.loadFromFile( "..\\resources\\level8Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+
+    if (!button9.loadFromFile( "..\\resources\\level9Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button10.loadFromFile( "..\\resources\\level10Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button11.loadFromFile( "..\\resources\\level11Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button12.loadFromFile( "..\\resources\\level12Button.png"))
         std::cout << "Can't find the image" << std::endl;
     buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
     buttonImage1.setTexture(button1);
@@ -429,6 +485,35 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     buttonImage3.setPosition(button3LevelSelectXPos,button3LevelSelectYPos);
     buttonImage3.setTexture(button3);
     App.draw(buttonImage3);
+    buttonImage4.setPosition(button4LevelSelectXPos,button4LevelSelectYPos);
+    buttonImage4.setTexture(button4);
+    App.draw(buttonImage4);
+
+    buttonImage5.setPosition(button5LevelSelectXPos, button5LevelSelectYPos);
+    buttonImage5.setTexture(button5);
+    App.draw(buttonImage5);
+    buttonImage6.setPosition(button6LevelSelectXPos,button6LevelSelectYPos);
+    buttonImage6.setTexture(button6);
+    App.draw(buttonImage6);
+    buttonImage7.setPosition(button7LevelSelectXPos,button7LevelSelectYPos);
+    buttonImage7.setTexture(button7);
+    App.draw(buttonImage7);
+    buttonImage8.setPosition(button8LevelSelectXPos,button8LevelSelectYPos);
+    buttonImage8.setTexture(button8);
+    App.draw(buttonImage8);
+
+    buttonImage9.setPosition(button9LevelSelectXPos, button9LevelSelectYPos);
+    buttonImage9.setTexture(button9);
+    App.draw(buttonImage9);
+    buttonImage10.setPosition(button10LevelSelectXPos,button10LevelSelectYPos);
+    buttonImage10.setTexture(button10);
+    App.draw(buttonImage10);
+    buttonImage11.setPosition(button11LevelSelectXPos,button11LevelSelectYPos);
+    buttonImage11.setTexture(button11);
+    App.draw(buttonImage11);
+    buttonImage12.setPosition(button12LevelSelectXPos,button12LevelSelectYPos);
+    buttonImage12.setTexture(button12);
+    App.draw(buttonImage12);
 
     //draw backButton
     sf::Texture backButton;
