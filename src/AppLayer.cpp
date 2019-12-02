@@ -48,15 +48,15 @@ std::string AppLayer::getLevel(int index) {
 		case 3:
 			return "zack_level_4.csv";
 		case 4:
-			return "";
+			return "henry_level_1.csv";
 		case 5:
-			return "";
+			return "henry_level_2.csv";
 		case 6:
-			return "";
+			return "henry_level_3.csv";
 		case 7:
-			return "";
+			return "henry_level_4.csv";
 		case 8:
-			return "";
+			return "henry_level_5.csv";
 		case 9:
 			return "";
 		case 10:
@@ -645,6 +645,96 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
 			printf("Going to level 3...\n");
 			return levelSelectOpen;
         }
+		if (buttonImage4.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 3;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 4...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage5.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 4;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 5...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage6.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 5;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 6...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage7.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 6;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 7...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage8.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 7;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 8...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage9.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 8;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 9...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage10.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 9;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 10...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage11.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 10;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 11...\n");
+			return levelSelectOpen;
+		}
+		if (buttonImage12.getGlobalBounds().contains(mouseLocF)) {
+			printf("button clicked!\n");
+			levelSelectOpen = false;
+			isPlaying = true;
+			cur_level = 11;
+			loader.loadMap(getLevel(cur_level));
+			level = loader.createLevelState();
+			printf("Going to level 12...\n");
+			return levelSelectOpen;
+		}
         if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
             printf("Going back to Main Menu...\n");
             levelSelectOpen = false;

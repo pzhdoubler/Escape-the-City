@@ -101,6 +101,14 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.x = 0;
 			spriteCoords.y = 40;
 			break;
+		case JUMP_ITEM:
+			spriteCoords.x = 40;
+			spriteCoords.y = 20;
+			break;
+		case SPEED_ITEM:
+			spriteCoords.x = 60;
+			spriteCoords.y = 20;
+			break;
 		case EXIT:
 			spriteCoords.x = 80;
 			spriteCoords.y = 20;

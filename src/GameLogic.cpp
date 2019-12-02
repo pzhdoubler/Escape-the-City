@@ -42,7 +42,7 @@ GameLogic::GameLogic(ResourceManager& manager)
 	}
 	//items
 	for (int i = 0; i < item_num; i++) {
-		std::shared_ptr<Interactables> ptr = std::make_shared<Items>();
+		std::shared_ptr<Interactables> ptr = std::make_shared<Items>(manager, i);
 		items.push_back(ptr);
 	}
 	for (int i = 0; i < platform_num; i++) {

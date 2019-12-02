@@ -3,13 +3,18 @@
 
 #include <SFML/Graphics.hpp>
 #include <Interactables.h>
+#include <ResourceManager.h>
 
 class Items : public Interactables {
 public:
 
-  Items();
+  Items() {};
 
-  sf::Texture item;
+  Items(ResourceManager& manager, int id);
+
+  const sf::Texture* spriteSheet;
+
+  sf::Vector2i spriteCoords;
 
   void draw(sf::RenderWindow& window);
 

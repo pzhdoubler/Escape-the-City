@@ -2,16 +2,27 @@
 #include <SFML/Graphics.hpp>
 
 
-Items::Items(){
+Items::Items(ResourceManager& manager, int id) {
   this->pickup= false;
-  item.loadFromFile("..\\resources\\Button.png");
 
+  sf::Vector2i coords;
+
+  if (id == 3 || id == 4)
+	  coords = manager.getSpriteCoords(ResourceManager::Sprites::SPEED_ITEM);
+  else
+	  coords = manager.getSpriteCoords(ResourceManager::Sprites::JUMP_ITEM);
+
+  spriteCoords.x = coords.x;
+  spriteCoords.y = coords.y;
+
+  spriteSheet = &manager.getSpriteSheet();
 }
 
 void Items::draw(sf::RenderWindow& window){
   if(pickup == false){
-  sf::Sprite i;
-  i.setTexture(item);
+  sf::Vector2i size(20, 20);
+  sf::IntRect spritePos(spriteCoords, size);
+  sf::Sprite i(*spriteSheet, spritePos);
   i.setPosition(pos);
   window.draw(i);
 }
