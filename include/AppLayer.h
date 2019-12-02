@@ -44,50 +44,50 @@ private:
     sf::Texture mainbackground;
     sf::Texture levelbackground;
 
-    float optionMenuButtonXPos = 500.0f;
-    float optionMenuButtonYPos = 400.0f;
+    float optionMenuButtonXPos = 528.0f;
+    float optionMenuButtonYPos = 478.0f;
 
-    float optionMenuRebindButtonXPos = 400.0f;
-    float optionMenuRebindButtonYPos = 400.0f;
+    float optionMenuRebindButtonXPos = 428.0f;
+    float optionMenuRebindButtonYPos = 478.0f;
 
-    float levelSelectMenuButtonXPos = 100.0f;
-    float levelSelectMenuButtonYPos = 400.0f;
+    float levelSelectMenuButtonXPos = 128.0f;
+    float levelSelectMenuButtonYPos = 478.0f;
 
-    float playGameButtonXPos = 300.0f;
-    float playGameButtonYPos = 400.0f;
+    float playGameButtonXPos = 328.0f;
+    float playGameButtonYPos = 478.0f;
 
-    float button1PauseMenuXPos = 300.0f;
-    float button1PauseMenuYPos = 300.0f;
+    float button1PauseMenuXPos = 328.0f;
+    float button1PauseMenuYPos = 378.0f;
 
-    float button1LevelSelectXPos = 0.0f;
-    float button1LevelSelectYPos = 100.0f;
-    float button2LevelSelectXPos = 200.0f;
-    float button2LevelSelectYPos = 100.0f;
-    float button3LevelSelectXPos = 400.0f;
-    float button3LevelSelectYPos = 100.0f;
-    float button4LevelSelectXPos = 600.0f;
-    float button4LevelSelectYPos = 100.0f;
+    float button1LevelSelectXPos = 28.0f;
+    float button1LevelSelectYPos = 178.0f;
+    float button2LevelSelectXPos = 228.0f;
+    float button2LevelSelectYPos = 178.0f;
+    float button3LevelSelectXPos = 428.0f;
+    float button3LevelSelectYPos = 178.0f;
+    float button4LevelSelectXPos = 628.0f;
+    float button4LevelSelectYPos = 178.0f;
 
-    float button5LevelSelectXPos = 0.0f;
-    float button5LevelSelectYPos = 200.0f;
-    float button6LevelSelectXPos = 200.0f;
-    float button6LevelSelectYPos = 200.0f;
-    float button7LevelSelectXPos = 400.0f;
-    float button7LevelSelectYPos = 200.0f;
-    float button8LevelSelectXPos = 600.0f;
-    float button8LevelSelectYPos = 200.0f;
+    float button5LevelSelectXPos = 28.0f;
+    float button5LevelSelectYPos = 278.0f;
+    float button6LevelSelectXPos = 228.0f;
+    float button6LevelSelectYPos = 278.0f;
+    float button7LevelSelectXPos = 428.0f;
+    float button7LevelSelectYPos = 278.0f;
+    float button8LevelSelectXPos = 628.0f;
+    float button8LevelSelectYPos = 278.0f;
 
-    float button9LevelSelectXPos = 0.0f;
-    float button9LevelSelectYPos = 300.0f;
-    float button10LevelSelectXPos = 200.0f;
-    float button10LevelSelectYPos = 300.0f;
-    float button11LevelSelectXPos = 400.0f;
-    float button11LevelSelectYPos = 300.0f;
-    float button12LevelSelectXPos = 600.0f;
-    float button12LevelSelectYPos = 300.0f;
+    float button9LevelSelectXPos = 28.0f;
+    float button9LevelSelectYPos = 378.0f;
+    float button10LevelSelectXPos = 228.0f;
+    float button10LevelSelectYPos = 378.0f;
+    float button11LevelSelectXPos = 428.0f;
+    float button11LevelSelectYPos = 378.0f;
+    float button12LevelSelectXPos = 628.0f;
+    float button12LevelSelectYPos = 378.0f;
 
-    float backButtonXPos = 630.0f;
-    float backButtonYPos = -75.0f;
+    float backButtonXPos = 658.0f;
+    float backButtonYPos = 3.0f;
 
 
     bool keyBinding(sf::RenderWindow& App, sf::Sprite backButtonImage, bool& paused);

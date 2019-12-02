@@ -1,7 +1,8 @@
 <?xml version= "1.0"?>
-<latest_level>1</latest_level>
 <!--make sure matches latest completed level-->
+<latest_level>1</latest_level>
 
+<!--level 1 should always be completed-->
 <levels>
     <lvl1>1</lvl1>
     <lvl2>0</lvl2>
