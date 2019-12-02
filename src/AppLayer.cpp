@@ -28,6 +28,11 @@ AppLayer::AppLayer() {
     controlbg.loadFromFile("..\\resources\\controlBackground4.jpg");
     controlbackground = controlbg;
 
+    //set pause/option background
+    static sf::Texture pauseoptionbg;
+    pauseoptionbg.loadFromFile("..\\resources\\Option_Texture.png");
+    pauseoptionbackground = pauseoptionbg;
+
 	//set level progression info
 	tinyxml2::XMLDocument progression;
 	if (progression.LoadFile("..\\config\\progression.xml"))
@@ -239,7 +244,9 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
 bool AppLayer::optionMenu(sf::RenderWindow &App, bool &paused) {
 
     //draw menu
-    App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
+    App.clear(sf::Color(0,0,0));
+    sf::Sprite pauseoptionbg(pauseoptionbackground);
+    App.draw(pauseoptionbg);
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(optionMenuString);
@@ -492,7 +499,9 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
 bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
 
     //draw pause menu
-    App.clear(sf::Color(pauseMenuR, pauseMenuG, pauseMenuB, pauseMenuAlpha));
+    App.clear(sf::Color(0,0,0));
+    sf::Sprite pauseoptionbg(pauseoptionbackground);
+    App.draw(pauseoptionbg);
     hud.setCharacterSize(characterSize);
     hud.setPosition(stringXPos,stringYPos);
     hud.setString(pauseMenuString);

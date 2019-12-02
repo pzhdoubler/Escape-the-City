@@ -62,6 +62,7 @@ private:
     sf::Texture mainbackground;
     sf::Texture levelbackground;
     sf::Texture controlbackground;
+    sf::Texture pauseoptionbackground;
 
     float optionMenuButtonXPos = 528.0f;
     float optionMenuButtonYPos = 478.0f;
