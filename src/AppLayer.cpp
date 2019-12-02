@@ -292,7 +292,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
             //get a corresponding number for your key
             //std::string keyBinding = fromKtoS(keyboardKey);
             int keyBinding = keyboardKey;
-            //std::cout << "keyBinding: " << keyBinding << std::endl;
+
 
 
             //run through the XML bindings and add to a vector
@@ -308,6 +308,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
             for (int s : bindVectFast) {
                 if (keyBinding == s) {
                     fastButtons = true;
+                    bindVectFast.clear();
                     App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
                     hud.setString(keyBindChangeStr);
                     App.draw(hud);
@@ -330,6 +331,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                 for (int s : bindVectJump) {
                     if (keyBinding == s) {
                         jumpButtons = true;
+                        bindVectJump.clear();
                         App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
                         hud.setString(keyBindChangeStr);
                         App.draw(hud);
@@ -345,6 +347,23 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
 
             if (fastButtons || jumpButtons) {
                 previousBinds.push_back(keyBinding);
+
+            }
+
+            std::cout << "keyBinding: " << keyBinding << std::endl;
+            std::cout << "fastButtons: " << fastButtons << std::endl;
+            std::cout << "jumpButtons: " << jumpButtons << std::endl;
+            std::cout << "previousBinds size: " << previousBinds.size() << std::endl;
+
+            //if previousBinds size  > 1, we know we pressed a key for the second input that is already bound to something
+            //this is a no-no so we should remove that last element from previousBinds and have them try again
+            if (previousBinds.size() > 1) {
+                App.clear(sf::Color(optionMenuR, optionMenuG, optionMenuB));
+                hud.setString(keyBindErrStr);
+                App.draw(hud);
+                App.draw(backButtonImage);
+                App.display();
+                previousBinds.pop_back();
             }
 
 
@@ -352,7 +371,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
             //now the user should input a new key and that should be the value of keyBindings
             //this key should not correspond to a fastButton or jumpButton so we go here to detect a new key
             //being pressed that we don't recognize
-            if (!fastButtons && !jumpButtons) {
+            if (!fastButtons && !jumpButtons && previousBinds.size() == 1) {
                 std::cout << "curr keyBinding is: " << keyBinding << std::endl;
                 int prevBind = previousBinds.at(previousBinds.size()-1);
                 std::cout << "prev keyBinding is: " << prevBind << std::endl;
@@ -370,6 +389,9 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                         App.draw(hud);
                         App.draw(backButtonImage);
                         App.display();
+                        previousBinds.clear();
+                        fastButtons = false;
+                        jumpButtons = false;
                     }
                 }
 
@@ -386,6 +408,9 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                         App.draw(hud);
                         App.draw(backButtonImage);
                         App.display();
+                        previousBinds.clear();
+                        fastButtons = false;
+                        jumpButtons = false;
                     }
                 }
                 config.SaveFile("..\\config\\controls.xml");
@@ -411,6 +436,9 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
             sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
             if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
                 printf("Going back to Option Menu...\n");
+                previousBinds.clear();
+                bindVectFast.clear();
+                bindVectJump.clear();
                 return false;
             }
         }

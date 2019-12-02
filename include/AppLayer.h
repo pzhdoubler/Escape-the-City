@@ -22,10 +22,11 @@ private:
                                   "Press the rebind button to rebind a key\n"
                                   "Or press Back to go back";
     sf::String keyBindString = "Press the button you want to change\n";
-    sf::String keyBindErrStr = "That isn't assigned yet my guy";
+    sf::String keyBindErrStr = "That key is already assigned.\n"
+                               "Try pressing a key that is not bound my guy\n";
     sf::String keyBindChangeStr = "That key is assigned to something\n"
                                "What would you like to change it to?";
-    sf::String keyBindSuccStr = "String changed!\n";
+    sf::String keyBindSuccStr = "Key changed!\n";
     sf::String pauseMenuString = "Paused\n "
                                  "Press Back to go back\n"
                                  "Or press a button below to go to Main Menu";
