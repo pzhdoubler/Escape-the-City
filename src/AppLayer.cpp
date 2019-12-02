@@ -40,29 +40,29 @@ AppLayer::AppLayer() {
 std::string AppLayer::getLevel(int index) {
 	switch (index) {
 		case 0:
-			return "zack_level_1.csv";
-		case 1:
-			return "zack_level_2.csv";
-		case 2:
 			return "zack_level_3.csv";
-		case 3:
-			return "zack_level_4.csv";
-		case 4:
+		case 1:
 			return "henry_level_1.csv";
-		case 5:
-			return "henry_level_2.csv";
-		case 6:
-			return "henry_level_3.csv";
-		case 7:
+		case 2:
+			return "zack_level_1.csv";
+		case 3:
 			return "henry_level_4.csv";
-		case 8:
+		case 4:
+			return "";
+		case 5:
+			return "";
+		case 6:
 			return "henry_level_5.csv";
+		case 7:
+			return "henry_level_3.csv";
+		case 8:
+			return "zack_level_4.csv";
 		case 9:
-			return "";
+			return "henry_level_2.csv";
 		case 10:
-			return "";
+			return "zack_level_2.csv";
 		case 11:
-			return "";
+			return "henry_level_6.csv";
 		default:
 			return "";
 	}

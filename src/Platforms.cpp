@@ -45,7 +45,7 @@ void Platforms::draw(sf::RenderWindow &window){
 
 if(time>.02){
   if(this->toggled == false){
-  this->curPos.x = curPos.x + (10*time);}
+  this->curPos.x = curPos.x + (velocity*time);}
   time2= time;
   time= 0;
 }
@@ -53,7 +53,7 @@ if(time>.02){
 if(direction == false){
   if(time>.02){
     if(this->toggled == false){
-    this->curPos.x = curPos.x - (10*time);}
+    this->curPos.x = curPos.x - (velocity *time);}
     time2= time;
     time= 0;
   }
@@ -76,17 +76,17 @@ if(this->direction){
 
 if(time>.02){
 if(this->toggled == false){
-this->curPos.y = curPos.y + 1;}
+this->curPos.y = curPos.y + (velocity * time);}
 time2= time;
-time= time-.02;
+time= 0;
 }
 }
 if(direction == false){
 if(time>.02){
   if(this->toggled == false){
-  this->curPos.y = curPos.y - 1;}
+  this->curPos.y = curPos.y - (velocity * time);}
   time2= time;
-  time= time-.02;}
+  time= 0;}
 }
 if(curPos.y<=pos.y){
 direction = true;}
@@ -145,13 +145,13 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
     if(orientation && toggled == false){
     if(this->direction){
     if(time2>.02){
-      position.x= position.x + (10*time2);
+      position.x= position.x + (velocity * time2);
       time2=0;
     }
   }
     if(this->direction == false){
       if(time2>.02){
-        position.x= position.x - (10*time2);
+        position.x= position.x - (velocity * time2);
         time2=0;
       }
     }}
