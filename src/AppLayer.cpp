@@ -60,7 +60,7 @@ std::string AppLayer::getLevel(int index) {
 		case 4:
 			return "";
 		case 5:
-			return "";
+			return "henry_level_7.csv";
 		case 6:
 			return "henry_level_5.csv";
 		case 7:
