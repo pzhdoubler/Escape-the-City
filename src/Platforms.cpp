@@ -45,17 +45,18 @@ void Platforms::draw(sf::RenderWindow &window){
 
 if(time>.02){
   if(this->toggled == false){
-  this->curPos.x = curPos.x + 1;}
+  this->curPos.x = curPos.x + (10*time);}
   time2= time;
-  time= time-.02;
+  time= 0;
 }
 }
 if(direction == false){
   if(time>.02){
     if(this->toggled == false){
-    this->curPos.x = curPos.x - 1;}
+    this->curPos.x = curPos.x - (10*time);}
     time2= time;
-    time= time-.02;}
+    time= 0;
+  }
 }
 if(curPos.x<=pos.x){
   direction = true;}
@@ -144,14 +145,14 @@ void Platforms::PlayerContact(PlayerChar &player, int id){
     if(orientation && toggled == false){
     if(this->direction){
     if(time2>.02){
-      position.x= position.x + 1;
-      time2=time2-.02;
+      position.x= position.x + (10*time2);
+      time2=0;
     }
   }
     if(this->direction == false){
       if(time2>.02){
-        position.x= position.x - 1;
-        time2=time2-.02;
+        position.x= position.x - (10*time2);
+        time2=0;
       }
     }}
     player.setInAir(false);
