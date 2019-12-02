@@ -23,6 +23,11 @@ AppLayer::AppLayer() {
     levelbg.loadFromFile("..\\resources\\levelSelectBackground2.jpg");
     levelbackground = levelbg;
 
+    //set controls background
+    static sf::Texture controlbg;
+    controlbg.loadFromFile("..\\resources\\controlBackground4.jpg");
+    controlbackground = controlbg;
+
 	//set level progression info
 	tinyxml2::XMLDocument progression;
 	if (progression.LoadFile("..\\config\\progression.xml"))
@@ -127,6 +132,15 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     playButtonImage.setTexture(playButton);
     App.draw(playButtonImage);
 
+    //draw controlButton
+    sf::Texture controlButton;
+    sf::Sprite controlButtonImage;
+    if (!controlButton.loadFromFile( "..\\resources\\controlButton.png"))
+        std::cout << "Can't find the play image" << std::endl;
+    controlButtonImage.setPosition(controlButtonXPos, controlButtonYPos);
+    controlButtonImage.setTexture(controlButton);
+    App.draw(controlButtonImage);
+
     //optionButton clicked
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
@@ -188,6 +202,31 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
 			cur_level = latest_level;
             loader.loadMap(getLevel(cur_level));
             level = loader.createLevelState();
+        }
+    }
+
+
+    //control clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (controlButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("Going to Control...\n");
+            controlMenuOpen = true;
+            while (controlMenuOpen) {
+                sf::Event event;
+                while (App.pollEvent(event))
+                {
+                    if (event.type == sf::Event::Closed) {
+                        controlMenuOpen = false;
+                        isPlaying = true;
+                        paused = true;
+                        App.close();
+                    }
+
+                }
+                controlMenu(App);
+            }
         }
     }
 
@@ -775,6 +814,50 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     return levelSelectOpen;
 }
 
+
+
+
+
+
+bool AppLayer::controlMenu(sf::RenderWindow &App) {
+
+    //draw pause menu
+    App.clear(sf::Color(0,0,0));
+    sf::Sprite controlbg(controlbackground);
+    App.draw(controlbg);
+    hud.setCharacterSize(characterSize);
+    hud.setPosition(fastControlStringXPos,fastControlStringYPos);
+    hud.setString(fastControlString);
+    App.draw(hud);
+    hud.setPosition(jumpControlStringXPos, jumpControlStringYPos);
+    hud.setString(jumpControlString);
+    App.draw(hud);
+
+    //draw back button
+    sf::Texture backButton;
+    sf::Sprite backButtonImage;
+    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+        std::cout << "Can't find the option image" << std::endl;
+    backButtonImage.setPosition(backButtonXPos, backButtonYPos);
+    backButtonImage.setTexture(backButton);
+    App.draw(backButtonImage);
+
+
+    //back clicked
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        sf::Vector2i mouseLocation = sf::Mouse::getPosition(App);
+        sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
+        if (backButtonImage.getGlobalBounds().contains(mouseLocF)) {
+            printf("returning to main...\n");
+            controlMenuOpen = false;
+            return controlMenuOpen;
+        }
+    }
+
+
+    App.display();
+    return controlMenuOpen;
+}
 //std::string AppLayer::fromKtoS(const sf::Keyboard::Key& k){
 //    std::string ret;
 //    switch(k){
