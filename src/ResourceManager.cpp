@@ -66,7 +66,7 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 {
 	switch (object) {
 		case BARRIER:
-			spriteCoords.x = 0;
+			spriteCoords.x = 20;
 			spriteCoords.y = 0;
 			break;
 		case JUMP_MAN:

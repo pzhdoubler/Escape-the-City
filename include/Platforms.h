@@ -48,6 +48,7 @@ private:
   int size;
   bool toggled;
   bool orientation;
+  int velocity = 100;
   Interactables* interactable;
 
 

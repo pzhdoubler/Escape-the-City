@@ -89,6 +89,7 @@ bool GameLogic::init(LevelState &level)
 			Hazards* haz = dynamic_cast<Hazards*>(hazards[i].get());
 			haz->setSize(size);
 			haz->setOrientation(orientation);
+			haz->Reset();
 		}
 	}
 
@@ -107,6 +108,7 @@ bool GameLogic::init(LevelState &level)
 			Door* doo = dynamic_cast<Door*>(doors[i].get());
 			doo->setSize(size);
 			doo->setOrientation(orientation);
+			doo->Reset();
 		}
 	}
 
@@ -125,6 +127,7 @@ bool GameLogic::init(LevelState &level)
 			Platforms* platf = dynamic_cast<Platforms*>(platforms[i].get());
 			platf->setSize(size);
 			platf->setOrientation(orientation);
+			platf->Reset();
 		}
 	}
 
@@ -153,11 +156,15 @@ bool GameLogic::init(LevelState &level)
 	for (int i = 0; i < item_pos.size(); i++) {
 		sf::Vector2f this_item = item_pos[i];
 		items[i]->setPos(this_item);
-
+		items[i]->Reset();
 	}
 
 
 	exitPos->setPos(level.getExitPt());
+
+	//reset
+	fast_man->useItem();
+	jump_man->useItem();
 
 	fast_man->setPos(level.getFastSpawnPt());
 	fast_man->setSpawnPt(level.getFastSpawnPt());
