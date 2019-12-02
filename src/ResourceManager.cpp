@@ -93,6 +93,10 @@ sf::Vector2i& ResourceManager::getSpriteCoords(Sprites object)
 			spriteCoords.x = 0;
 			spriteCoords.y = 20;
 			break;
+		case HAZARDS_OFF:
+			spriteCoords.x = 40;
+			spriteCoords.y = 40;
+			break;
 		case PLATFORM_ON:
 			spriteCoords.x = 0;
 			spriteCoords.y = 60;

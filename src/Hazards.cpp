@@ -8,8 +8,11 @@ Hazards::Hazards(ResourceManager& manager){
   this->size = 1;
 
   sf::Vector2i coords = manager.getSpriteCoords(ResourceManager::Sprites::HAZARDS);
-  spriteCoords.x = coords.x;
-  spriteCoords.y = coords.y;
+  onSpriteCoords.x = coords.x;
+  onSpriteCoords.y = coords.y;
+  coords = manager.getSpriteCoords(ResourceManager::Sprites::HAZARDS_OFF);
+  offSpriteCoords.x = coords.x;
+  offSpriteCoords.y = coords.y;
   spriteSheet = &manager.getSpriteSheet();
   //hazard.loadFromFile("..\\resources\\Spikes.png");
 }
@@ -17,11 +20,20 @@ Hazards::Hazards(ResourceManager& manager){
 void Hazards::draw(sf::RenderWindow& window){
   sf::Vector2f position= pos;
   sf::Vector2i size(20, 20);
-  sf::IntRect spritePos(spriteCoords, size);
-  sf::Sprite h(*spriteSheet, spritePos);
-  if(toggled== false){
+  sf::Sprite h;
+  if (toggled == false) {
+	  sf::IntRect spritePos(onSpriteCoords, size);
+	  sf::Sprite temp(*spriteSheet, spritePos);
+	  h = temp;
+  }
+  else {
+	  sf::IntRect spritePos(offSpriteCoords, size);
+	  sf::Sprite temp(*spriteSheet, spritePos);
+	  h = temp;
+  }
+
     //horizontal surface
-    if(orient == true){
+  if(orient == true){
       for(int i = 0; i< this->size; i++){
         //h.setTexture(hazard);
         h.setRotation(0);
@@ -31,7 +43,7 @@ void Hazards::draw(sf::RenderWindow& window){
     }
   }
   //vertical surface
-    else{
+  else{
       position.x=position.x+20;
       for(int i = 0; i< this->size; i++){
 		//h.setTexture(hazard);
@@ -40,8 +52,7 @@ void Hazards::draw(sf::RenderWindow& window){
       window.draw(h);
       position.y=position.y+20;
     }
-    }
-}
+  }
 }
 
 
