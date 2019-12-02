@@ -38,14 +38,14 @@ private:
                                  "Left = Move left\n"
                                  "Down = Move down\n"
                                  "Right = Move right\n"
-                                 "Right Alt = Use Item\n"
-                                 "Period = Respawn\n";
+                                 "Right Shift = Use Item\n"
+                                 "Comma = Respawn\n";
     sf::String jumpControlString = "Jump Man:\n"
                                    "W = Jump\n"
                                    "A = Move left\n"
                                    "S = Move down\n"
                                    "D = Move right\n"
-                                   "Left Alt = Use Item\n"
+                                   "Left Shift = Use Item\n"
                                    "R = Respawn\n";
 
     float mainStringXPos = 130;
