@@ -81,6 +81,7 @@ int main(int argc, char** argv)
 			        printf("should send to main\n");
 			        appLayer.isPlaying = false;
 			        appLayer.returnToMain = false;
+					appLayer.completeLevel();
 			        break;
 			    }
 			}

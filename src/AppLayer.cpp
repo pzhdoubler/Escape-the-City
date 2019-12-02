@@ -23,6 +23,68 @@ AppLayer::AppLayer() {
     levelbg.loadFromFile("..\\resources\\levelSelectBackground2.jpg");
     levelbackground = levelbg;
 
+	//set level progression info
+	tinyxml2::XMLDocument progression;
+	if (progression.LoadFile("..\\config\\progression.xml"))
+		std::cout << "Can't find level progression info" << std::endl;
+	latest_level = std::stoi(progression.FirstChildElement("latest_level")->GetText()) - 1;
+	tinyxml2::XMLElement* levels = progression.FirstChildElement("levels");
+	int cur = 0;
+	for (tinyxml2::XMLElement* lvl = levels->FirstChildElement(); cur < num_levels && lvl != NULL; lvl = lvl->NextSiblingElement()) {
+		playable_levels[cur] = std::stoi(lvl->GetText());
+		cur++;
+	}
+
+}
+
+std::string AppLayer::getLevel(int index) {
+	switch (index) {
+		case 0:
+			return "zack_level_1.csv";
+		case 1:
+			return "zack_level_2.csv";
+		case 2:
+			return "zack_level_3.csv";
+		case 3:
+			return "zack_level_4.csv";
+		case 4:
+			return "";
+		case 5:
+			return "";
+		case 6:
+			return "";
+		case 7:
+			return "";
+		case 8:
+			return "";
+		case 9:
+			return "";
+		case 10:
+			return "";
+		case 11:
+			return "";
+		default:
+			return "";
+	}
+}
+
+bool AppLayer::completeLevel() {
+	if (cur_level + 1 < num_levels)
+		playable_levels[cur_level + 1] = 1;
+	if (cur_level == latest_level && latest_level != num_levels-1)
+		latest_level += 1;
+
+	tinyxml2::XMLDocument progression;
+	if (progression.LoadFile("..\\config\\progression.xml"))
+		std::cout << "Can't find level progression info" << std::endl;
+	progression.FirstChildElement("latest_level")->SetText(latest_level + 1);
+	tinyxml2::XMLElement* levels = progression.FirstChildElement("levels");
+	int cur = 0;
+	for (tinyxml2::XMLElement* lvl = levels->FirstChildElement(); cur < num_levels && lvl != NULL; lvl = lvl->NextSiblingElement()) {
+		lvl->SetText(playable_levels[cur]);
+		cur++;
+	}
+	progression.SaveFile("..\\config\\progression.xml");
 }
 
 bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &controller, GameLogic &logic) {
@@ -123,7 +185,8 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
         sf::Vector2f mouseLocF(static_cast<float>(mouseLocation.x), static_cast<float>(mouseLocation.y));
         if (playButtonImage.getGlobalBounds().contains(mouseLocF)) {
             isPlaying = true;
-            loader.loadMap("level_tutorial.csv");
+			cur_level = latest_level;
+            loader.loadMap(getLevel(cur_level));
             level = loader.createLevelState();
         }
     }
@@ -380,7 +443,7 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
     //draw mainMenu button
     sf::Texture button1;
     sf::Sprite buttonImage1;
-    if (!button1.loadFromFile( "..\\resources\\button_template_mainMenu.png"))
+    if (!button1.loadFromFile( "..\\resources\\menuButton.png"))
         std::cout << "Can't find the image" << std::endl;
     buttonImage1.setPosition(button1PauseMenuXPos, button1PauseMenuYPos);
     buttonImage1.setTexture(button1);
@@ -476,44 +539,68 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
         std::cout << "Can't find the image" << std::endl;
     if (!button12.loadFromFile( "..\\resources\\level12Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
-    buttonImage1.setTexture(button1);
-    App.draw(buttonImage1);
-    buttonImage2.setPosition(button2LevelSelectXPos,button2LevelSelectYPos);
-    buttonImage2.setTexture(button2);
-    App.draw(buttonImage2);
-    buttonImage3.setPosition(button3LevelSelectXPos,button3LevelSelectYPos);
-    buttonImage3.setTexture(button3);
-    App.draw(buttonImage3);
-    buttonImage4.setPosition(button4LevelSelectXPos,button4LevelSelectYPos);
-    buttonImage4.setTexture(button4);
-    App.draw(buttonImage4);
+	if (playable_levels[0] == 1) {
+		buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
+		buttonImage1.setTexture(button1);
+		App.draw(buttonImage1);
+	}
+	if (playable_levels[1] == 1) {
+		buttonImage2.setPosition(button2LevelSelectXPos, button2LevelSelectYPos);
+		buttonImage2.setTexture(button2);
+		App.draw(buttonImage2);
+	}
+	if (playable_levels[2] == 1) {
+		buttonImage3.setPosition(button3LevelSelectXPos, button3LevelSelectYPos);
+		buttonImage3.setTexture(button3);
+		App.draw(buttonImage3);
+	}
+	if (playable_levels[3] == 1) {
+		buttonImage4.setPosition(button4LevelSelectXPos, button4LevelSelectYPos);
+		buttonImage4.setTexture(button4);
+		App.draw(buttonImage4);
+	}
 
-    buttonImage5.setPosition(button5LevelSelectXPos, button5LevelSelectYPos);
-    buttonImage5.setTexture(button5);
-    App.draw(buttonImage5);
-    buttonImage6.setPosition(button6LevelSelectXPos,button6LevelSelectYPos);
-    buttonImage6.setTexture(button6);
-    App.draw(buttonImage6);
-    buttonImage7.setPosition(button7LevelSelectXPos,button7LevelSelectYPos);
-    buttonImage7.setTexture(button7);
-    App.draw(buttonImage7);
-    buttonImage8.setPosition(button8LevelSelectXPos,button8LevelSelectYPos);
-    buttonImage8.setTexture(button8);
-    App.draw(buttonImage8);
+	if (playable_levels[4] == 1) {
+		buttonImage5.setPosition(button5LevelSelectXPos, button5LevelSelectYPos);
+		buttonImage5.setTexture(button5);
+		App.draw(buttonImage5);
+	}
+	if (playable_levels[5] == 1) {
+		buttonImage6.setPosition(button6LevelSelectXPos, button6LevelSelectYPos);
+		buttonImage6.setTexture(button6);
+		App.draw(buttonImage6);
+	}
+	if (playable_levels[6] == 1) {
+		buttonImage7.setPosition(button7LevelSelectXPos, button7LevelSelectYPos);
+		buttonImage7.setTexture(button7);
+		App.draw(buttonImage7);
+	}
+	if (playable_levels[7] == 1) {
+		buttonImage8.setPosition(button8LevelSelectXPos, button8LevelSelectYPos);
+		buttonImage8.setTexture(button8);
+		App.draw(buttonImage8);
+	}
 
-    buttonImage9.setPosition(button9LevelSelectXPos, button9LevelSelectYPos);
-    buttonImage9.setTexture(button9);
-    App.draw(buttonImage9);
-    buttonImage10.setPosition(button10LevelSelectXPos,button10LevelSelectYPos);
-    buttonImage10.setTexture(button10);
-    App.draw(buttonImage10);
-    buttonImage11.setPosition(button11LevelSelectXPos,button11LevelSelectYPos);
-    buttonImage11.setTexture(button11);
-    App.draw(buttonImage11);
-    buttonImage12.setPosition(button12LevelSelectXPos,button12LevelSelectYPos);
-    buttonImage12.setTexture(button12);
-    App.draw(buttonImage12);
+	if (playable_levels[8] == 1) {
+		buttonImage9.setPosition(button9LevelSelectXPos, button9LevelSelectYPos);
+		buttonImage9.setTexture(button9);
+		App.draw(buttonImage9);
+	}
+	if (playable_levels[9] == 1) {
+		buttonImage10.setPosition(button10LevelSelectXPos, button10LevelSelectYPos);
+		buttonImage10.setTexture(button10);
+		App.draw(buttonImage10);
+	}
+	if (playable_levels[10] == 1) {
+		buttonImage11.setPosition(button11LevelSelectXPos, button11LevelSelectYPos);
+		buttonImage11.setTexture(button11);
+		App.draw(buttonImage11);
+	}
+	if (playable_levels[11] == 1) {
+		buttonImage12.setPosition(button12LevelSelectXPos, button12LevelSelectYPos);
+		buttonImage12.setTexture(button12);
+		App.draw(buttonImage12);
+	}
 
     //draw backButton
     sf::Texture backButton;
@@ -532,7 +619,8 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
             printf("button clicked!\n");
             levelSelectOpen = false;
             isPlaying = true;
-            loader.loadMap("zack_level_1.csv");
+			cur_level = 0;
+            loader.loadMap(getLevel(cur_level));
             level = loader.createLevelState();
             printf("Going to level 1...\n");
             return levelSelectOpen;
@@ -541,16 +629,18 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
             printf("button clicked!\n");
 			levelSelectOpen = false;
 			isPlaying = true;
-			loader.loadMap("zack_level_2.csv");
+			cur_level = 1;
+			loader.loadMap(getLevel(cur_level));
 			level = loader.createLevelState();
-			printf("Going to level 3...\n");
+			printf("Going to level 2...\n");
 			return levelSelectOpen;
         }
         if (buttonImage3.getGlobalBounds().contains(mouseLocF)) {
 			printf("button clicked!\n");
 			levelSelectOpen = false;
 			isPlaying = true;
-			loader.loadMap("zack_level_3.csv");
+			cur_level = 2;
+			loader.loadMap(getLevel(cur_level));
 			level = loader.createLevelState();
 			printf("Going to level 3...\n");
 			return levelSelectOpen;

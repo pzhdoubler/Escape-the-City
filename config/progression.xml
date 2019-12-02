@@ -1,0 +1,17 @@
+<?xml version= "1.0"?>
+<latest_level>1</latest_level> <!--make sure matches latest completed level-->
+
+<levels>
+    <lvl1>1</lvl1>
+    <lvl2>0</lvl2>
+    <lvl3>0</lvl3>
+    <lvl4>0</lvl4>
+    <lvl5>0</lvl5>
+    <lvl6>0</lvl6>
+    <lvl7>0</lvl7>
+    <lvl8>0</lvl8>
+    <lvl9>0</lvl9>
+    <lvl10>0</lvl10>
+    <lvl11>0</lvl11>
+    <lvl12>0</lvl12>
+</levels>

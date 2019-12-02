@@ -5,6 +5,7 @@
 #ifndef CSCI437_APPLAYER_H
 #define CSCI437_APPLAYER_H
 
+#include <string>
 #include "GameLogic.h"
 #include "ScreenView.h"
 #include "LevelState.h"
@@ -55,7 +56,7 @@ private:
     float playGameButtonYPos = 400.0f;
 
     float button1PauseMenuXPos = 300.0f;
-    float button1PauseMenuYPos = 400.0f;
+    float button1PauseMenuYPos = 300.0f;
 
     float button1LevelSelectXPos = 0.0f;
     float button1LevelSelectYPos = 100.0f;
@@ -116,6 +117,11 @@ private:
     int levelSelectG = 211;
     int levelSelectB = 128;
 
+	int num_levels = 12;
+	int playable_levels[12]; //size must equal num_levels
+	int latest_level;
+	int cur_level;
+
 
 //    sf::Sprite operator == (sf::Sprite const &sprite) {
 //
@@ -133,6 +139,8 @@ public:
 
     bool mainMenu(sf::RenderWindow& App, bool& paused, Controller& controller, GameLogic& logic);
     bool pauseMenu(sf::RenderWindow& App, bool& paused);
+	std::string getLevel(int index);
+	bool completeLevel();
     bool pauseMenuOpen = false;
 
     LevelReader loader;
