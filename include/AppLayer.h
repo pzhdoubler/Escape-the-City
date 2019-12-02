@@ -29,25 +29,44 @@ private:
     sf::String keyBindSuccStr = "Key changed!\n";
     sf::String pauseMenuString = "Paused\n "
                                  "Press Back to go back\n"
-                                 "Or press a button below to go to Main Menu";
+                                 "Or press a menu below to go to Main Menu";
     sf::String levelSelectMenuString = "This is the LevelSelect Screen\n"
                                        "Press a button for a level\n"
                                        "Or Press Back to go back";
+    sf::String fastControlString = "Fast Man:\n"
+                                   "Up = Jump\n"
+                                 "Left = Move left\n"
+                                 "Down = Move down\n"
+                                 "Right = Move right\n"
+                                 "Right Alt = Use Item\n"
+                                 "Period = Respawn\n";
+    sf::String jumpControlString = "Jump Man:\n"
+                                   "W = Jump\n"
+                                   "A = Move left\n"
+                                   "S = Move down\n"
+                                   "D = Move right\n"
+                                   "Left Alt = Use Item\n"
+                                   "R = Respawn\n";
 
     float mainStringXPos = 130;
     float mainStringYPos = 10;
     int characterSize = 42;
     float stringXPos = 0;
     float stringYPos = 0;
+    float fastControlStringXPos = 0;
+    float fastControlStringYPos = 0;
+    float jumpControlStringXPos = 390;
+    float jumpControlStringYPos = 0;
 
 
     sf::Texture mainbackground;
     sf::Texture levelbackground;
+    sf::Texture controlbackground;
 
     float optionMenuButtonXPos = 528.0f;
     float optionMenuButtonYPos = 478.0f;
 
-    float optionMenuRebindButtonXPos = 428.0f;
+    float optionMenuRebindButtonXPos = 328.0f;
     float optionMenuRebindButtonYPos = 478.0f;
 
     float levelSelectMenuButtonXPos = 128.0f;
@@ -55,6 +74,9 @@ private:
 
     float playGameButtonXPos = 328.0f;
     float playGameButtonYPos = 478.0f;
+
+    float controlButtonXPos = 328.0f;
+    float controlButtonYPos = 528.0f;
 
     float button1PauseMenuXPos = 328.0f;
     float button1PauseMenuYPos = 378.0f;
@@ -100,6 +122,8 @@ private:
     bool optionMenuOpen = false;
     bool levelSelectMenu(sf::RenderWindow& App);
     bool levelSelectOpen = false;
+    bool controlMenu(sf::RenderWindow& App);
+    bool controlMenuOpen = false;
 
     int mainMenuR = 0;
     int mainMenuG = 0;

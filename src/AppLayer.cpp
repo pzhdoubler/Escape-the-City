@@ -23,7 +23,7 @@ AppLayer::AppLayer() {
     levelbg.loadFromFile("..\\resources\\levelSelectBackground2.jpg");
     levelbackground = levelbg;
 
-	//set level progression info
+    //set level progression info
 	tinyxml2::XMLDocument progression;
 	if (progression.LoadFile("..\\config\\progression.xml"))
 		std::cout << "Can't find level progression info" << std::endl;
@@ -58,7 +58,7 @@ std::string AppLayer::getLevel(int index) {
 		case 8:
 			return "henry_level_5.csv";
 		case 9:
-			return "";
+            return "";
 		case 10:
 			return "";
 		case 11:
