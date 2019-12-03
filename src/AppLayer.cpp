@@ -58,15 +58,15 @@ std::string AppLayer::getLevel(int index) {
 		case 3:
 			return "henry_level_4.csv";
 		case 4:
-			return "luke_level_1.csv";
-		case 5:
 			return "henry_level_7.csv";
-		case 6:
+		case 5:
 			return "henry_level_5.csv";
-		case 7:
+		case 6:
 			return "henry_level_3.csv";
-		case 8:
+		case 7:
 			return "zack_level_4.csv";
+		case 8:
+			return "luke_level_1.csv";
 		case 9:
 			return "henry_level_2.csv";
 		case 10:
