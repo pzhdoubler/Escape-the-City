@@ -1,19 +1,19 @@
 <?xml version= "1.0"?>
 <!--make sure matches latest completed level-->
-<latest_level>12</latest_level>
+<latest_level>1</latest_level>
 
 <!--level 1 should always be completed-->
 <levels>
     <lvl1>1</lvl1>
-    <lvl2>1</lvl2>
-    <lvl3>1</lvl3>
-    <lvl4>1</lvl4>
-    <lvl5>1</lvl5>
-    <lvl6>1</lvl6>
-    <lvl7>1</lvl7>
-    <lvl8>1</lvl8>
-    <lvl9>1</lvl9>
-    <lvl10>1</lvl10>
-    <lvl11>1</lvl11>
-    <lvl12>1</lvl12>
+    <lvl2>0</lvl2>
+    <lvl3>0</lvl3>
+    <lvl4>0</lvl4>
+    <lvl5>0</lvl5>
+    <lvl6>0</lvl6>
+    <lvl7>0</lvl7>
+    <lvl8>0</lvl8>
+    <lvl9>0</lvl9>
+    <lvl10>0</lvl10>
+    <lvl11>0</lvl11>
+    <lvl12>0</lvl12>
 </levels>
