@@ -20,12 +20,12 @@ AppLayer::AppLayer() {
 
     //set level select background
     static sf::Texture levelbg;
-    levelbg.loadFromFile("..\\resources\\levelSelectBackground2.jpg");
+    levelbg.loadFromFile("..\\resources\\Option_Texture.png");
     levelbackground = levelbg;
 
     //set controls background
     static sf::Texture controlbg;
-    controlbg.loadFromFile("..\\resources\\controlBackground4.jpg");
+    controlbg.loadFromFile("..\\resources\\Option_Texture.png");
     controlbackground = controlbg;
 
     //set pause/option background
