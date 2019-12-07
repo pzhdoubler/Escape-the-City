@@ -23,7 +23,7 @@ void ScreenView::init(LevelState &level, ResourceManager& manager) {
     textureCanvas.clear(sf::Color(0,0,0,0));
 	//background
 	static sf::Texture bg;
-	bg.loadFromFile("..\\resources\\citybackground.png"); //Do in resource manager
+	bg.loadFromFile("../resources/citybackground.png"); //Do in resource manager
 	background = bg;
 	//barrier tiles
 	sf::Vector2i size(level.getTileSize(), level.getTileSize());
