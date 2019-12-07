@@ -14,7 +14,7 @@ bool Controller::init(GameLogic &logic)
 
 	//read in values from file, currently correspond to default keys in design doc
 	tinyxml2::XMLDocument config;
-	tinyxml2::XMLError result = config.LoadFile("..\\config\\controls.xml");
+	tinyxml2::XMLError result = config.LoadFile("../config/controls.xml");
 	if (result != tinyxml2::XML_SUCCESS)
 		return false;
 

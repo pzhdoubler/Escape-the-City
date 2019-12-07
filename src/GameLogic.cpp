@@ -183,7 +183,7 @@ bool GameLogic::init(LevelState &level)
 	//read in physics constants
 
 	tinyxml2::XMLDocument config;
-	tinyxml2::XMLError result = config.LoadFile("..\\config\\constants.xml");
+	tinyxml2::XMLError result = config.LoadFile("../config/constants.xml");
 	if (result != tinyxml2::XML_SUCCESS)
 		return false;
 

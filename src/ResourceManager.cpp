@@ -1,7 +1,7 @@
 #include <ResourceManager.h>
 
 ResourceManager::ResourceManager(){
-	this->spriteSheet.loadFromFile("..\\resources\\sprite_sheet.png");
+	this->spriteSheet.loadFromFile("../resources/sprite_sheet.png");
 	//this->texture.create(20, 20);
 }
 

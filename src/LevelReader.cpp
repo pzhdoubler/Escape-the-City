@@ -17,7 +17,7 @@ LevelReader::LevelReader(){
 void LevelReader::loadMap(const std::string& level){
 	this->tileSize = 20;
 	std::ifstream file;
-	file.open("..\\levels\\" + level);
+	file.open("../levels/" + level);
 	if(!file.is_open()){
 		std::cout << "Failed to load file";
 	}

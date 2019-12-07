@@ -10,32 +10,32 @@
 AppLayer::AppLayer() {
 
     //load font
-    font.loadFromFile("..\\resources\\XPED Italic.TTF");
+    font.loadFromFile("../resources/XPED Italic.ttf");
     hud.setFont(font);
 
     //set menu background
     static sf::Texture mainbg;
-    mainbg.loadFromFile("..\\resources\\menuBackground.png");
+    mainbg.loadFromFile("../resources/menuBackground.png");
     mainbackground = mainbg;
 
     //set level select background
     static sf::Texture levelbg;
-    levelbg.loadFromFile("..\\resources\\Option_Texture.png");
+    levelbg.loadFromFile("../resources/Option_Texture.png");
     levelbackground = levelbg;
 
     //set controls background
     static sf::Texture controlbg;
-    controlbg.loadFromFile("..\\resources\\Option_Texture.png");
+    controlbg.loadFromFile("../resources/Option_Texture.png");
     controlbackground = controlbg;
 
     //set pause/option background
     static sf::Texture pauseoptionbg;
-    pauseoptionbg.loadFromFile("..\\resources\\Option_Texture.png");
+    pauseoptionbg.loadFromFile("../resources/Option_Texture.png");
     pauseoptionbackground = pauseoptionbg;
 
 	//set level progression info
 	tinyxml2::XMLDocument progression;
-	if (progression.LoadFile("..\\config\\progression.xml"))
+	if (progression.LoadFile("../config/progression.xml"))
 		std::cout << "Can't find level progression info" << std::endl;
 	latest_level = std::stoi(progression.FirstChildElement("latest_level")->GetText()) - 1;
 	tinyxml2::XMLElement* levels = progression.FirstChildElement("levels");
@@ -85,7 +85,7 @@ bool AppLayer::completeLevel() {
 		latest_level += 1;
 
 	tinyxml2::XMLDocument progression;
-	if (progression.LoadFile("..\\config\\progression.xml"))
+	if (progression.LoadFile("../config/progression.xml"))
 		std::cout << "Can't find level progression info" << std::endl;
 	progression.FirstChildElement("latest_level")->SetText(latest_level + 1);
 	tinyxml2::XMLElement* levels = progression.FirstChildElement("levels");
@@ -94,7 +94,7 @@ bool AppLayer::completeLevel() {
 		lvl->SetText(playable_levels[cur]);
 		cur++;
 	}
-	progression.SaveFile("..\\config\\progression.xml");
+	progression.SaveFile("../config/progression.xml");
 }
 
 bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &controller, GameLogic &logic) {
@@ -113,7 +113,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw optionButton
     sf::Texture optionButton;
     sf::Sprite optionButtonImage;
-    if (!optionButton.loadFromFile( "..\\resources\\optionsButton.png"))
+    if (!optionButton.loadFromFile( "../resources/optionsButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     optionButtonImage.setPosition(optionMenuButtonXPos, optionMenuButtonYPos);
     optionButtonImage.setTexture(optionButton);
@@ -122,7 +122,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw levelSelectButton
     sf::Texture levelSelectButton;
     sf::Sprite levelSelectButtonImage;
-    if (!levelSelectButton.loadFromFile( "..\\resources\\levelButton.png"))
+    if (!levelSelectButton.loadFromFile( "../resources/levelButton.png"))
         std::cout << "Can't find the level image" << std::endl;
     levelSelectButtonImage.setPosition(levelSelectMenuButtonXPos, levelSelectMenuButtonYPos);
     levelSelectButtonImage.setTexture(levelSelectButton);
@@ -131,7 +131,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw playButton
     sf::Texture playButton;
     sf::Sprite playButtonImage;
-    if (!playButton.loadFromFile( "..\\resources\\playButton.png"))
+    if (!playButton.loadFromFile( "../resources/playButton.png"))
         std::cout << "Can't find the play image" << std::endl;
     playButtonImage.setPosition(playGameButtonXPos, playGameButtonYPos);
     playButtonImage.setTexture(playButton);
@@ -140,7 +140,7 @@ bool AppLayer::mainMenu(sf::RenderWindow &App, bool &paused, Controller &control
     //draw controlButton
     sf::Texture controlButton;
     sf::Sprite controlButtonImage;
-    if (!controlButton.loadFromFile( "..\\resources\\controlButton.png"))
+    if (!controlButton.loadFromFile( "../resources/controlButton.png"))
         std::cout << "Can't find the play image" << std::endl;
     controlButtonImage.setPosition(controlButtonXPos, controlButtonYPos);
     controlButtonImage.setTexture(controlButton);
@@ -255,7 +255,7 @@ bool AppLayer::optionMenu(sf::RenderWindow &App, bool &paused) {
     //draw back button
     sf::Texture backButton;
     sf::Sprite backButtonImage;
-    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+    if (!backButton.loadFromFile( "../resources/backButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     backButtonImage.setPosition(backButtonXPos, backButtonYPos);
     backButtonImage.setTexture(backButton);
@@ -264,7 +264,7 @@ bool AppLayer::optionMenu(sf::RenderWindow &App, bool &paused) {
     //draw new text when a valid button is clicked
     sf::Texture bindButton;
     sf::Sprite bindButtonImage;
-    if (!bindButton.loadFromFile("..\\resources\\keybindButton.png"))
+    if (!bindButton.loadFromFile("../resources/keybindButton.png"))
         std::cout << "Can't find the keyBinding image" << std::endl;
     bindButtonImage.setPosition(optionMenuRebindButtonXPos, optionMenuRebindButtonYPos);
     bindButtonImage.setTexture(bindButton);
@@ -315,7 +315,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
     //here we want to open the config file
     //read in values from file, currently correspond to default keys in design doc
     tinyxml2::XMLDocument config;
-    tinyxml2::XMLError result = config.LoadFile("..\\config\\controls.xml");
+    tinyxml2::XMLError result = config.LoadFile("../config/controls.xml");
     if (result != tinyxml2::XML_SUCCESS)
         return false;
 
@@ -459,7 +459,7 @@ bool AppLayer::keyBinding(sf::RenderWindow &App, sf::Sprite backButtonImage, boo
                         jumpButtons = false;
                     }
                 }
-                config.SaveFile("..\\config\\controls.xml");
+                config.SaveFile("../config/controls.xml");
             }
         }
 
@@ -510,7 +510,7 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
     //draw back button
     sf::Texture backButton;
     sf::Sprite backButtonImage;
-    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+    if (!backButton.loadFromFile( "../resources/backButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     backButtonImage.setPosition(backButtonXPos, backButtonYPos);
     backButtonImage.setTexture(backButton);
@@ -519,7 +519,7 @@ bool AppLayer::pauseMenu(sf::RenderWindow &App, bool &paused) {
     //draw mainMenu button
     sf::Texture button1;
     sf::Sprite buttonImage1;
-    if (!button1.loadFromFile( "..\\resources\\menuButton.png"))
+    if (!button1.loadFromFile( "../resources/menuButton.png"))
         std::cout << "Can't find the image" << std::endl;
     buttonImage1.setPosition(button1PauseMenuXPos, button1PauseMenuYPos);
     buttonImage1.setTexture(button1);
@@ -589,31 +589,31 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     sf::Texture button12;
     sf::Sprite buttonImage12;
 
-    if (!button1.loadFromFile( "..\\resources\\level1Button.png"))
+    if (!button1.loadFromFile( "../resources/level1Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button2.loadFromFile( "..\\resources\\level2Button.png"))
+    if (!button2.loadFromFile( "../resources/level2Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button3.loadFromFile( "..\\resources\\level3Button.png"))
+    if (!button3.loadFromFile( "../resources/level3Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button4.loadFromFile( "..\\resources\\level4Button.png"))
-        std::cout << "Can't find the image" << std::endl;
-
-    if (!button5.loadFromFile( "..\\resources\\level5Button.png"))
-        std::cout << "Can't find the image" << std::endl;
-    if (!button6.loadFromFile( "..\\resources\\level6Button.png"))
-        std::cout << "Can't find the image" << std::endl;
-    if (!button7.loadFromFile( "..\\resources\\level7Button.png"))
-        std::cout << "Can't find the image" << std::endl;
-    if (!button8.loadFromFile( "..\\resources\\level8Button.png"))
+    if (!button4.loadFromFile( "../resources/level4Button.png"))
         std::cout << "Can't find the image" << std::endl;
 
-    if (!button9.loadFromFile( "..\\resources\\level9Button.png"))
+    if (!button5.loadFromFile( "../resources/level5Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button10.loadFromFile( "..\\resources\\level10Button.png"))
+    if (!button6.loadFromFile( "../resources/level6Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button11.loadFromFile( "..\\resources\\level11Button.png"))
+    if (!button7.loadFromFile( "../resources/level7Button.png"))
         std::cout << "Can't find the image" << std::endl;
-    if (!button12.loadFromFile( "..\\resources\\level12Button.png"))
+    if (!button8.loadFromFile( "../resources/level8Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+
+    if (!button9.loadFromFile( "../resources/level9Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button10.loadFromFile( "../resources/level10Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button11.loadFromFile( "../resources/level11Button.png"))
+        std::cout << "Can't find the image" << std::endl;
+    if (!button12.loadFromFile( "../resources/level12Button.png"))
         std::cout << "Can't find the image" << std::endl;
 	if (playable_levels[0] == 1) {
 		buttonImage1.setPosition(button1LevelSelectXPos, button1LevelSelectYPos);
@@ -681,7 +681,7 @@ bool AppLayer::levelSelectMenu(sf::RenderWindow &App) {
     //draw backButton
     sf::Texture backButton;
     sf::Sprite backButtonImage;
-    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+    if (!backButton.loadFromFile( "../resources/backButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     backButtonImage.setPosition(backButtonXPos, backButtonYPos);
     backButtonImage.setTexture(backButton);
@@ -845,7 +845,7 @@ bool AppLayer::controlMenu(sf::RenderWindow &App) {
     //draw back button
     sf::Texture backButton;
     sf::Sprite backButtonImage;
-    if (!backButton.loadFromFile( "..\\resources\\backButton.png"))
+    if (!backButton.loadFromFile( "../resources/backButton.png"))
         std::cout << "Can't find the option image" << std::endl;
     backButtonImage.setPosition(backButtonXPos, backButtonYPos);
     backButtonImage.setTexture(backButton);
